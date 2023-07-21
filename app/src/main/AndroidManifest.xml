@@ -22,7 +22,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StoreActivity"
+            android:name=".NewItemActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".StoreItemsActivity"
             android:exported="true">
         </activity>
     </application>
