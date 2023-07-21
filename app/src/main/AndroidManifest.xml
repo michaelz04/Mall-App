@@ -13,24 +13,28 @@
         android:theme="@style/Theme.B07finalproject"
         tools:targetApi="31">
         <activity
+            android:name=".ItemActivity"
+            android:exported="false" />
+        <activity
             android:name=".storelist_customer"
             android:exported="false" />
         <activity
-            android:name=".AccountTypeView"
+            android:name=".AccountTypeActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginView"
-            android:exported="false"
-            android:label="@string/title_activity_login_view"
-            android:theme="@style/Theme.B07finalproject" />
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:label="@string/title_activity_login_view">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".NewItemActivity"
