@@ -16,6 +16,9 @@
             android:name=".storelist_customer"
             android:exported="false" />
         <activity
+            android:name=".AccountTypeView"
+            android:exported="false" />
+        <activity
             android:name=".LoginView"
             android:exported="false"
             android:label="@string/title_activity_login_view"
@@ -29,6 +32,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".StoreActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>
