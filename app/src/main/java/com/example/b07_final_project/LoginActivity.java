@@ -8,6 +8,7 @@ import android.view.View;
 
 public class LoginActivity extends AppCompatActivity {
     String userId = CurrentUserData.getInstance().getId();
+    FirebaseDatabase db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
