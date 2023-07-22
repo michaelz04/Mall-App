@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
         //AddDataActivity.addStoreToDatabase();
         //Comment below to make sure it doesnt break.
-        Intent intent = new Intent(this, storelist_customer.class);
-        startActivity(intent);
-        finish();
+        //Intent intent = new Intent(this, storelist_customer.class);
+        //startActivity(intent);
+        //finish();
     }
 }
