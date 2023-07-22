@@ -59,4 +59,5 @@
     <string name="add_to_cart">Add to cart</string>
     <string name="cart">Cart</string>
     <string name="description">(description)</string>
+    <string name="title_activity_storeitem_view">storeitem_view</string>
 </resources>
