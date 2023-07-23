@@ -70,4 +70,5 @@
     <string name="login_failed">"Login failed"</string>
     <string name="userlabel">Username:</string>
     <string name="registerbutton">Register</string>
+    <string name="passlbl">Password:</string>
 </resources>
