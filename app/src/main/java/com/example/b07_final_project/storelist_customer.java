@@ -26,7 +26,7 @@ public class storelist_customer extends AppCompatActivity {
         setContentView(R.layout.activity_storelist_customer);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        Log.d("storelist_customer", "RecyclerView initialized");
+       // Log.d("storelist_customer", "RecyclerView initialized");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         storeList = new ArrayList<>();
 
@@ -55,7 +55,7 @@ public class storelist_customer extends AppCompatActivity {
                    /* ArrayList empty = new ArrayList();
                     Store createStore = new Store(storename, storeinfo, storeowner, empty);*/
                     storeList.add(createStore);
-                    Log.d("StoreListSize", "Store List Size: " + storeList.size());
+                  //  Log.d("StoreListSize", "Store List Size: " + storeList.size());
                     //adapter.notifyDataSetChanged();
 
                 }

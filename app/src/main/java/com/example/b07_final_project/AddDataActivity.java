@@ -22,7 +22,7 @@ public class AddDataActivity extends AppCompatActivity {
 
     // Method to add a store to the Firebase Realtime Database
     public static void addStoreToDatabase() {
-        // Get a reference to the root node of your database
+       /* // Get a reference to the root node of your database
         DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
         //Map<String, Store> storesMap = new HashMap<>();
 
@@ -45,7 +45,59 @@ public class AddDataActivity extends AppCompatActivity {
         DatabaseReference storesRef2 = databaseRef.child("Stores").push();
         storesRef.setValue(store);
         storesRef1.setValue(store1);
-        storesRef2.setValue(store2);
+        storesRef2.setValue(store2);*/
+
+        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference();
+
+        // Create a few sample items
+        Item item1 = new Item("Item 1", "Description 1", 10.0f, "StoreName");
+        Item item2 = new Item("Item 2", "Description 2", 15.0f, "StoreName");
+        Item item3 = new Item("Item 3", "Description 3", 20.0f, "StoreName");
+
+        Item item4 = new Item("Item 4", "Description 4", 12.0f, "StoreName1");
+        Item item5 = new Item("Item 5", "Description 5", 18.0f, "StoreName1");
+        Item item6 = new Item("Item 6", "Description 6", 22.0f, "StoreName1");
+
+        Item item7 = new Item("Item 7", "Description 7", 8.0f, "StoreName2");
+        Item item8 = new Item("Item 8", "Description 8", 16.0f, "StoreName2");
+        Item item9 = new Item("Item 9", "Description 9", 24.0f, "StoreName2");
+
+        // Push the items to the "Items" node in the database
+        DatabaseReference itemsRef = databaseRef.child("Items").push();
+        itemsRef.setValue(item1);
+        DatabaseReference itemsRef2 = databaseRef.child("Items").push();
+        itemsRef2.setValue(item2);
+        DatabaseReference itemsRef3 = databaseRef.child("Items").push();
+        itemsRef3.setValue(item3);
+
+        DatabaseReference itemsRef4 = databaseRef.child("Items").push();
+        itemsRef4.setValue(item4);
+        DatabaseReference itemsRef5 = databaseRef.child("Items").push();
+        itemsRef5.setValue(item5);
+        DatabaseReference itemsRef6 = databaseRef.child("Items").push();
+        itemsRef6.setValue(item6);
+
+        DatabaseReference itemsRef7 = databaseRef.child("Items").push();
+        itemsRef7.setValue(item7);
+        DatabaseReference itemsRef8 = databaseRef.child("Items").push();
+        itemsRef8.setValue(item8);
+        DatabaseReference itemsRef9 = databaseRef.child("Items").push();
+        itemsRef9.setValue(item9);
+
+        // Create the stores
+        Store store1 = new Store("StoreName", "StoreInfo", "StoreOwner", Arrays.asList(itemsRef.getKey(), itemsRef2.getKey(), itemsRef3.getKey()));
+        Store store2 = new Store("StoreName1", "StoreInfo1", "StoreOwner1", Arrays.asList(itemsRef4.getKey(), itemsRef5.getKey(), itemsRef6.getKey()));
+        Store store3 = new Store("StoreName2", "StoreInfo2", "StoreOwner2", Arrays.asList(itemsRef7.getKey(), itemsRef8.getKey(), itemsRef9.getKey()));
+
+        // Push the stores to the "Stores" node in the database
+        DatabaseReference storesRef = databaseRef.child("Stores").push();
+        storesRef.setValue(store1);
+        DatabaseReference storesRef1 = databaseRef.child("Stores").push();
+        storesRef1.setValue(store2);
+        DatabaseReference storesRef2 = databaseRef.child("Stores").push();
+        storesRef2.setValue(store3);
+
+
 
     }
 }
