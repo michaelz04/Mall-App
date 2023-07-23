@@ -13,7 +13,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.*;
 
 public class LoginActivity extends AppCompatActivity {
-    //String userId = CurrentUserData.getInstance().getId();
     DatabaseReference db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
