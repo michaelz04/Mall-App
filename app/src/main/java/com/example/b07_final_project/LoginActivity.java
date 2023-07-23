@@ -57,7 +57,9 @@ public class LoginActivity extends AppCompatActivity {
                                                 //check if password and password from database is correct
                                                 if (databasePassword.equals(password)){
                                                     //set current user id
-                                                    CurrentUserData.getInstance().setId(username);
+                                                    CurrentUserData currentUserData = CurrentUserData.getInstance();
+                                                    currentUserData.setId(username);
+                                                    currentUserData.setAccountType("Shoppers");
                                                     ((TextView)findViewById(R.id.LoginFail)).setText("Password correct");
                                                 } else {
                                                     ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
@@ -83,7 +85,9 @@ public class LoginActivity extends AppCompatActivity {
                             //check if password and password from database is correct
                             if (databasePassword.equals(password)){
                                 //set current user id
-                                CurrentUserData.getInstance().setId(username);
+                                CurrentUserData currentUserData = CurrentUserData.getInstance();
+                                currentUserData.setId(username);
+                                currentUserData.setAccountType("Owners");
                                 ((TextView)findViewById(R.id.LoginFail)).setText("Password correct");
                             } else {
                                 ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
