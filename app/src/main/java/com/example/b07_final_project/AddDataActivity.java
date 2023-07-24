@@ -90,11 +90,11 @@ public class AddDataActivity extends AppCompatActivity {
         Store store3 = new Store("StoreName2", "StoreInfo2", "StoreOwner2", Arrays.asList(itemsRef7.getKey(), itemsRef8.getKey(), itemsRef9.getKey()));
 
         // Push the stores to the "Stores" node in the database
-        DatabaseReference storesRef = databaseRef.child("Stores").push();
+        DatabaseReference storesRef = databaseRef.child("Stores").child(store1.getName());
         storesRef.setValue(store1);
-        DatabaseReference storesRef1 = databaseRef.child("Stores").push();
+        DatabaseReference storesRef1 = databaseRef.child("Stores").child(store2.getName());
         storesRef1.setValue(store2);
-        DatabaseReference storesRef2 = databaseRef.child("Stores").push();
+        DatabaseReference storesRef2 = databaseRef.child("Stores").child(store3.getName());;
         storesRef2.setValue(store3);
 
 

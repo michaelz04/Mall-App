@@ -35,7 +35,7 @@ public class storelist_customer extends AppCompatActivity {
 
         //Change this line for whatever the actual database uses,
         // either the url or the path of Stores
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Stores");
+        DatabaseReference dbRef = FirebaseDatabase.getInstance("https://test-project-17268-default-rtdb.firebaseio.com/").getReference("Stores");
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -63,11 +63,15 @@ public class storelist_customer extends AppCompatActivity {
 
             }
 
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 //Error stuff
             }
         });
+
+
 
     }
 }

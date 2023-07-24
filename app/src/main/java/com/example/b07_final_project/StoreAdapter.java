@@ -1,5 +1,6 @@
 package com.example.b07_final_project;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,10 +48,18 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         holder.storeButton.setText(buttonText);
 
         // Set click listener for the button if needed
+
         holder.storeButton.setOnClickListener(v -> {
             // Handle button click, you can open a new activity or fragment to show the store's items
-            // For now, let's just show a Toast with the store name when the button is clicked
-            Toast.makeText(v.getContext(), store.getName(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(v.getContext(), store.getName(), Toast.LENGTH_SHORT).show();
+
+
+            Intent intent = new Intent(v.getContext(), StoreItemsActivityView.class);
+            intent.putExtra("store_id", store.getName()); // Assuming you have a getKey() method in the Store class
+            v.getContext().startActivity(intent);
+
+
+
         });
     }
 

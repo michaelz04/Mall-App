@@ -32,4 +32,20 @@ public class Store {
     public List<String> getItems() {
         return items;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public void setItems(List<String> items) {
+        this.items = items;
+    }
 }
