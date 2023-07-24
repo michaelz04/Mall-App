@@ -18,6 +18,7 @@
     <string name="shopper_text">Shopper</string>
     <string name="store_owner_text">Store owner</string>
 
+    <string name="create_store_description">Create a store</string>
     <string name="store_name_placeholder">Store name</string>
     <string name="store_description_placeholder">Store description</string>
     <string name="create_store_button">Create store</string>
