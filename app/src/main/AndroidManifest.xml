@@ -46,9 +46,6 @@
         <activity
             android:name=".NewItemActivity"
             android:exported="true"></activity>
-        <activity
-            android:name=".StoreItemsActivity"
-            android:exported="true"></activity>
     </application>
 
 </manifest>

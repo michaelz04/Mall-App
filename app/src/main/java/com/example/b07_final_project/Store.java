@@ -3,10 +3,10 @@ package com.example.b07_final_project;
 import java.util.List;
 
 public class Store {
-    public String name;
-    public String info;
-    public String owner;
-    public List<String> items;
+    private String name;
+    private String info;
+    private String owner;
+    private List<String> items;
 
     public Store() {}
 
