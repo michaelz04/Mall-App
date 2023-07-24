@@ -8,12 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class CreateStoreActivity extends AppCompatActivity {
     DatabaseReference db;
@@ -76,44 +72,16 @@ public class CreateStoreActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (!snapshot.exists()){
-                        //if username not in owners, check shoppers
-                        DatabaseReference queryShoppers = db.child("Shoppers").child(username);
-                        queryShoppers.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (!snapshot.exists()){
-                                    //username does not exist in either owners or shoppers
-                                    ((TextView)findViewById(R.id.LoginFail)).setText("Username does not exist");
-                                } else {
-                                    //username exists in shoppers so check password
-                                    //get password from database
-                                    db.child("Shoppers").child(username).child("Password").get().
-                                            addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                                    String databasePassword = String.valueOf(task.getResult().getValue());
-                                                    //check if password and password from database is correct
-                                                    if (databasePassword.equals(password)){
-                                                        //set current user id
-                                                        CurrentUserData currentUserData = CurrentUserData.getInstance();
-                                                        currentUserData.setId(username);
-                                                        currentUserData.setAccountType("Shoppers");
-                                                        ((TextView)findViewById(R.id.LoginFail)).setText("Password correct");
-                                                    } else {
-                                                        ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
-                                                    }
-                                                }
-                                            });
-                                }
-                            }
+                        //Store does not exist so add to DB
+                        // Add store to DB
+                        DatabaseReference newStoreRef = storesRef.child(storeName);
+                        newStoreRef.child("description").setValue(storeDescription);
+                        // Add store key to owner
+                        ownerRef.child("StoreID").child(storeName);
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
+                        // TODO: Switch to the store owner's store page activity
+                        showError("Success");
                     } else {
-
                         showError("Store already exists");
                         return;
                     }
@@ -124,16 +92,6 @@ public class CreateStoreActivity extends AppCompatActivity {
 
                 }
             });
-
-
-            // Add store to DB
-            DatabaseReference newStoreRef = storesRef.child(storeName);
-            newStoreRef.child("description").setValue(storeDescription);
-            // Add store key to owner
-            ownerRef.child("StoreID").child(storeName);
-
-            // TODO: Switch to the store owner's store page activity
-            showError("Success");
         });
     }
 }
