@@ -1,5 +1,6 @@
 package com.example.b07_final_project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -28,6 +29,10 @@ public class CreateStoreActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
     }
 
+    @Override
+    public void onBackPressed(){
+
+    }
     private void showError(String errorText) {
         // Replace the error text to display its message
         ((TextView) findViewById(R.id.createStoreError)).setText(errorText);
@@ -44,6 +49,13 @@ public class CreateStoreActivity extends AppCompatActivity {
                 .getText()
                 .toString();
 
+        // Check if store name is empty
+        if (storeName.equals("")) {
+            // Show the error
+            showError("Store name cannot be empty");
+            return;
+        }
+
         // DB references for owner and stores
         ownerRef = db.child("Owners").child(username);
         storesRef = db.child("Stores");
@@ -57,23 +69,62 @@ public class CreateStoreActivity extends AppCompatActivity {
                 return;
             }
 
-            // Get list of stores from DB
-            List<String> stores = new ArrayList<>();
-            for (DataSnapshot child : task.getResult().getChildren()) {
-                stores.add(child.getKey());
-            }
-            if (stores.contains(storeName)) {
-                // Store already exists
-                showError("Store already exists");
-                return;
-            }
+            //check if store exists in DB
+            DatabaseReference queryStores = db.child("Stores").child(storeName);
 
-            // Check if store name is empty
-            if (storeName.equals("")) {
-                // Show the error
-                showError("Store name cannot be empty");
-                return;
-            }
+            queryStores.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (!snapshot.exists()){
+                        //if username not in owners, check shoppers
+                        DatabaseReference queryShoppers = db.child("Shoppers").child(username);
+                        queryShoppers.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (!snapshot.exists()){
+                                    //username does not exist in either owners or shoppers
+                                    ((TextView)findViewById(R.id.LoginFail)).setText("Username does not exist");
+                                } else {
+                                    //username exists in shoppers so check password
+                                    //get password from database
+                                    db.child("Shoppers").child(username).child("Password").get().
+                                            addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                                    String databasePassword = String.valueOf(task.getResult().getValue());
+                                                    //check if password and password from database is correct
+                                                    if (databasePassword.equals(password)){
+                                                        //set current user id
+                                                        CurrentUserData currentUserData = CurrentUserData.getInstance();
+                                                        currentUserData.setId(username);
+                                                        currentUserData.setAccountType("Shoppers");
+                                                        ((TextView)findViewById(R.id.LoginFail)).setText("Password correct");
+                                                    } else {
+                                                        ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
+                                                    }
+                                                }
+                                            });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    } else {
+
+                        showError("Store already exists");
+                        return;
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
 
             // Add store to DB
             DatabaseReference newStoreRef = storesRef.child(storeName);
