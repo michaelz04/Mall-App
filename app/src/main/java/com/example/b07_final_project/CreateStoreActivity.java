@@ -51,6 +51,12 @@ public class CreateStoreActivity extends AppCompatActivity {
             showError("Store name cannot be empty");
             return;
         }
+        // Check if store description is empty
+        if (storeDescription.equals("")) {
+            // Show the error
+            showError("Store description cannot be empty");
+            return;
+        }
 
         // DB references for owner and stores
         ownerRef = db.child("Owners").child(username);
@@ -75,9 +81,12 @@ public class CreateStoreActivity extends AppCompatActivity {
                         //Store does not exist so add to DB
                         // Add store to DB
                         DatabaseReference newStoreRef = storesRef.child(storeName);
+                        //set description
                         newStoreRef.child("description").setValue(storeDescription);
+                        //set name of store
+                        newStoreRef.child("storeName").setValue(storeName);
                         // Add store key to owner
-                        ownerRef.child("StoreID").child(storeName);
+                        ownerRef.child("StoreID").setValue(storeName);
 
                         // TODO: Switch to the store owner's store page activity
                         showError("Success");
