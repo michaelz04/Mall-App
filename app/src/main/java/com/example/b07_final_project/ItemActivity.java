@@ -34,7 +34,7 @@ public class ItemActivity extends AppCompatActivity {
                 //retrieving values from database
                 String itemDes = snapshot.child("description").getValue(String.class);
                 String itemName = snapshot.child("itemName").getValue(String.class);
-                Integer itemPrice = snapshot.child("price").getValue(Integer.class);
+                Float itemPrice = snapshot.child("price").getValue(Float.class);
                 String itemImage = snapshot.child("picture").getValue(String.class);
 
                 //displaying values to the user
