@@ -53,7 +53,7 @@ public class CreateStoreActivity extends AppCompatActivity {
         storesRef.get().addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
                 // Error fetching data
-                showError("@string/create_store_data_error");
+                showError("Error fetching data");
                 return;
             }
 
@@ -64,14 +64,14 @@ public class CreateStoreActivity extends AppCompatActivity {
             }
             if (stores.contains(storeName)) {
                 // Store already exists
-                showError("@string/create_store_exists_error");
+                showError("Store already exists");
                 return;
             }
 
             // Check if store name is empty
             if (storeName.equals("")) {
                 // Show the error
-                showError("@string/create_store_empty_error");
+                showError("Store name cannot be empty");
                 return;
             }
 
