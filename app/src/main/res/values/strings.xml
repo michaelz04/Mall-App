@@ -9,6 +9,7 @@
 
 
     <string name="SignUpText"><u>Sign Up</u></string>
+    <string name="Login"><u>Login</u></string>
     <string name="title_activity_account_type_view">AccountTypeView</string>
 
     <string name="title_text">Javan\'s Mall</string>
@@ -17,6 +18,13 @@
     <string name="shopper_text">Shopper</string>
     <string name="store_owner_text">Store owner</string>
 
+    <string name="create_store_description">Create a store</string>
+    <string name="store_name_placeholder">Store name</string>
+    <string name="store_description_placeholder">Store description</string>
+    <string name="create_store_button">Create store</string>
+    <string name="create_store_exists_error">Store already exists</string>
+    <string name="create_store_empty_error">Store name cannot be empty</string>
+    <string name="create_store_data_error">Error fetching data</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
@@ -60,4 +68,16 @@
     <string name="cart">Cart</string>
     <string name="description">(description)</string>
     <string name="title_activity_storeitem_view">storeitem_view</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="userlabel">Username:</string>
+    <string name="registerbutton">Register</string>
+    <string name="passlbl">Password:</string>
 </resources>

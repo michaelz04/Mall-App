@@ -12,12 +12,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_storelist_customer);
-
-        //AddDataActivity.addStoreToDatabase();
-        //Comment below to make sure it doesnt break.
-        Intent intent = new Intent(this, storelist_customer.class);
-        startActivity(intent);
-        finish();
+        setContentView(R.layout.activity_login);
     }
 }
