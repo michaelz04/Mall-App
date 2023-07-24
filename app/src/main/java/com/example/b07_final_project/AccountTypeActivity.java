@@ -24,48 +24,13 @@ public class AccountTypeActivity extends AppCompatActivity {
     }
 
     public void onClickShopper(View view){
+        //add username and password to Shoppers
+        db.child("Shoppers").child(username).child("Password").setValue(password);
 
-        DatabaseReference queryOwners = db.child("Shoppers").child(username);
+    }
 
-        queryOwners.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //add username and password to Shoppers
-
-
-                if (!snapshot.exists()){
-                    //if username not in owners, check shoppers
-                    DatabaseReference queryShoppers = db.child("Shoppers").child(username);
-                    queryShoppers.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (!snapshot.exists()){
-                                //username does not exist in either owners or shoppers so add to singleton class.
-                                CurrentUserData.getInstance().setId(username);
-                                CurrentUserData.getInstance().setPassword(password);
-                                startActivity(new Intent(SignUpActivity.this, AccountTypeActivity.class));
-                            } else {
-                                //username exists in shoppers so print username exists
-                                ((TextView)findViewById(R.id.LoginFail)).setText("Username already exists. Please try again.");
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                } else {
-                    //username exists in owners so print username exists
-                    ((TextView)findViewById(R.id.LoginFail)).setText("Username already exists. Please try again.");
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+    public void onClickOwner(View view){
+        //add username and password to Shoppers
+        db.child("Owners").child(username).child("Password").setValue(password);
     }
 }

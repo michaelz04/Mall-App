@@ -42,9 +42,15 @@ public class SignUpActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (!snapshot.exists()){
                                 //username does not exist in either owners or shoppers so add to singleton class.
-                                CurrentUserData.getInstance().setId(username);
-                                CurrentUserData.getInstance().setPassword(password);
-                                startActivity(new Intent(SignUpActivity.this, AccountTypeActivity.class));
+
+                                //check if password is empty
+                                if (password.length() == 0){
+                                    ((TextView)findViewById(R.id.LoginFail)).setText("Password cannot be empty. Please try again.");
+                                } else {
+                                    CurrentUserData.getInstance().setId(username);
+                                    CurrentUserData.getInstance().setPassword(password);
+                                    startActivity(new Intent(SignUpActivity.this, AccountTypeActivity.class));
+                                }
                             } else {
                                 //username exists in shoppers so print username exists
                                 ((TextView)findViewById(R.id.LoginFail)).setText("Username already exists. Please try again.");
