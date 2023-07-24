@@ -16,7 +16,7 @@ public class CurrentUserData {
     }
     public void setAccountType(String accountType) {
         this.accountType = accountType;
-
+    }
     public String getPassword() {
         return password;
     }
