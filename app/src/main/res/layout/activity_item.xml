@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ItemActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/Item_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/item_1"
@@ -58,13 +58,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/Item_Image"
         android:layout_width="180dp"
         android:layout_height="212dp"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/Item_Name"
         app:layout_constraintVertical_bias="0.546"
         app:srcCompat="@android:drawable/ic_input_get" />
 
@@ -77,6 +77,17 @@
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/Item_Image" />
+
+    <TextView
+        android:id="@+id/Item_Price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="price"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/Item_Image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Item_Name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
