@@ -79,7 +79,7 @@ public class CreateStoreActivity extends AppCompatActivity {
             DatabaseReference newStoreRef = storesRef.child(storeName);
             newStoreRef.child("description").setValue(storeDescription);
             // Add store key to owner
-            ownerRef.child("storeKey").child(storeName);
+            ownerRef.child("StoreID").child(storeName);
 
             // TODO: Switch to the store owner's store page activity
             showError("Success");
