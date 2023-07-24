@@ -19,6 +19,10 @@ public class AccountTypeActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
     }
 
+    @Override
+    public void onBackPressed(){
+
+    }
     public void onClickShopper(View view){
         //add username and password to Shoppers
         DatabaseReference userRef = db.child("Shoppers").child(username);
@@ -31,5 +35,6 @@ public class AccountTypeActivity extends AppCompatActivity {
         //add username and password to Shoppers
         db.child("Owners").child(username).child("Password").setValue(password);
         startActivity(new Intent(AccountTypeActivity.this, CreateStoreActivity.class));
+
     }
 }
