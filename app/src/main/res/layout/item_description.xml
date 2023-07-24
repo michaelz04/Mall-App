@@ -10,7 +10,7 @@
 
 
     <Button
-        android:id="@+id/storeButton"
+        android:id="@+id/itemButtonView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"

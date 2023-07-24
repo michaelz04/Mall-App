@@ -12,6 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.B07finalproject"
         tools:targetApi="31">
+
+        
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+        </activity>
+
+        <activity
+            android:name=".StoreItemsActivityView"
+            android:exported="false" />
         <activity
             android:name=".CreateStoreActivity"
             android:exported="false" />
@@ -34,9 +44,12 @@
             android:label="@string/title_activity_login_view">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".NewItemActivity"
+            android:exported="true"></activity>       
         </activity>
         <activity
             android:name=".MainActivity"
