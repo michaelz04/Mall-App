@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 
 public class ItemActivity extends AppCompatActivity {
     String userId = CurrentUserData.getInstance().getId();
-    String itemId = "ID1";
+    String itemId = CurrentItemData.getInstance().getId();
     DatabaseReference db;
     ImageView rImage;
     @Override
@@ -35,7 +35,7 @@ public class ItemActivity extends AppCompatActivity {
                 String itemDes = snapshot.child("description").getValue(String.class);
                 String itemName = snapshot.child("itemName").getValue(String.class);
                 Integer itemPrice = snapshot.child("price").getValue(Integer.class);
-                String itemImage = snapshot.child("image").getValue(String.class);
+                String itemImage = snapshot.child("picture").getValue(String.class);
 
                 //displaying values to the user
                 ((TextView)findViewById(R.id.Item_Description)).setText(itemDes);
