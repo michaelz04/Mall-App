@@ -9,6 +9,7 @@
 
 
     <string name="SignUpText"><u>Sign Up</u></string>
+    <string name="Login"><u>Login</u></string>
     <string name="title_activity_account_type_view">AccountTypeView</string>
 
     <string name="title_text">Javan\'s Mall</string>
