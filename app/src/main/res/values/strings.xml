@@ -18,6 +18,13 @@
     <string name="shopper_text">Shopper</string>
     <string name="store_owner_text">Store owner</string>
 
+    <string name="create_store_description">Create a store</string>
+    <string name="store_name_placeholder">Store name</string>
+    <string name="store_description_placeholder">Store description</string>
+    <string name="create_store_button">Create store</string>
+    <string name="create_store_exists_error">Store already exists</string>
+    <string name="create_store_empty_error">Store name cannot be empty</string>
+    <string name="create_store_data_error">Error fetching data</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
