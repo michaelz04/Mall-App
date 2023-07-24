@@ -1,5 +1,6 @@
 package com.example.b07_final_project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -7,12 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class CreateStoreActivity extends AppCompatActivity {
     DatabaseReference db;
@@ -28,6 +25,10 @@ public class CreateStoreActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
     }
 
+    @Override
+    public void onBackPressed(){
+
+    }
     private void showError(String errorText) {
         // Replace the error text to display its message
         ((TextView) findViewById(R.id.createStoreError)).setText(errorText);
@@ -44,6 +45,19 @@ public class CreateStoreActivity extends AppCompatActivity {
                 .getText()
                 .toString();
 
+        // Check if store name is empty
+        if (storeName.equals("")) {
+            // Show the error
+            showError("Store name cannot be empty");
+            return;
+        }
+        // Check if store description is empty
+        if (storeDescription.equals("")) {
+            // Show the error
+            showError("Store description cannot be empty");
+            return;
+        }
+
         // DB references for owner and stores
         ownerRef = db.child("Owners").child(username);
         storesRef = db.child("Stores");
@@ -57,32 +71,36 @@ public class CreateStoreActivity extends AppCompatActivity {
                 return;
             }
 
-            // Get list of stores from DB
-            List<String> stores = new ArrayList<>();
-            for (DataSnapshot child : task.getResult().getChildren()) {
-                stores.add(child.getKey());
-            }
-            if (stores.contains(storeName)) {
-                // Store already exists
-                showError("Store already exists");
-                return;
-            }
+            //check if store exists in DB
+            DatabaseReference queryStores = db.child("Stores").child(storeName);
 
-            // Check if store name is empty
-            if (storeName.equals("")) {
-                // Show the error
-                showError("Store name cannot be empty");
-                return;
-            }
+            queryStores.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (!snapshot.exists()){
+                        //Store does not exist so add to DB
+                        // Add store to DB
+                        DatabaseReference newStoreRef = storesRef.child(storeName);
+                        //set description
+                        newStoreRef.child("description").setValue(storeDescription);
+                        //set name of store
+                        newStoreRef.child("storeName").setValue(storeName);
+                        // Add store key to owner
+                        ownerRef.child("StoreID").setValue(storeName);
 
-            // Add store to DB
-            DatabaseReference newStoreRef = storesRef.child(storeName);
-            newStoreRef.child("description").setValue(storeDescription);
-            // Add store key to owner
-            ownerRef.child("StoreID").child(storeName);
+                        // TODO: Switch to the store owner's store page activity
+                        showError("Success");
+                    } else {
+                        showError("Store already exists");
+                        return;
+                    }
+                }
 
-            // TODO: Switch to the store owner's store page activity
-            showError("Success");
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         });
     }
 }

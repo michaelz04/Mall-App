@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     CurrentUserData currentUserData = CurrentUserData.getInstance();
                                                     currentUserData.setId(username);
                                                     currentUserData.setAccountType("Shoppers");
+                                                    startActivity(new Intent(LoginActivity.this, storelist_customer.class));
                                                     ((TextView)findViewById(R.id.LoginFail)).setText("Password correct");
                                                 } else {
                                                     ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
