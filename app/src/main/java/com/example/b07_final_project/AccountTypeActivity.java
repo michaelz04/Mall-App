@@ -32,5 +32,6 @@ public class AccountTypeActivity extends AppCompatActivity {
     public void onClickOwner(View view){
         //add username and password to Shoppers
         db.child("Owners").child(username).child("Password").setValue(password);
+        setContentView(R.layout.activity_create_store);
     }
 }
