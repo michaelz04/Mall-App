@@ -5,10 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.b07_final_project.classes.Store;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Store store = storeList.get(position);
-        String buttonText = store.getName() + " - " + store.getInfo() + " - " + store.getOwner();
+        String buttonText = store.getStoreName() + " - " + store.getDescription() + " - " + store.getStoreOwner();
         holder.storeButton.setText(buttonText);
 
         // Set click listener for the button if needed
@@ -55,7 +56,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
 
 
             Intent intent = new Intent(v.getContext(), StoreItemsActivityView.class);
-            intent.putExtra("store_id", store.getName()); // Assuming you have a getKey() method in the Store class
+            intent.putExtra("store_id", store.getStoreName()); // Assuming you have a getKey() method in the Store class
             v.getContext().startActivity(intent);
 
 
