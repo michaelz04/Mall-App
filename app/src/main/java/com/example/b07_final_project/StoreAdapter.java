@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07_final_project.classes.Store;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,7 +24,6 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         this.storeList = storeList;
     }
 
-    // ViewHolder class to hold the views for each store item
     public static class ViewHolder extends RecyclerView.ViewHolder {
         Button storeButton;
 
@@ -45,23 +45,31 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Store store = storeList.get(position);
-        String buttonText = store.getStoreName() + " - " + store.getDescription() + " - " + store.getStoreOwner();
-        holder.storeButton.setText(buttonText);
+        String storename = store.getStoreName();
+        String errormsg = "No Stores currently";
 
-        // Set click listener for the button if needed
+        if (!storename.equals(errormsg)) {
+            String buttonText = store.getStoreName() + " - " + store.getDescription() +
+                    " - " + store.getStoreOwner(); //+ " - " + temp.size();
+            holder.storeButton.setText(buttonText);
 
-        holder.storeButton.setOnClickListener(v -> {
-            // Handle button click, you can open a new activity or fragment to show the store's items
-            //Toast.makeText(v.getContext(), store.getName(), Toast.LENGTH_SHORT).show();
+            // Set click listener
 
-
-            Intent intent = new Intent(v.getContext(), StoreItemsActivityView.class);
-            intent.putExtra("store_id", store.getStoreName()); // Assuming you have a getKey() method in the Store class
-            v.getContext().startActivity(intent);
+            holder.storeButton.setOnClickListener(v -> {
 
 
+                Intent intent = new Intent(v.getContext(), StoreItemsActivityView.class);
+                intent.putExtra("store_id", store.getStoreName());
+                v.getContext().startActivity(intent);
 
-        });
+
+            });
+        }
+        else{
+            holder.storeButton.setText(errormsg);
+            holder.storeButton.setOnClickListener(null);
+            holder.storeButton.setClickable(false);
+        }
     }
 
 

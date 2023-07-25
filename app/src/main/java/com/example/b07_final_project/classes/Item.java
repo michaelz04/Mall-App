@@ -11,11 +11,12 @@ public class Item {
         // Empty constructor required for Firebase
     }
 
-    public Item(String itemname, String description, float price, String storeKey) {
+    public Item(String itemname, String description, float price, String storeKey, String picture) {
         this.itemName = itemname;
         this.description = description;
         this.price = price;
         this.storeKey = storeKey;
+        this.picture = picture;
     }
 
     public String getItemName() {

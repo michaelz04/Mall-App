@@ -1,5 +1,7 @@
 package com.example.b07_final_project;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,15 +42,27 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Item item = itemList.get(position);
-        String buttonText = item.getItemName() + " - " + item.getDescription() + " - $" + item.getPrice();
-        holder.itemButtonView.setText(buttonText);
 
-        // Set click listener for the button to handle the item click
-        holder.itemButtonView.setOnClickListener(v -> {
-            // Handle the item click, for now, let's just show a Toast with the item name
-            Toast.makeText(v.getContext(), item.getItemName(), Toast.LENGTH_SHORT).show();
-        });
+            Item item = itemList.get(position);
+            String itemName = item.getItemName();
+            String errormsg= "No Items in the Store";
+            if(!itemName.equals(errormsg)) {
+                String buttonText = item.getItemName() + " - " + item.getDescription() + " - $" + item.getPrice();
+                holder.itemButtonView.setText(buttonText);
+
+                // Set click listener
+                holder.itemButtonView.setOnClickListener(v -> {
+                    Intent intent = new Intent(v.getContext(), ItemActivity.class);
+                    v.getContext().startActivity(intent);
+                });
+            }
+
+            else{
+                holder.itemButtonView.setText(errormsg);
+                holder.itemButtonView.setOnClickListener(null);
+                holder.itemButtonView.setClickable(false);
+            }
+
     }
 
     @Override
