@@ -4,10 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.b07_final_project.classes.Item;
 import com.example.b07_final_project.classes.Store;
@@ -22,8 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewItemActivity extends AppCompatActivity {
-//    String storeId = CurrentStoreData.getInstance().getId();
-    String storeId = "1234";
+    String storeId = CurrentStoreData.getInstance().getId();
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://testing-6c0f3-default-rtdb.firebaseio.com/");
 
     @Override
@@ -43,6 +41,19 @@ public class NewItemActivity extends AppCompatActivity {
         // a few seconds.
         // See: https://developer.android.com/reference/com/google/android/material/snackbar/Snackbar
         Snackbar successPrompt;
+
+        // No empty fields
+        if (TextUtils.isEmpty(nameInput.getText().toString())
+                || TextUtils.isEmpty(priceInput.getText().toString())
+                || TextUtils.isEmpty(imageInput.getText().toString())
+                || TextUtils.isEmpty(descInput.getText().toString())
+
+        ) {
+            successPrompt = Snackbar.make(view, "Cannot have empty field", 3000);
+            successPrompt.show();
+            return;
+
+        }
 
         try {
             // Create item with random ID
