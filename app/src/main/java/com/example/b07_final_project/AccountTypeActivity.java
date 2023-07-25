@@ -29,6 +29,7 @@ public class AccountTypeActivity extends AppCompatActivity {
         DatabaseReference userRef = db.child("Shoppers").child(username);
         CurrentUserData.getInstance().setAccountType("Shoppers");
         userRef.child("Password").setValue(password);
+        startActivity(new Intent(AccountTypeActivity.this, storelist_customer.class));
     }
 
     public void onClickOwner(View view){
