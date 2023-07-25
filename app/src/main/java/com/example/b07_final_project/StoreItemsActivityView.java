@@ -75,20 +75,23 @@ public class StoreItemsActivityView extends AppCompatActivity {
                 itemList.clear();
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                     String itemId = itemSnapshot.getKey();
-                    if(itemIDs != null) {
+                    if (itemIDs != null) {
                         if (itemIDs.contains(itemId)) {
                             Item item = itemSnapshot.getValue(Item.class);
                             itemList.add(item);
 
                         }
                     }
-                    if(itemIDs == null && !addonce[0]){
-                       String errormsg= "No Items in the Store";
-                       Item empty = new Item(errormsg, "", 0.0f, "", "");
-                       itemList.add(empty);
-                       addonce[0] = true;
-                    }
                 }
+
+                    if (itemIDs == null && !addonce[0]) {
+                        String errormsg = "No Items in the Store";
+                        Item empty = new Item(errormsg, "", 0.0f, "", "");
+                        itemList.add(empty);
+                        addonce[0] = true;
+                    }
+
+
                // Log.d("Size", String.valueOf(itemList.size()));
 
                 adapter.notifyDataSetChanged();
