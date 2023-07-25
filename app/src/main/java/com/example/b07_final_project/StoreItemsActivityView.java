@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07_final_project.classes.CurrentStoreData;
+import com.example.b07_final_project.classes.CurrentUserData;
 import com.example.b07_final_project.classes.Item;
 import com.example.b07_final_project.classes.Store;
 import com.example.b07_final_project.fragments.IndividualStoreActivityOwnerFragment;
