@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.Item;
 import com.example.b07_final_project.classes.Store;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +34,8 @@ public class StoreItemsActivityView extends AppCompatActivity {
         //Error is that getting the StoreID from a previous activity is hard, might need to change
         // Store class
         // Get the store ID passed from the previous activity somehow find some code.
-        storeId = getIntent().getStringExtra("store_id");
+        // get store id from singleton class
+        storeId = CurrentStoreData.getInstance().getId();
 
         // Initialize the RecyclerView and ItemAdapter
         RecyclerView recyclerView = findViewById(R.id.recyclerViewItems);
@@ -41,8 +43,7 @@ public class StoreItemsActivityView extends AppCompatActivity {
         itemList = new ArrayList<>();
         adapter = new ItemAdapter(itemList);
         recyclerView.setAdapter(adapter);
-
-        DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("Stores").child(storeId);
+        DatabaseReference storeRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference("Stores").child(storeId);
         storeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

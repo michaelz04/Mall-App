@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.b07_final_project.classes.CurrentUserData;
 import com.google.firebase.database.*;
 
 public class AccountTypeActivity extends AppCompatActivity {
@@ -27,8 +28,6 @@ public class AccountTypeActivity extends AppCompatActivity {
         //add username and password to Shoppers
         DatabaseReference userRef = db.child("Shoppers").child(username);
         userRef.child("Password").setValue(password);
-        // add cart to user
-        userRef.child("Cart");
     }
 
     public void onClickOwner(View view){
