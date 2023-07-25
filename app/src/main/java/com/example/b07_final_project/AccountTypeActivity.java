@@ -27,12 +27,14 @@ public class AccountTypeActivity extends AppCompatActivity {
     public void onClickShopper(View view){
         //add username and password to Shoppers
         DatabaseReference userRef = db.child("Shoppers").child(username);
+        CurrentUserData.getInstance().setAccountType("Shoppers");
         userRef.child("Password").setValue(password);
     }
 
     public void onClickOwner(View view){
         //add username and password to Shoppers
         db.child("Owners").child(username).child("Password").setValue(password);
+        CurrentUserData.getInstance().setAccountType("Owners");
         startActivity(new Intent(AccountTypeActivity.this, CreateStoreActivity.class));
 
     }
