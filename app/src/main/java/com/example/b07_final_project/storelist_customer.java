@@ -34,8 +34,8 @@ public class storelist_customer extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
-        //DatabaseReference dbRef = FirebaseDatabase.getInstance("https://test-project-17268-default-rtdb.firebaseio.com/").getReference("Stores");
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Stores");
+        //DatabaseReference dbRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/");
+        DatabaseReference dbRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference("Stores");
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

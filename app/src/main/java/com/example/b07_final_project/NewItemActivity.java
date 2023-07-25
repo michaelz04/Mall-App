@@ -23,7 +23,7 @@ import java.util.List;
 
 public class NewItemActivity extends AppCompatActivity {
     String storeId = CurrentStoreData.getInstance().getId();
-    FirebaseDatabase db = FirebaseDatabase.getInstance("https://testing-6c0f3-default-rtdb.firebaseio.com/");
+    FirebaseDatabase db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
