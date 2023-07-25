@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07_final_project.classes.Item;
 import com.example.b07_final_project.classes.Store;
+import com.example.b07_final_project.fragments.IndividualStoreActivityOwnerFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -80,6 +81,18 @@ public class StoreItemsActivityView extends AppCompatActivity {
                 // Handle database error
             }
         });
+
+
+        if (savedInstanceState == null) {
+            String type = CurrentUserData.getInstance().getAccountType();
+            if (type.equals("Owners")) {
+                getSupportFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .add(R.id.fragmentContainerView, IndividualStoreActivityOwnerFragment.class, null)
+                        .commit();
+            }
+            // TODO: add other fragment for shopper, shows cart. Implement in sprint 2
+        }
     }
 
     // Helper method to check if the store contains the given item ID
