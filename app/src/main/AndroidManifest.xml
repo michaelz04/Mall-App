@@ -14,16 +14,9 @@
         android:theme="@style/Theme.B07finalproject"
         tools:targetApi="31">
         <activity
-            android:name=".AppDataActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity> <!-- Add other activities here -->
         <activity android:name=".StoreItemsActivityView" />
         <activity android:name=".CreateStoreActivity" />
@@ -35,7 +28,14 @@
         <activity android:name=".AccountTypeActivity" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login_view" />
+            android:exported="true"
+            android:label="@string/title_activity_login_view" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".NewItemActivity" />
     </application>
 
