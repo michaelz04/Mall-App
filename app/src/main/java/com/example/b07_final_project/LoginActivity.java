@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                             } else {
                                 //username exists in shoppers so check password
                                 //get password from database
-                                db.child("Shoppers").child(username).child("Password").get().
+                                db.child("Shoppers").child(username).child("password").get().
                                         addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                             @Override
                                             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     //username exists in owners so check password
                     //get password from database
-                    String databasePassword = snapshot.child("Password").getValue(String.class);
+                    String databasePassword = snapshot.child("password").getValue(String.class);
                     if (databasePassword.equals(password)){
                         //set current user id
                         CurrentUserData currentUserData = CurrentUserData.getInstance();
