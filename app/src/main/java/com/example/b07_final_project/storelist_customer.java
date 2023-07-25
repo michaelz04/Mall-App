@@ -33,34 +33,40 @@ public class storelist_customer extends AppCompatActivity {
         adapter = new StoreAdapter(storeList);
         recyclerView.setAdapter(adapter);
 
-        //Change this line for whatever the actual database uses,
-        // either the url or the path of Stores
-        DatabaseReference dbRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference("Stores");
 
+        //DatabaseReference dbRef = FirebaseDatabase.getInstance("https://test-project-17268-default-rtdb.firebaseio.com/").getReference("Stores");
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Stores");
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                storeList.clear(); //Comment this out if u have future errors.
-                for (DataSnapshot store : snapshot.getChildren()) {
-                    String storename= store.child("name").getValue(String.class);
-                    String storeinfo= store.child("info").getValue(String.class);
-                    String storeowner= store.child("owner").getValue(String.class);
-                    List<String> storeitems = new ArrayList<>();
-                    for(DataSnapshot item: store.child("items").getChildren()) {
-                        storeitems.add(item.getValue(String.class));
+                storeList.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot store : snapshot.getChildren()) {
+                        String storename = store.child("storeName").getValue(String.class);
+                        String storeinfo = store.child("description").getValue(String.class);
+                        String storeowner = store.child("storeOwner").getValue(String.class);
+                        List<String> storeitems = new ArrayList<>();
+                        for (DataSnapshot item : store.child("items").getChildren()) {
+                            storeitems.add(item.getValue(String.class));
+                        }
+
+                        Store createStore = new Store(storename, storeinfo, storeowner,
+                                storeitems);
+
+                        storeList.add(createStore);
+
+
                     }
 
-                    Store createStore = new Store(storename, storeinfo, storeowner,
-                            storeitems);
-                   /* ArrayList empty = new ArrayList();
-                    Store createStore = new Store(storename, storeinfo, storeowner, empty);*/
-                    storeList.add(createStore);
-                  //  Log.d("StoreListSize", "Store List Size: " + storeList.size());
-                    //adapter.notifyDataSetChanged();
 
                 }
-               adapter.notifyDataSetChanged();
+                else{
+                    String errormsg= "No Stores currently";
+                    Store empty = new Store(errormsg, "", "", new ArrayList<>());
+                    storeList.add(empty);
 
+                }
+                adapter.notifyDataSetChanged();
             }
 
 
