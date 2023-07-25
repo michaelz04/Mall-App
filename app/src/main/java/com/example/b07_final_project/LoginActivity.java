@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
+import com.example.b07_final_project.classes.CurrentStoreData;
+import com.example.b07_final_project.classes.CurrentUserData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.*;
@@ -77,23 +79,19 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     //username exists in owners so check password
                     //get password from database
-                    db.child("Owners").child(username).child("Password").get().
-                            addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            String databasePassword = String.valueOf(task.getResult().getValue());
-                            //check if password and password from database is correct
-                            if (databasePassword.equals(password)){
-                                //set current user id
-                                CurrentUserData currentUserData = CurrentUserData.getInstance();
-                                currentUserData.setId(username);
-                                currentUserData.setAccountType("Owners");
-                                ((TextView)findViewById(R.id.LoginFail)).setText("Password correct");
-                            } else {
-                                ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
-                            }
-                        }
-                    });
+                    String databasePassword = snapshot.child("Password").getValue(String.class);
+                    if (databasePassword.equals(password)){
+                        //set current user id
+                        CurrentUserData currentUserData = CurrentUserData.getInstance();
+                        currentUserData.setId(username);
+                        currentUserData.setAccountType("Owners");
+                        //set current store instance
+                        String ownerStoreID = snapshot.child("storeKey").getValue(String.class);
+                        CurrentStoreData.getInstance().setId(ownerStoreID);
+                        startActivity(new Intent(LoginActivity.this, StoreItemsActivityView.class));
+                    } else {
+                        ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
+                    }
 
                 }
             }

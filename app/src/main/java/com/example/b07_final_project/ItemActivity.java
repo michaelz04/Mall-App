@@ -1,14 +1,14 @@
 package com.example.b07_final_project;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.b07_final_project.classes.CurrentItemData;
+import com.example.b07_final_project.classes.CurrentUserData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +34,7 @@ public class ItemActivity extends AppCompatActivity {
                 //retrieving values from database
                 String itemDes = snapshot.child("description").getValue(String.class);
                 String itemName = snapshot.child("itemName").getValue(String.class);
-                Integer itemPrice = snapshot.child("price").getValue(Integer.class);
+                Float itemPrice = snapshot.child("price").getValue(Float.class);
                 String itemImage = snapshot.child("picture").getValue(String.class);
 
                 //displaying values to the user

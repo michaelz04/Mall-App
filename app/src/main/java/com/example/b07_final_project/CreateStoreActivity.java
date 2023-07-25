@@ -3,11 +3,14 @@ package com.example.b07_final_project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.b07_final_project.classes.CurrentStoreData;
+import com.example.b07_final_project.classes.CurrentUserData;
 import com.google.firebase.database.*;
 
 
@@ -85,11 +88,14 @@ public class CreateStoreActivity extends AppCompatActivity {
                         newStoreRef.child("description").setValue(storeDescription);
                         //set name of store
                         newStoreRef.child("storeName").setValue(storeName);
+                        //set store owner
+                        newStoreRef.child("storeOwner").setValue(username);
                         // Add store key to owner
-                        ownerRef.child("StoreID").setValue(storeName);
+                        ownerRef.child("storeKey").setValue(storeName);
 
-                        // TODO: Switch to the store owner's store page activity
-                        showError("Success");
+                        //Switch to the store owner's store page activity
+                        CurrentStoreData.getInstance().setId(storeName);
+                        startActivity(new Intent(CreateStoreActivity.this, StoreItemsActivityView.class));
                     } else {
                         showError("Store already exists");
                         return;
