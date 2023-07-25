@@ -1,4 +1,4 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.classes;
 
 public class CurrentUserData {
     private String id;

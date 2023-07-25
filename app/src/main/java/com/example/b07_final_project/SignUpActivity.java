@@ -8,8 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.b07_final_project.classes.CurrentUserData;
 import com.google.firebase.database.*;
 import android.widget.*;
 
