@@ -46,8 +46,25 @@ public class StoreItemsActivityView extends AppCompatActivity {
         itemList = new ArrayList<>();
         adapter = new ItemAdapter(itemList);
         recyclerView.setAdapter(adapter);
-        final boolean[] addonce = {false};
+
+        if (savedInstanceState == null) {
+            String type = CurrentUserData.getInstance().getAccountType();
+            if (type.equals("Owners")) {
+                getSupportFragmentManager().beginTransaction()
+                        .setReorderingAllowed(true)
+                        .add(R.id.fragmentContainerView, IndividualStoreActivityOwnerFragment.class, null)
+                        .commit();
+            }
+            // TODO: add other fragment for shopper, shows cart. Implement in sprint 2
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         // This boolean will help in checking if there are no items in a Store.
+        final boolean[] addonce = {false};
 
         DatabaseReference storeRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference("Stores").child(storeId);
 //        DatabaseReference storeRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").child(storeId);
@@ -65,7 +82,7 @@ public class StoreItemsActivityView extends AppCompatActivity {
         });
 
 
-       // DatabaseReference itemsRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/");
+        // DatabaseReference itemsRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/");
         DatabaseReference itemsRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference("Items");
         itemsRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -82,16 +99,15 @@ public class StoreItemsActivityView extends AppCompatActivity {
                     }
                 }
 
-                    if (itemIDs == null && !addonce[0]) {
-                        String errormsg = "No Items in the Store";
-                        Item empty = new Item(errormsg, "", 0.0f, "", "", "");
-                        itemList.add(empty);
-                        addonce[0] = true;
-                    }
+                if (itemIDs == null && !addonce[0]) {
+                    String errormsg = "No Items in the Store";
+                    Item empty = new Item(errormsg, "", 0.0f, "", "", "");
+                    itemList.add(empty);
+                    addonce[0] = true;
+                }
 
-
-               // Log.d("Size", String.valueOf(itemList.size()));
-
+                // Log.d("Size", String.valueOf(itemList.size()));
+https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324px-Banana-Single.jpg
                 adapter.notifyDataSetChanged();
             }
 
@@ -100,18 +116,6 @@ public class StoreItemsActivityView extends AppCompatActivity {
                 // Handle database error
             }
         });
-
-
-        if (savedInstanceState == null) {
-            String type = CurrentUserData.getInstance().getAccountType();
-            if (type.equals("Owners")) {
-                getSupportFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true)
-                        .add(R.id.fragmentContainerView, IndividualStoreActivityOwnerFragment.class, null)
-                        .commit();
-            }
-            // TODO: add other fragment for shopper, shows cart. Implement in sprint 2
-        }
     }
 
     // Helper method to check if the store contains the given item ID
