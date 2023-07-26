@@ -17,14 +17,15 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class ItemActivity extends AppCompatActivity {
-    String userId = CurrentUserData.getInstance().getId();
-    String itemId = CurrentItemData.getInstance().getId();
+    //String userId = CurrentUserData.getInstance().getId();
+    //String itemId = CurrentItemData.getInstance().getId();
     DatabaseReference db;
     ImageView rImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
+        String itemId = getIntent().getStringExtra("item_id");
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
         DatabaseReference queryItems = db.child("Items").child(itemId);
         rImage = findViewById(R.id.Item_Image);

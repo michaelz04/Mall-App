@@ -53,6 +53,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                 // Set click listener
                 holder.itemButtonView.setOnClickListener(v -> {
                     Intent intent = new Intent(v.getContext(), ItemActivity.class);
+                    intent.putExtra("item_id", item.getItemID());
                     v.getContext().startActivity(intent);
                 });
             }
