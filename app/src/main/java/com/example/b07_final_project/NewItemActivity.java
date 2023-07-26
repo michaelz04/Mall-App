@@ -23,7 +23,7 @@ import java.util.List;
 
 public class NewItemActivity extends AppCompatActivity {
     String storeId = CurrentStoreData.getInstance().getId();
-    FirebaseDatabase db = FirebaseDatabase.getInstance("https://testing-6c0f3-default-rtdb.firebaseio.com/");
+    FirebaseDatabase db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +66,8 @@ public class NewItemActivity extends AppCompatActivity {
                     descInput.getText().toString(),
                     Float.parseFloat(priceInput.getText().toString()),
                     imageInput.getText().toString(),
-                    storeId
+                    storeId,
+                    itemKey
             );
             newItem.setValue(item);
 

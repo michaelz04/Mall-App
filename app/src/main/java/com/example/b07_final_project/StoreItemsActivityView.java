@@ -52,8 +52,8 @@ public class StoreItemsActivityView extends AppCompatActivity {
         final boolean[] addonce = {false};
         // This boolean will help in checking if there are no items in a Store.
 
-        //DatabaseReference storeRef = FirebaseDatabase.getInstance("https://test-project-17268-default-rtdb.firebaseio.com/").getReference("Stores").child(storeId);
         DatabaseReference storeRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference("Stores").child(storeId);
+//        DatabaseReference storeRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").child(storeId);
         storeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -68,8 +68,8 @@ public class StoreItemsActivityView extends AppCompatActivity {
         });
 
 
-       // DatabaseReference itemsRef = FirebaseDatabase.getInstance("https://test-project-17268-default-rtdb.firebaseio.com/").getReference("Items");
-        DatabaseReference itemsRef = FirebaseDatabase.getInstance().getReference("Items");
+       // DatabaseReference itemsRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/");
+        DatabaseReference itemsRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference("Items");
         itemsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -87,7 +87,7 @@ public class StoreItemsActivityView extends AppCompatActivity {
 
                     if (itemIDs == null && !addonce[0]) {
                         String errormsg = "No Items in the Store";
-                        Item empty = new Item(errormsg, "", 0.0f, "", "");
+                        Item empty = new Item(errormsg, "", 0.0f, "", "", "");
                         itemList.add(empty);
                         addonce[0] = true;
                     }
