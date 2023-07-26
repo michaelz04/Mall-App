@@ -66,7 +66,8 @@ public class NewItemActivity extends AppCompatActivity {
                     descInput.getText().toString(),
                     Float.parseFloat(priceInput.getText().toString()),
                     imageInput.getText().toString(),
-                    storeId
+                    storeId,
+                    itemKey
             );
             newItem.setValue(item);
 

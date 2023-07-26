@@ -69,7 +69,7 @@ public class StoreItemsActivityView extends AppCompatActivity {
 
 
        // DatabaseReference itemsRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/");
-        DatabaseReference itemsRef = FirebaseDatabase.getInstance().getReference("Items");
+        DatabaseReference itemsRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference("Items");
         itemsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -87,7 +87,7 @@ public class StoreItemsActivityView extends AppCompatActivity {
 
                     if (itemIDs == null && !addonce[0]) {
                         String errormsg = "No Items in the Store";
-                        Item empty = new Item(errormsg, "", 0.0f, "", "");
+                        Item empty = new Item(errormsg, "", 0.0f, "", "", "");
                         itemList.add(empty);
                         addonce[0] = true;
                     }

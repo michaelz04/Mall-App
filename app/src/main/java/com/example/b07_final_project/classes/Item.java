@@ -2,6 +2,7 @@ package com.example.b07_final_project.classes;
 
 public class Item {
     private String itemName;
+    private String itemID;
     private String description;
     private float price;
     private String picture;
@@ -11,8 +12,9 @@ public class Item {
         // Empty constructor required for Firebase
     }
 
-    public Item(String itemName, String description, float price,  String picture, String storeKey) {
+    public Item(String itemName, String description, float price,  String picture, String storeKey, String itemID) {
         this.itemName = itemName;
+        this.itemID = itemID;
         this.description = description;
         this.price = price;
         this.storeKey = storeKey;
@@ -25,6 +27,14 @@ public class Item {
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
+    }
+
+    public String getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(String itemID) {
+        this.itemID = itemID;
     }
 
     public String getDescription() {
