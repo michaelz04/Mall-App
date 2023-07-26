@@ -80,4 +80,8 @@ public class storelist_customer extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed(){
+
+    }
 }

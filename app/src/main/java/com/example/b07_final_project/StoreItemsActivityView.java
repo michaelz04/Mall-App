@@ -37,8 +37,8 @@ public class StoreItemsActivityView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_items_view);
 
-        //storeId = CurrentStoreData.getInstance().getId();
-        storeId = getIntent().getStringExtra("store_id");
+        storeId = CurrentStoreData.getInstance().getId();
+        //storeId = getIntent().getStringExtra("store_id");
 
         // Initialize the RecyclerView and ItemAdapter
         RecyclerView recyclerView = findViewById(R.id.recyclerViewItems);
