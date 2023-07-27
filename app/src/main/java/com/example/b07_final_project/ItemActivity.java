@@ -1,6 +1,7 @@
 package com.example.b07_final_project;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,5 +51,13 @@ public class ItemActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void onClickAdd(View view) {
+        // TODO: Implement code for the button
+    }
+
+    public void onClickCart(View view) {
+        // TODO: Implement code for the button
     }
 }

@@ -62,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
                                                     currentUserData.setId(username);
                                                     currentUserData.setAccountType("Shoppers");
                                                     startActivity(new Intent(LoginActivity.this, storelist_customer.class));
-                                                    ((TextView)findViewById(R.id.LoginFail)).setText("Password correct");
                                                 } else {
                                                     ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
                                                 }
@@ -87,6 +86,11 @@ public class LoginActivity extends AppCompatActivity {
                         currentUserData.setAccountType("Owners");
                         //set current store instance
                         String ownerStoreID = snapshot.child("storeKey").getValue(String.class);
+                        // If the store doesn't exist, send the owner to create the store
+                        if (ownerStoreID == null || ownerStoreID.isEmpty()) {
+                            startActivity(new Intent(LoginActivity.this, CreateStoreActivity.class));
+                            return;
+                        }
                         CurrentStoreData.getInstance().setId(ownerStoreID);
                         startActivity(new Intent(LoginActivity.this, StoreItemsActivityView.class));
                     } else {
