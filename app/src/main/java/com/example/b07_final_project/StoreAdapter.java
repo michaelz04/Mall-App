@@ -1,6 +1,7 @@
 package com.example.b07_final_project;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.Store;
 
 import java.util.ArrayList;
@@ -59,7 +61,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
 
 
                 Intent intent = new Intent(v.getContext(), StoreItemsActivityView.class);
-                intent.putExtra("store_id", store.getStoreName());
+                CurrentStoreData.getInstance().setId(store.getStoreName());
                 v.getContext().startActivity(intent);
 
 
