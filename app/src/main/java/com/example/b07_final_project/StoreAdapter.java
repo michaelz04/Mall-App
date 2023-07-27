@@ -61,6 +61,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
 
 
                 Intent intent = new Intent(v.getContext(), StoreItemsActivityView.class);
+                intent.putExtra("store_id", store.getStoreName());
                 CurrentStoreData.getInstance().setId(store.getStoreName());
                 v.getContext().startActivity(intent);
 
