@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="12dp"
+    app:cardCornerRadius="12dp">
+
+
+    <Button
+        android:id="@+id/storeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="start|center_vertical"
+        android:padding="16dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:text="abc"/>
+    <!--android:text="Comment this out after and look at commented out code above this"-->
+    <!-- android:drawableStart="@drawable/ic_store" Replace with your store icon -->
+
+</androidx.cardview.widget.CardView>
