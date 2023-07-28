@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     CurrentUserData currentUserData = CurrentUserData.getInstance();
                                                     currentUserData.setId(username);
                                                     currentUserData.setAccountType("Shoppers");
-                                                    startActivity(new Intent(LoginActivity.this, storelist_customer.class));
+                                                    startActivity(new Intent(LoginActivity.this, CustomerActivityBase.class));
                                                 } else {
                                                     ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
                                                 }
@@ -92,7 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                             return;
                         }
                         CurrentStoreData.getInstance().setId(ownerStoreID);
-                        startActivity(new Intent(LoginActivity.this, StoreItemsActivityView.class));
+
+                        startActivity(new Intent(LoginActivity.this, OwnerActivityBase.class));
                     } else {
                         ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
                     }

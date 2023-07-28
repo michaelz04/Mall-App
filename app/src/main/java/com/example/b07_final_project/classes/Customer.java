@@ -5,8 +5,8 @@ import java.util.List;
 public class Customer {
     private String username;
     private String password;
-    private List<String> cart;
-    private List<String> orders;
+    private List<String> cart; //is this a list of item ids?
+    private List<String> orders; //same Qs here
 
     public Customer() {
     }
