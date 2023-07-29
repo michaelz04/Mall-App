@@ -73,7 +73,7 @@ public class OwnerOrderAdapter extends RecyclerView.Adapter<OwnerOrderAdapter.Vi
                 holder.doneText.setText("Not Done");
             }
 
-            String orderIdTrim = orderId.substring(0, 12);
+            String orderIdTrim = orderId.substring(0, 15);
             String buttonText = "Order ID: #" + orderIdTrim;
             holder.orderButton.setText(buttonText);
 

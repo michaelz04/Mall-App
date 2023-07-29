@@ -14,26 +14,28 @@
 
         <Button
             android:id="@+id/OwnerOrderButton"
-            android:layout_width="221dp"
-            android:layout_height="60dp"
+            android:layout_width="254dp"
+            android:layout_height="82dp"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
             android:padding="16dp"
             android:text="Button"
+            android:textAlignment="textStart"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.462" />
 
         <TextView
             android:id="@+id/OrderStatusText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="61dp"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="38dp"
             android:layout_marginBottom="43dp"
             android:text="Order Status"
@@ -46,16 +48,20 @@
 
         <TextView
             android:id="@+id/OrderStatusDone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="62dp"
+            android:layout_height="33dp"
             android:layout_marginStart="47dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="51dp"
+            android:layout_marginBottom="8dp"
             android:text="Not Done"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.842"
             app:layout_constraintStart_toEndOf="@+id/OwnerOrderButton"
-            app:layout_constraintTop_toBottomOf="@+id/OrderStatusText" />
+            app:layout_constraintTop_toBottomOf="@+id/OrderStatusText"
+            app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
