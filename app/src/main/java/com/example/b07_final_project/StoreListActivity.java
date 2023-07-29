@@ -21,12 +21,13 @@ import java.util.List;
 public class StoreListActivity extends AppCompatActivity {
     private List<Store> storeList;
     private StoreAdapter adapter;
+    private RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_storelist_customer);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = findViewById(R.id.recyclerView);
        // Log.d("storelist_customer", "RecyclerView initialized");
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         storeList = new ArrayList<>();

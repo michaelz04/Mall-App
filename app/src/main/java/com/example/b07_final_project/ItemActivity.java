@@ -1,5 +1,6 @@
 package com.example.b07_final_project;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,6 +43,13 @@ public class ItemActivity extends AppCompatActivity {
                 onClickAdd();
             }
         });
+
+        Button goCart = findViewById(R.id.goToCart);
+        goCart.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), CartActivity.class);
+            v.getContext().startActivity(intent);
+        });
+
         DatabaseReference queryItems = db.child("Items").child(itemId);
         rImage = findViewById(R.id.Item_Image);
         queryItems.addValueEventListener(new ValueEventListener() {
@@ -95,7 +103,7 @@ public class ItemActivity extends AppCompatActivity {
 
     }
 
-    public void onClickCart(View view) {
+    public void onClickCart() {
         // TODO: Implement code for the button
     }
 }
