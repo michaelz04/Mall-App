@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".OwnerActivityBase">
+    tools:context=".OwnerMenuActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -42,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="32dp"
+        android:onClick="onClickOrder"
         android:text="Order History"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
