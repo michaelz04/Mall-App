@@ -31,6 +31,9 @@
         <activity android:name=".storelist_customer" />
         <activity android:name=".AccountTypeActivity" />
         <activity
+            android:name=".CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:label="@string/title_activity_login_view">

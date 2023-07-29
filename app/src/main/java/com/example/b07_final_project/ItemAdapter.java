@@ -64,6 +64,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                 holder.itemButtonView.setClickable(false);
             }
 
+           // Log.d("test", String.valueOf(position));
+
     }
 
     @Override
