@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.b07_final_project.adapters.StoreAdapter;
 import com.example.b07_final_project.classes.Store;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class storelist_customer extends AppCompatActivity {
+public class StoreListActivity extends AppCompatActivity {
     private List<Store> storeList;
     private StoreAdapter adapter;
     @Override

@@ -1,13 +1,13 @@
 package com.example.b07_final_project;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07_final_project.adapters.ItemAdapter;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
 import com.example.b07_final_project.classes.Item;
@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoreItemsActivityView extends AppCompatActivity {
+public class StoreItemsListActivity extends AppCompatActivity {
 
     private List<Item> itemList;
     private ItemAdapter adapter;
