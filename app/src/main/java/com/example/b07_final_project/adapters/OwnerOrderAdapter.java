@@ -1,5 +1,6 @@
 package com.example.b07_final_project.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.*;
 
@@ -53,6 +54,9 @@ public class OwnerOrderAdapter extends RecyclerView.Adapter<OwnerOrderAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull OwnerOrderAdapter.ViewHolder holder, int position) {
         String orderId = orderList.get(position);
+
+        String text = Integer.toString(position);
+        Log.d("test", text);
 
         if (orderId.equals("empty")){
             String buttonText = "No orders";

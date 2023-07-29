@@ -53,12 +53,11 @@ public class OwnerOrdersListActivity extends AppCompatActivity {
 
 
                     if (orderId != null){
-                        //String text = (String) snapshot.child("Orders").child(orderId).
-                        //        child("stores").child(storeId).child("status").getValue();
 
-                        //Log.d("test", text);
                         boolean orderStatus = (Boolean) snapshot.child("Orders").child(orderId).
                                 child("stores").child(storeId).child("status").getValue();
+
+                        //Log.d("test", orderId);
 
                         orderList.add(orderId);
                         statusList.add(orderStatus);
