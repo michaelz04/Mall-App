@@ -72,7 +72,9 @@ public class OwnerOrderAdapter extends RecyclerView.Adapter<OwnerOrderAdapter.Vi
             } else {
                 holder.doneText.setText("Not Done");
             }
-            String buttonText = "Order ID: #" + orderId;
+
+            String orderIdTrim = orderId.substring(0, 12);
+            String buttonText = "Order ID: #" + orderIdTrim;
             holder.orderButton.setText(buttonText);
 
             // Set click listener
