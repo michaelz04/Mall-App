@@ -2,6 +2,7 @@ package com.example.b07_final_project;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,17 +18,30 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class ItemActivity extends AppCompatActivity {
     //String userId = CurrentUserData.getInstance().getId();
-    //String itemId = CurrentItemData.getInstance().getId();
+    String itemId;
     DatabaseReference db;
     ImageView rImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
-        String itemId = getIntent().getStringExtra("item_id");
+        itemId = getIntent().getStringExtra("item_id");
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
+
+        // Make Add to Cart work.
+        Button cartAdd = findViewById(R.id.addToCartButton);
+        cartAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickAdd();
+            }
+        });
         DatabaseReference queryItems = db.child("Items").child(itemId);
         rImage = findViewById(R.id.Item_Image);
         queryItems.addValueEventListener(new ValueEventListener() {
@@ -51,10 +65,34 @@ public class ItemActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
-    public void onClickAdd(View view) {
+    private void onClickAdd() {
         // TODO: Implement code for the button
+        String userId = CurrentUserData.getInstance().getId();
+        DatabaseReference cartRef = db.child("Shoppers").child(userId).child("cart");
+        cartRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HashMap<String, Integer> currentCartItems;
+                if(snapshot.exists()) {
+                    currentCartItems = (HashMap<String, Integer>) snapshot.getValue();
+
+                }
+                else{
+                    currentCartItems = new HashMap<String, Integer>();
+                }
+                currentCartItems.put(itemId,1);
+                cartRef.setValue(currentCartItems);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     public void onClickCart(View view) {
