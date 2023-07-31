@@ -119,6 +119,7 @@ public class CartActivity extends AppCompatActivity {
                     if (snapshot.exists()) {
                         Map<String, OrderStores> storesMap = new HashMap<>(); //Will be all the stores and items
                         Set<String> uniqueStoreKeys = new HashSet<>(); //To check if all the stores are added.
+                        HashSet<String> ownersOfOrders = new HashSet<>();
 
                         for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                             String itemId = itemSnapshot.getKey();
@@ -132,6 +133,7 @@ public class CartActivity extends AppCompatActivity {
                                             orderStores = new OrderStores(new HashMap<>(), false);
                                             storesMap.put(storeKey, orderStores);
                                             uniqueStoreKeys.add(storeKey);
+                                            //Log.d("CartActivity", "Added new storeKey: " + storeKey);
                                         }
 
                                         orderStores.getItems().put(itemId, quantity);
@@ -141,6 +143,31 @@ public class CartActivity extends AppCompatActivity {
                                             db.child("Orders").child(orderId).setValue(orders);
                                             //If you want to remove a user's cart after checkout uncomment code below
                                             //cartRef.removeValue();
+                                            DatabaseReference storeRef = db.child("Stores");
+                                            storeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    for(DataSnapshot stores: snapshot.getChildren()) {
+                                                        if(uniqueStoreKeys.contains(stores.getKey())) {
+                                                            String ownername = stores.child("storeOwner").getValue(String.class);
+                                                            ownersOfOrders.add(ownername);
+                                                            //Log.d("CartActivity", "2nd test " + ownername);
+                                                        }
+                                                    }
+                                                  //  Log.d("CartActivity", "4th test " + ownersOfOrders.size());
+                                                    DatabaseReference ownersRef = db.child("Owners");
+                                                    for (String orderowner : ownersOfOrders) {
+                                                        ownersRef.child(orderowner).child("orders").child(orderId).setValue(orderId);
+                                                        //Log.d("CartActivity", "3rd test " + orderowner);
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
+                                            });
+
                                         }
                                     }
                                 }
