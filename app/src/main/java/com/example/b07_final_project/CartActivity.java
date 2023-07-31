@@ -142,7 +142,10 @@ public class CartActivity extends AppCompatActivity {
                                             Orders orders = new Orders(orderId, storesMap);
                                             db.child("Orders").child(orderId).setValue(orders);
                                             //If you want to remove a user's cart after checkout uncomment code below
-                                            //cartRef.removeValue();
+                                            cartRef.removeValue();
+                                            cartAdapter.notifyDataSetChanged();
+
+                                            //Add things to owners
                                             DatabaseReference storeRef = db.child("Stores");
                                             storeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override

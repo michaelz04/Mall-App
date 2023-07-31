@@ -52,7 +52,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             holder.cartButtonView.setText(buttonText);
 
             holder.cartButtonView.setOnClickListener(v ->  {
-
+                // Implement the adding quantity + removing item, remember to send extra intent.
             });
 
         }
