@@ -38,7 +38,8 @@ public class ItemActivity extends AppCompatActivity {
         // Make Add to Cart work.
         Button cartAdd = findViewById(R.id.addToCartButton);
         cartAdd.setOnClickListener(v ->  {
-                onClickAdd();
+            onClickAdd();
+
         });
 
         Button goCart = findViewById(R.id.goToCart);
