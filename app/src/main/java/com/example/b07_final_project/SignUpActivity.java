@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -25,7 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
-        usernameText = (TextInputEditText) findViewById(R.id.UsernameInput);
+        usernameText = (TextInputEditText) findViewById(R.id.itemNameInput);
         passwordText = (TextInputEditText) findViewById(R.id.PasswordInput);
         // when the user presses 'done' on their keyboard, try logging in
         passwordText.setOnEditorActionListener(new TextView.OnEditorActionListener() {

@@ -63,7 +63,7 @@
                     android:layout_marginTop="16dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/UsernameInput"
+                        android:id="@+id/itemNameInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Username"
