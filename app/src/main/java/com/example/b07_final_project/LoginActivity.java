@@ -12,6 +12,7 @@ import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.*;
 
 public class LoginActivity extends AppCompatActivity {
@@ -28,9 +29,9 @@ public class LoginActivity extends AppCompatActivity {
         //check for user id
 
         //grab username and password from input
-        EditText usernameText = (EditText) findViewById(R.id.UsernameInput);
+        TextInputEditText usernameText = (TextInputEditText) findViewById(R.id.UsernameInput);
         String username = usernameText.getText().toString();
-        EditText passwordText = (EditText) findViewById(R.id.PasswordInput);
+        TextInputEditText passwordText = (TextInputEditText) findViewById(R.id.PasswordInput);
         String password = passwordText.getText().toString();
 
         //query owners
@@ -46,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (!snapshot.exists()){
                                 //username does not exist in either owners or shoppers
-                                ((TextView)findViewById(R.id.LoginFail)).setText("Username does not exist");
+//                                ((TextView)findViewById(R.id.LoginFail)).setText("Username does not exist");
                             } else {
                                 //username exists in shoppers so check password
                                 //get password from database
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     currentUserData.setAccountType("Shoppers");
                                                     startActivity(new Intent(LoginActivity.this, CustomerMenuActivity.class));
                                                 } else {
-                                                    ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
+//                                                    ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
                                                 }
                                             }
                                         });
@@ -95,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         startActivity(new Intent(LoginActivity.this, OwnerMenuActivity.class));
                     } else {
-                        ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
+//                        ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
                     }
 
                 }
