@@ -31,7 +31,7 @@ public class CustomerOrdersListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_list_orders);
+        setContentView(R.layout.customer_order_recycle_view);
 
         ordersList = new ArrayList<>();
         adapter = new CustomerOrderAdapter(ordersList);
@@ -44,6 +44,8 @@ public class CustomerOrdersListActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        ordersList.clear();
 
         // go through the list of orders for current user
         DatabaseReference orderKeys = db.getReference("Shoppers").child(user).child("orders");

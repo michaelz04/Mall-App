@@ -1,5 +1,6 @@
 package com.example.b07_final_project.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07_final_project.CustomerSpecificOrderActivity;
 import com.example.b07_final_project.R;
+import com.example.b07_final_project.classes.CurrentOrderData;
 import com.example.b07_final_project.classes.Orders;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -75,10 +79,16 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
             status.setText("Incomplete");
         }
 
-        // Keybinding // TODO: Implement switching to view for single order
+        // Keybinding
         holder.getView().setOnClickListener(v -> {
-            Toast t = Toast.makeText(v.getContext(), order.getOrderID(), Toast.LENGTH_LONG);
-            t.show();
+            // Really should never appear, but just in case
+            if (order.getStores() == null || order.getStores().isEmpty()) {
+                Snackbar bar = Snackbar.make(v, "No orders from this store (This should never appear)", 3000);
+                bar.show();
+                return;
+            }
+            CurrentOrderData.getInstance().setId(order.getOrderID());
+            v.getContext().startActivity(new Intent(v.getContext(), CustomerSpecificOrderActivity.class));
         });
     }
 
