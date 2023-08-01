@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void onClickLogin(View view){
+    public void onClickLoginLogin(View view){
         //check for user id
 
         //grab username and password from input
@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void onClickSignup(View view){
+    public void onClickLoginSignup(View view){
         startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
     }
 }

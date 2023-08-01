@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.b07_final_project.classes.CurrentUserData;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.*;
 import android.widget.*;
 
@@ -21,11 +22,11 @@ public class SignUpActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
     }
 
-    public void onClickRegister(View view){
+    public void onClickSignupSignup(View view){
         //grab username and password from input
-        EditText usernameText = (EditText) findViewById(R.id.UsernameInput);
+        TextInputEditText usernameText = (TextInputEditText) findViewById(R.id.UsernameInput);
         String username = usernameText.getText().toString();
-        EditText passwordText = (EditText) findViewById(R.id.PasswordInput);
+        TextInputEditText passwordText = (TextInputEditText) findViewById(R.id.PasswordInput);
         String password = passwordText.getText().toString();
 
         DatabaseReference queryOwners = db.child("Owners").child(username);
@@ -44,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                                 //check if password is empty
                                 if (password.length() == 0){
-                                    ((TextView)findViewById(R.id.LoginFail)).setText("Password cannot be empty. Please try again.");
+//                                    ((TextView)findViewById(R.id.LoginFail)).setText("Password cannot be empty. Please try again.");
                                 } else {
                                     CurrentUserData.getInstance().setId(username);
                                     CurrentUserData.getInstance().setPassword(password);
@@ -52,7 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 }
                             } else {
                                 //username exists in shoppers so print username exists
-                                ((TextView)findViewById(R.id.LoginFail)).setText("Username already exists. Please try again.");
+//                                ((TextView)findViewById(R.id.LoginFail)).setText("Username already exists. Please try again.");
                             }
                         }
 
@@ -63,7 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
                     });
                 } else {
                     //username exists in owners so print username exists
-                    ((TextView)findViewById(R.id.LoginFail)).setText("Username already exists. Please try again.");
+//                    ((TextView)findViewById(R.id.LoginFail)).setText("Username already exists. Please try again.");
 
                 }
             }
@@ -75,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    public void onClickLogin(View view){
+    public void onClickSignupLogin(View view){
         startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
     }
 }
