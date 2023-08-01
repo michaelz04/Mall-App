@@ -1,5 +1,6 @@
 package com.example.b07_final_project.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07_final_project.CustomerSpecificOrderActivity;
 import com.example.b07_final_project.R;
+import com.example.b07_final_project.classes.CurrentOrderData;
 import com.example.b07_final_project.classes.Orders;
 
 import java.util.List;
@@ -77,8 +80,8 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
 
         // Keybinding // TODO: Implement switching to view for single order
         holder.getView().setOnClickListener(v -> {
-            Toast t = Toast.makeText(v.getContext(), order.getOrderID(), Toast.LENGTH_LONG);
-            t.show();
+            CurrentOrderData.getInstance().setId(order.getOrderID());
+            v.getContext().startActivity(new Intent(v.getContext(), CustomerSpecificOrderActivity.class));
         });
     }
 
