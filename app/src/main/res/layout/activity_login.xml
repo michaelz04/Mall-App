@@ -67,6 +67,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Username"
+                        android:imeOptions="actionNext"
                         android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -83,8 +84,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Password"
-                        android:inputType="phone"
-                        android:password="true"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:nextFocusDown="@+id/LoginLoginButton"
+                        android:password="false"
+                        android:phoneNumber="false"
                         android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>

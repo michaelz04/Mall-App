@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 
 import com.example.b07_final_project.classes.CurrentStoreData;
@@ -18,26 +20,37 @@ import com.google.firebase.database.*;
 
 public class LoginActivity extends AppCompatActivity {
     DatabaseReference db;
+    TextInputEditText usernameText;
+    TextInputEditText passwordText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
-
+        usernameText = (TextInputEditText) findViewById(R.id.UsernameInput);
+        passwordText = (TextInputEditText) findViewById(R.id.PasswordInput);
+        // when the user presses 'done' on their keyboard, try logging in
+        passwordText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) onClickLoginLogin(findViewById(R.id.LoginLoginButton));
+                return false;
+            }
+        });
     }
 
     public void onClickLoginLogin(View view){
         //check for user id
 
-        //grab username and password from input
-        TextInputEditText usernameText = (TextInputEditText) findViewById(R.id.UsernameInput);
-        TextInputEditText passwordText = (TextInputEditText) findViewById(R.id.PasswordInput);
+        // if empty, show error
         if (usernameText.getText() == null || passwordText.getText() == null) {
             Snackbar.make(view, "Fields cannot be empty", 1000).show();
             return;
         }
+        //grab username and password from input
         String username = usernameText.getText().toString();
         String password = passwordText.getText().toString();
+        // if empty, show error
         if (username.isEmpty() || password.isEmpty()) {
             Snackbar.make(view, "Fields cannot be empty", 1000).show();
             return;
