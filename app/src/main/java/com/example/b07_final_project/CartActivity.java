@@ -144,6 +144,10 @@ public class CartActivity extends AppCompatActivity {
                                             //If you want to remove a user's cart after checkout uncomment code below
                                             cartRef.removeValue();
                                             cartAdapter.notifyDataSetChanged();
+                                            //Add to current user orders:
+                                            String currentUser = CurrentUserData.getInstance().getId();
+                                            DatabaseReference userRef = db.child("Shoppers").child(currentUser);
+                                            userRef.child("orders").child(orderId).setValue(orderId);
 
                                             //Add things to owners
                                             DatabaseReference storeRef = db.child("Stores");

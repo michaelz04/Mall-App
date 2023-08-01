@@ -20,6 +20,9 @@
             android:name=".CustomerOrdersListActivity"
             android:exported="false" />
         <activity
+            android:name=".EditItemAmount"
+            android:exported="false" />
+        <activity
             android:name=".OwnerOrdersListActivity"
             android:exported="false" />
         <activity
