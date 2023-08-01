@@ -79,7 +79,8 @@ public class CustomerSpecificOrderAdapter extends RecyclerView.Adapter<CustomerS
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     Item newItem = task.getResult().getValue(Item.class);
-                    itemView.setText(newItem.getItemName());
+                    // format: Item (Quantity)
+                    itemView.setText(newItem.getItemName() + " (" + orderStore.getItems().get(item) + ")");
                     priceView.setText("$" + Float.toString(newItem.getPrice()));
                     // Numbers aligned to right
                     priceView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
