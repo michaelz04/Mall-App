@@ -63,6 +63,7 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
 
         Orders order = orders.get(position);
         id.setText(order.getOrderID());
+        id_label.setText("Ordering ID:");
 
         // Colors :D // FIXME: Change bc Ish is creating a colorscheme, use that
         if (order.getOrderStatus()) {

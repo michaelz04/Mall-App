@@ -62,8 +62,8 @@ public class CustomerOrdersListActivity extends AppCompatActivity {
                         Orders order = task.getResult().getValue(Orders.class);
                         if (order != null) {
                             ordersList.add(task.getResult().getValue(Orders.class));
-//                            adapter.notifyDataSetChanged();
-                            adapter.notifyItemInserted(ordersList.size());
+                            adapter.notifyDataSetChanged();
+//                            adapter.notifyItemInserted(ordersList.size());
                         }
                     }
                 });
