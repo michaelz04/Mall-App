@@ -17,6 +17,6 @@ public class CustomerActivityBase extends AppCompatActivity {
         startActivity(new Intent(CustomerActivityBase.this, storelist_customer.class));
     }
     public void onClickOrder(View view){
-        //TODO make order interface
+        startActivity(new Intent(CustomerActivityBase.this, CustomerOrdersListActivity.class));
     }
 }
