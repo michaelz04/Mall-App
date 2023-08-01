@@ -7,11 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.b07_final_project.adapters.CustomerOrderAdapter;
 import com.example.b07_final_project.classes.CurrentUserData;
-import com.example.b07_final_project.classes.Order;
+import com.example.b07_final_project.classes.Orders;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
@@ -21,12 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class CustomerOrdersListActivity extends AppCompatActivity {
     String user = CurrentUserData.getInstance().getId();
-    List<Order> ordersList;
+    List<Orders> ordersList;
     CustomerOrderAdapter adapter;
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/");
 
@@ -61,9 +59,9 @@ public class CustomerOrdersListActivity extends AppCompatActivity {
                 db.getReference("Orders").child(orderID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        Order order = task.getResult().getValue(Order.class);
+                        Orders order = task.getResult().getValue(Orders.class);
                         if (order != null) {
-                            ordersList.add(task.getResult().getValue(Order.class));
+                            ordersList.add(task.getResult().getValue(Orders.class));
 //                            adapter.notifyDataSetChanged();
                             adapter.notifyItemInserted(ordersList.size());
                         }

@@ -2,14 +2,14 @@ package com.example.b07_final_project.classes;
 
 import java.util.Map;
 
-public class OrderStore {
+public class OrderStores {
     private Map<String, Integer> items;
     private boolean status;
 
-    public OrderStore() {
+    public OrderStores() {
     }
 
-    public OrderStore(Map<String, Integer> items, boolean status) {
+    public OrderStores(Map<String, Integer> items, boolean status) {
         this.items = items;
         this.status = status;
     }

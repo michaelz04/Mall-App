@@ -1,6 +1,5 @@
 package com.example.b07_final_project.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07_final_project.R;
-import com.example.b07_final_project.classes.Order;
+import com.example.b07_final_project.classes.Orders;
 
 import java.util.List;
 
 public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdapter.ViewHolder> {
-    private final List<Order> orders;
+    private final List<Orders> orders;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // The container is the parent card view from ui_customer_order.xml
@@ -36,7 +35,7 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
     }
 
 
-    public CustomerOrderAdapter(List<Order> orders) {
+    public CustomerOrderAdapter(List<Orders> orders) {
         this.orders = orders;
     }
 
@@ -62,7 +61,7 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
             return;
         }
 
-        Order order = orders.get(position);
+        Orders order = orders.get(position);
         id.setText(order.getOrderID());
 
         // Colors :D // FIXME: Change bc Ish is creating a colorscheme, use that

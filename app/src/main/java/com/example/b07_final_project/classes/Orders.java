@@ -2,14 +2,14 @@ package com.example.b07_final_project.classes;
 
 import java.util.Map;
 
-public class Order{
+public class Orders {
     private String orderID;
-    private Map<String, OrderStore> stores;
+    private Map<String, OrderStores> stores;
 
-    public Order() {
+    public Orders() {
     }
 
-    public Order(String orderID, Map<String, OrderStore> stores) {
+    public Orders(String orderID, Map<String, OrderStores> stores) {
         this.orderID = orderID;
         this.stores = stores;
     }
@@ -22,11 +22,11 @@ public class Order{
         this.orderID = orderID;
     }
 
-    public Map<String, OrderStore> getStores() {
+    public Map<String, OrderStores> getStores() {
         return stores;
     }
 
-    public void setStores(Map<String, OrderStore> stores) {
+    public void setStores(Map<String, OrderStores> stores) {
         this.stores = stores;
     }
 
@@ -35,7 +35,7 @@ public class Order{
         if (stores == null) return true;
 
         for (String storeKey: stores.keySet()) {
-            OrderStore orderStore = stores.get(storeKey);
+            OrderStores orderStore = stores.get(storeKey);
             if (orderStore ==  null) return false;
             if (!orderStore.isStatus()) return false;
         }
