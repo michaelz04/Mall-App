@@ -24,7 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
-        usernameText = (TextInputEditText) findViewById(R.id.itemNameInput);
+        usernameText = (TextInputEditText) findViewById(R.id.UsernameInput);
         passwordText = (TextInputEditText) findViewById(R.id.PasswordInput);
         // when the user presses 'done' on their keyboard, try logging in
         passwordText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
