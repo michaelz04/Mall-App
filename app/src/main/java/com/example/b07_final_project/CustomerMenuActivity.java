@@ -17,6 +17,6 @@ public class CustomerMenuActivity extends AppCompatActivity {
         startActivity(new Intent(CustomerMenuActivity.this, StoreListActivity.class));
     }
     public void onClickOrder(View view){
-        //TODO make order interface
+        startActivity(new Intent(CustomerMenuActivity.this, CustomerOrdersListActivity.class));
     }
 }
