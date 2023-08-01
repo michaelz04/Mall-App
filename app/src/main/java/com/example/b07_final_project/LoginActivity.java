@@ -12,6 +12,7 @@ import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.*;
 
@@ -30,9 +31,17 @@ public class LoginActivity extends AppCompatActivity {
 
         //grab username and password from input
         TextInputEditText usernameText = (TextInputEditText) findViewById(R.id.UsernameInput);
-        String username = usernameText.getText().toString();
         TextInputEditText passwordText = (TextInputEditText) findViewById(R.id.PasswordInput);
+        if (usernameText.getText() == null || passwordText.getText() == null) {
+            Snackbar.make(view, "Fields cannot be empty", 1000).show();
+            return;
+        }
+        String username = usernameText.getText().toString();
         String password = passwordText.getText().toString();
+        if (username.isEmpty() || password.isEmpty()) {
+            Snackbar.make(view, "Fields cannot be empty", 1000).show();
+            return;
+        }
 
         //query owners
         DatabaseReference queryOwners = db.child("Owners").child(username);
@@ -47,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (!snapshot.exists()){
                                 //username does not exist in either owners or shoppers
-//                                ((TextView)findViewById(R.id.LoginFail)).setText("Username does not exist");
+                                Snackbar.make(view, "Username does not exist", 1000).show();
                             } else {
                                 //username exists in shoppers so check password
                                 //get password from database
@@ -64,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     currentUserData.setAccountType("Shoppers");
                                                     startActivity(new Intent(LoginActivity.this, CustomerMenuActivity.class));
                                                 } else {
-//                                                    ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
+                                                    Snackbar.make(view, "Incorrect password", 1000).show();
                                                 }
                                             }
                                         });
@@ -96,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         startActivity(new Intent(LoginActivity.this, OwnerMenuActivity.class));
                     } else {
-//                        ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
+                        Snackbar.make(view, "Incorrect password", 1000).show();
                     }
 
                 }

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.b07_final_project.classes.CurrentUserData;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.*;
 import android.widget.*;
@@ -25,9 +26,17 @@ public class SignUpActivity extends AppCompatActivity {
     public void onClickSignupSignup(View view){
         //grab username and password from input
         TextInputEditText usernameText = (TextInputEditText) findViewById(R.id.UsernameInput);
-        String username = usernameText.getText().toString();
         TextInputEditText passwordText = (TextInputEditText) findViewById(R.id.PasswordInput);
+        if (usernameText.getText() == null || passwordText.getText() == null) {
+            Snackbar.make(view, "Fields cannot be empty", 1000).show();
+            return;
+        }
+        String username = usernameText.getText().toString();
         String password = passwordText.getText().toString();
+        if (username.isEmpty() || password.isEmpty()) {
+            Snackbar.make(view, "Fields cannot be empty", 1000).show();
+            return;
+        }
 
         DatabaseReference queryOwners = db.child("Owners").child(username);
 
@@ -53,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 }
                             } else {
                                 //username exists in shoppers so print username exists
-//                                ((TextView)findViewById(R.id.LoginFail)).setText("Username already exists. Please try again.");
+                                Snackbar.make(view, "Username taken", 1000).show();
                             }
                         }
 
@@ -64,8 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
                     });
                 } else {
                     //username exists in owners so print username exists
-//                    ((TextView)findViewById(R.id.LoginFail)).setText("Username already exists. Please try again.");
-
+                    Snackbar.make(view, "Username taken", 1000).show();
                 }
             }
 
