@@ -1,7 +1,6 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.adapters;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +9,11 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07_final_project.R;
+import com.example.b07_final_project.StoreItemsListActivity;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.Store;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -60,7 +60,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
             holder.storeButton.setOnClickListener(v -> {
 
 
-                Intent intent = new Intent(v.getContext(), StoreItemsActivityView.class);
+                Intent intent = new Intent(v.getContext(), StoreItemsListActivity.class);
                 //intent.putExtra("store_id", store.getStoreName());
                 CurrentStoreData.getInstance().setId(store.getStoreName());
                 v.getContext().startActivity(intent);

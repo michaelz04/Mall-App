@@ -1,16 +1,16 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.adapters;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07_final_project.ItemActivity;
+import com.example.b07_final_project.R;
 import com.example.b07_final_project.classes.Item;
 
 import java.util.List;
@@ -63,6 +63,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                 holder.itemButtonView.setOnClickListener(null);
                 holder.itemButtonView.setClickable(false);
             }
+
+           // Log.d("test", String.valueOf(position));
 
     }
 

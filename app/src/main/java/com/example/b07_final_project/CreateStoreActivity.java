@@ -95,7 +95,7 @@ public class CreateStoreActivity extends AppCompatActivity {
 
                         //Switch to the store owner's store page activity
                         CurrentStoreData.getInstance().setId(storeName);
-                        startActivity(new Intent(CreateStoreActivity.this, OwnerActivityBase.class));
+                        startActivity(new Intent(CreateStoreActivity.this, OwnerMenuActivity.class));
                     } else {
                         showError("Store already exists");
                         return;

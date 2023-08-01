@@ -17,22 +17,28 @@
             android:name=".CustomerOrdersListActivity"
             android:exported="false" />
         <activity
-            android:name=".CustomerActivityBase"
+            android:name=".OwnerOrdersListActivity"
             android:exported="false" />
         <activity
-            android:name=".OwnerActivityBase"
+            android:name=".CustomerMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OwnerMenuActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true" /> <!-- Add other activities here -->
-        <activity android:name=".StoreItemsActivityView" />
+        <activity android:name=".StoreItemsListActivity" />
         <activity android:name=".CreateStoreActivity" />
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_signup" />
         <activity android:name=".ItemActivity" />
-        <activity android:name=".storelist_customer" />
+        <activity android:name=".StoreListActivity" />
         <activity android:name=".AccountTypeActivity" />
+        <activity
+            android:name=".CartActivity"
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="true"
