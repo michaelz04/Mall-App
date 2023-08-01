@@ -17,6 +17,6 @@ public class CustomerMenuActivity extends AppCompatActivity {
         startActivity(new Intent(CustomerMenuActivity.this, StoreListActivity.class));
     }
     public void onClickOrder(View view){
-        startActivity(new Intent(CustomerActivityBase.this, CustomerOrdersListActivity.class));
+        startActivity(new Intent(CustomerMenuActivity.this, CustomerOrdersListActivity.class));
     }
 }
