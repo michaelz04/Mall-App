@@ -44,6 +44,8 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.ownerIndvOrderRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        finish = findViewById(R.id.finish);
+        order = findViewById(R.id.orderheader);
         OrderItemList = new ArrayList<String>();
         //ItemList = new ArrayList<>();
 
@@ -74,7 +76,10 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
                 }*/
                 orderStatus = (Boolean) snapshot.child("Orders").child(orderID).
                         child("stores").child(storeId).child("status").getValue();
+                String status = "Done";
+                if(!orderStatus)status = "Not Done";
 
+                order.setText("Order ID #: "+orderID + " Status: "+status);
                 if(OrderItemList.isEmpty()){
                     OrderItemList.add("empty");
                 }
@@ -88,10 +93,7 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
 
             }
         });
-        /*String status;
-        if(orderStatus)status = "Done";
-        else status = "Not Done";
-        order.setText("Order ID #: "+orderID + " Status: "+status);*/
+
 
         //TODO remove finish button and add check if status is not done, then add the button and button listener -- conditional button
 
