@@ -33,7 +33,7 @@ public class OwnerOrdersListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_orders_list);
 
-        RecyclerView recyclerView = findViewById(R.id.ownersOrderRecycler);
+        RecyclerView recyclerView = findViewById(R.id.OwnerOrdersRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderList = new ArrayList<>();
         statusList = new ArrayList<>();
@@ -47,24 +47,22 @@ public class OwnerOrdersListActivity extends AppCompatActivity {
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot order : snapshot.child("Owners").child(username).
-                        child("orders").getChildren()){
-                    String orderId = order.getKey();
+                if (snapshot.child("Owners").child(username).
+                        child("orders").exists()){
+                    for(DataSnapshot order : snapshot.child("Owners").child(username).
+                            child("orders").getChildren()){
 
+                        String orderId = order.getKey();
+                        if (orderId != null){
+                            boolean orderStatus = (Boolean) snapshot.child("Orders").child(orderId).
+                                    child("stores").child(storeId).child("status").getValue();
+                            orderList.add(orderId);
+                            statusList.add(orderStatus);
+                        }
 
-
-                    if (orderId != null){
-
-                        boolean orderStatus = (Boolean) snapshot.child("Orders").child(orderId).
-                                child("stores").child(storeId).child("status").getValue();
-
-                        //Log.d("test", orderId);
-
-                        orderList.add(orderId);
-                        statusList.add(orderStatus);
                     }
-
                 }
+
                 if (orderList.isEmpty()){
                     orderList.add("empty");
                 }

@@ -1,4 +1,4 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.adapters;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.b07_final_project.EditItemAmount;
+import com.example.b07_final_project.R;
 import com.example.b07_final_project.classes.Item;
 
 import java.util.List;
