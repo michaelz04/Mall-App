@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.b07_final_project.adapters.OwnerIndvOrderAdapter;
 import com.example.b07_final_project.classes.CurrentOrderData;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
