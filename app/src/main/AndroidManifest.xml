@@ -18,6 +18,15 @@
             android:exported="false"
             android:label="@string/title_activity_shopper_ui" />
         <activity
+            android:name=".CustomerSpecificOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerOrdersListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditItemAmount"
+            android:exported="false" />
+        <activity
             android:name=".OwnerOrdersListActivity"
             android:exported="false" />
         <activity

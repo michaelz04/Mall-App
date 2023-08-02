@@ -1,18 +1,18 @@
 package com.example.b07_final_project.classes;
 
-import java.util.List;
+import java.util.Map;
 
 public class Owner {
     private String username;
     private String password;
     private String storeKey;
 
-    private List<String> orders;
+    private Map<String, String> orders;
 
     public Owner() {
     }
 
-    public Owner(String username, String password, String storeKey, List<String> orders) {
+    public Owner(String username, String password, String storeKey, Map<String, String> orders) {
         this.username = username;
         this.password = password;
         this.storeKey = storeKey;
@@ -43,11 +43,11 @@ public class Owner {
         this.storeKey = storeKey;
     }
 
-    public List<String> getOrders() {
+    public Map<String, String> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<String> orders) {
+    public void setOrders(Map<String, String> orders) {
         this.orders = orders;
     }
 }
