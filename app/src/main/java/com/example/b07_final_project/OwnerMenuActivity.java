@@ -47,4 +47,10 @@ public class OwnerMenuActivity extends AppCompatActivity {
         startActivity(new Intent(OwnerMenuActivity.this, OwnerOrdersListActivity.class));
     }
 
+    public void onClickSignOut(View view){
+        startActivity(new Intent(OwnerMenuActivity.this, LoginActivity.class));
+    }
+
+    @Override
+    public void onBackPressed(){}
 }

@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
 
 import com.example.b07_final_project.adapters.OwnerOrderAdapter;
 import com.example.b07_final_project.classes.CurrentStoreData;
@@ -78,5 +82,10 @@ public class OwnerOrdersListActivity extends AppCompatActivity {
 
 
     }
+    public void onClickMenu(View view){
+        startActivity(new Intent(OwnerOrdersListActivity.this, OwnerMenuActivity.class));
+    }
 
+    @Override
+    public void onBackPressed(){}
 }
