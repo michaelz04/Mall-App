@@ -84,7 +84,7 @@ public class OwnerOrderAdapter extends RecyclerView.Adapter<OwnerOrderAdapter.Vi
             holder.orderButton.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), OwnerIndividualOrderActivity.class);
                 CurrentOrderData.getInstance().setId(orderId);
-                //v.getContext().startActivity(intent);
+                v.getContext().startActivity(intent);
             });
         }
     }

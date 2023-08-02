@@ -26,7 +26,7 @@ import java.util.List;
 
 public class OwnerIndividualOrderActivity extends AppCompatActivity {
     private List<String> OrderItemList;
-    private List<Item> ItemList;
+    //private List<Item> ItemList;
     private boolean orderStatus;
     String username = CurrentUserData.getInstance().getId();
     String storeId = CurrentStoreData.getInstance().getId();
@@ -45,9 +45,9 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.ownerIndvOrderRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         OrderItemList = new ArrayList<String>();
-        ItemList = new ArrayList<>();
+        //ItemList = new ArrayList<>();
 
-        adapter = new OwnerIndvOrderAdapter(OrderItemList, ItemList);
+        adapter = new OwnerIndvOrderAdapter(OrderItemList);
         recyclerView.setAdapter(adapter);
 
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").
@@ -69,10 +69,11 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
                 if(OrderItemList.isEmpty()){
                     OrderItemList.add("empty");
                 }
+                /*
                 for(int i = 0; i< OrderItemList.size();i++){
                     Item temp = (Item) snapshot.child("Items").child(OrderItemList.get(i)).getValue();
                     ItemList.add(temp);
-                }
+                }*/
                 orderStatus = (Boolean) snapshot.child("Orders").child(orderID).
                         child("stores").child(storeId).child("status").getValue();
 
