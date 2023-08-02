@@ -31,7 +31,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cartButtonView = itemView.findViewById(R.id.cartItemButton);
+            cartButtonView = itemView.findViewById(R.id.itemOrder);
         }
     }
 
