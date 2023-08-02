@@ -78,5 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void onClickLogin(View view){
         startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
     }
+    @Override
+    public void onBackPressed(){}
 }
 
