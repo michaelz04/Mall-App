@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    tools:context=".OwnerIndividualOrderActivity">
+
+    <TextView
+        android:id="@+id/orderheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ownerIndvOrderRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/orderheader"
+        android:layout_marginTop="31dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:onClick="onClickFinish"
+        android:text="Finish" />
+
+
+</RelativeLayout>

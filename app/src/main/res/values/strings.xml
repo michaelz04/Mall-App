@@ -80,5 +80,6 @@
     <string name="userlabel">Username:</string>
     <string name="registerbutton">Register</string>
     <string name="passlbl">Password:</string>
+    <string name="status">status</string>
     <string name="title_activity_change_item_amount">ChangeItemAmount</string>
 </resources>

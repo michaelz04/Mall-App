@@ -1,9 +1,12 @@
 package com.example.b07_final_project.adapters;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.*;
 
+import com.example.b07_final_project.OwnerIndividualOrderActivity;
+import com.example.b07_final_project.StoreItemsListActivity;
 import com.example.b07_final_project.classes.CurrentOrderData;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
@@ -79,9 +82,9 @@ public class OwnerOrderAdapter extends RecyclerView.Adapter<OwnerOrderAdapter.Vi
 
             // Set click listener
             holder.orderButton.setOnClickListener(v -> {
-                //Intent intent = new Intent(v.getContext(), StoreItemsListActivity.class); change to owner individual order activity
+                Intent intent = new Intent(v.getContext(), OwnerIndividualOrderActivity.class);
                 CurrentOrderData.getInstance().setId(orderId);
-                //v.getContext().startActivity(intent);
+                v.getContext().startActivity(intent);
             });
         }
     }

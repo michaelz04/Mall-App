@@ -10,11 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+
 import com.example.b07_final_project.adapters.OwnerOrderAdapter;
-import com.example.b07_final_project.adapters.StoreAdapter;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
-import com.example.b07_final_project.classes.Store;
 import com.google.firebase.database.*;
 
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class OwnerOrdersListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_orders_list);
 
-        RecyclerView recyclerView = findViewById(R.id.OwnerOrdersRecycler);
+        RecyclerView recyclerView = findViewById(R.id.ownersOrderRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderList = new ArrayList<>();
         statusList = new ArrayList<>();
@@ -83,7 +82,6 @@ public class OwnerOrdersListActivity extends AppCompatActivity {
 
 
     }
-
     public void onClickMenu(View view){
         startActivity(new Intent(OwnerOrdersListActivity.this, OwnerMenuActivity.class));
     }
