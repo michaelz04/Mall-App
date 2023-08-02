@@ -66,9 +66,7 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
                         OrderItemList.add(itemID);
                     }
                 }
-                if(OrderItemList.isEmpty()){
-                    OrderItemList.add("empty");
-                }
+
                 /*
                 for(int i = 0; i< OrderItemList.size();i++){
                     Item temp = (Item) snapshot.child("Items").child(OrderItemList.get(i)).getValue();
@@ -77,7 +75,9 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
                 orderStatus = (Boolean) snapshot.child("Orders").child(orderID).
                         child("stores").child(storeId).child("status").getValue();
 
-
+                if(OrderItemList.isEmpty()){
+                    OrderItemList.add("empty");
+                }
                 adapter.notifyDataSetChanged();
 
             }
@@ -88,10 +88,10 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
 
             }
         });
-        String status;
+        /*String status;
         if(orderStatus)status = "Done";
         else status = "Not Done";
-        order.setText("Order ID #: "+orderID + " Status: "+status);
+        order.setText("Order ID #: "+orderID + " Status: "+status);*/
 
         //TODO remove finish button and add check if status is not done, then add the button and button listener -- conditional button
 
