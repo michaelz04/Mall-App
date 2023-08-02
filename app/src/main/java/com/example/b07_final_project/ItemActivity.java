@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,11 +38,9 @@ public class ItemActivity extends AppCompatActivity {
 
         // Make Add to Cart work.
         Button cartAdd = findViewById(R.id.addToCartButton);
-        cartAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickAdd();
-            }
+        cartAdd.setOnClickListener(v ->  {
+            onClickAdd();
+
         });
 
         Button goCart = findViewById(R.id.goToCart);
@@ -91,8 +90,13 @@ public class ItemActivity extends AppCompatActivity {
                 else{
                     currentCartItems = new HashMap<String, Integer>();
                 }
-                currentCartItems.put(itemId,1);
-                cartRef.setValue(currentCartItems);
+                if(currentCartItems.containsKey(itemId)) {
+                    Toast.makeText(ItemActivity.this, "This item is already in your cart", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    currentCartItems.put(itemId, 1);
+                    cartRef.setValue(currentCartItems);
+                }
             }
 
             @Override

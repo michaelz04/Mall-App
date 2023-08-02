@@ -29,4 +29,17 @@ public class Orders {
     public void setStores(Map<String, OrderStores> stores) {
         this.stores = stores;
     }
+
+    public boolean getOrderStatus() {
+        // If there are no orders, why is this even here?
+        if (stores == null) return true;
+
+        for (String storeKey: stores.keySet()) {
+            OrderStores orderStore = stores.get(storeKey);
+            if (orderStore ==  null) return false;
+            if (!orderStore.isStatus()) return false;
+        }
+        return true;
+
+    }
 }

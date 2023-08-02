@@ -1,5 +1,6 @@
 package com.example.b07_final_project;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             holder.cartButtonView.setText(buttonText);
 
             holder.cartButtonView.setOnClickListener(v ->  {
+                Intent intent = new Intent(v.getContext(), EditItemAmount.class);
+
+                intent.putExtra("item_id", item.getItemID());
+                intent.putExtra("item_name", item.getItemName());
+                intent.putExtra("store", item.getStoreKey());
+
+
+                v.getContext().startActivity(intent);
 
             });
 
