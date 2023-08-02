@@ -192,9 +192,7 @@ public class CartActivity extends AppCompatActivity {
                     // Handle error
                 }
             });
-            /*
-             You can start adding the orders into owners here.
-             */
+            Toast.makeText(this, "Checkout successful", Toast.LENGTH_SHORT).show();
         });
     }
 
