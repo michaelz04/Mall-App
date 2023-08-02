@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.b07_final_project.classes.CurrentItemData;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
+import com.example.b07_final_project.classes.Item;
 
 import java.util.List;
 
 public class OwnerIndvOrderAdapter extends RecyclerView.Adapter<OwnerIndvOrderAdapter.ViewHolder> {
 
     private List<String> OrderItemList;
-    //private List<Item> OrderItem;
+   // private List<Item> OrderItem;
     String username = CurrentUserData.getInstance().getId();
     String storeId = CurrentStoreData.getInstance().getId();
 
@@ -51,8 +52,9 @@ public class OwnerIndvOrderAdapter extends RecyclerView.Adapter<OwnerIndvOrderAd
             holder.itemButton.setText(buttonText);
         }
         else{
-
+            //String buttonText = OrderItem.get(position).getItemName();
             holder.itemButton.setText("ItemID: "+itemID);
+            //holder.itemButton.setText(buttonText);
             holder.itemButton.setClickable(false);
 
             /*

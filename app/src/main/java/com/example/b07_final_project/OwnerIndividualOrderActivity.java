@@ -44,10 +44,10 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.ownerIndvOrderRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        finish = findViewById(R.id.finish);
         order = findViewById(R.id.orderheader);
         OrderItemList = new ArrayList<String>();
         //ItemList = new ArrayList<>();
+        finish = findViewById(R.id.finish);
 
         adapter = new OwnerIndvOrderAdapter(OrderItemList);
         recyclerView.setAdapter(adapter);
@@ -71,15 +71,16 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
 
                 /*
                 for(int i = 0; i< OrderItemList.size();i++){
-                    Item temp = (Item) snapshot.child("Items").child(OrderItemList.get(i)).getValue();
-                    ItemList.add(temp);
+                        Item temp = (Item) snapshot.child("Items").child(OrderItemList.get(i)).getValue();
+                        ItemList.add(temp);
+
                 }*/
                 orderStatus = (Boolean) snapshot.child("Orders").child(orderID).
                         child("stores").child(storeId).child("status").getValue();
                 String status = "Done";
                 if(!orderStatus)status = "Not Done";
 
-                order.setText("Order ID #: "+orderID + " Status: "+status);
+                order.setText("Order ID #: "+orderID);
                 if(OrderItemList.isEmpty()){
                     OrderItemList.add("empty");
                 }
@@ -102,8 +103,6 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
     }
     public void onClickFinish(View view){
 
-        //set order status to true
-        //CurrentOrderData.getInstance().setStatus(storeID, true);
         orderStatus = true;
         FirebaseDatabase.getInstance().getReference("Orders").child(orderID).child("stores").child(storeId).child("status").setValue(true);
         startActivity(new Intent(OwnerIndividualOrderActivity.this, OwnerOrdersListActivity.class));
