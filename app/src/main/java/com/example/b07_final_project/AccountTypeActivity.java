@@ -21,9 +21,7 @@ public class AccountTypeActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
-
-    }
+    public void onBackPressed(){}
     public void onClickShopper(View view){
         //add username and password to Shoppers
         DatabaseReference userRef = db.child("Shoppers").child(username);
