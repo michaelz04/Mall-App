@@ -82,7 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Password"
-                        android:inputType="phone"
+                        android:inputType="textPassword"
                         android:password="true"
                         android:singleLine="true" />
 
@@ -107,7 +107,7 @@
                         style="@style/TextAppearance.AppCompat.Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Don't have an account?" />
+                        android:text="Already have an account?" />
 
                     <TextView
                         android:id="@+id/SignupLoginButton"
