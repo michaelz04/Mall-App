@@ -81,4 +81,8 @@
     <string name="registerbutton">Register</string>
     <string name="passlbl">Password:</string>
     <string name="username">Username</string>
+    <string name="title_activity_shopper_ui">ShopperUI</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
