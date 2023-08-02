@@ -19,7 +19,7 @@ import java.util.List;
 public class OwnerIndvOrderAdapter extends RecyclerView.Adapter<OwnerIndvOrderAdapter.ViewHolder> {
 
     private List<String> OrderItemList;
-   // private List<Item> OrderItem;
+   private List<Item> OrderItem;
     String username = CurrentUserData.getInstance().getId();
     String storeId = CurrentStoreData.getInstance().getId();
 
@@ -27,6 +27,12 @@ public class OwnerIndvOrderAdapter extends RecyclerView.Adapter<OwnerIndvOrderAd
         this.OrderItemList = orderItemList;
         //this.OrderItem = OrderItem;
     }
+
+    public OwnerIndvOrderAdapter(List<String> orderItemList, List<Item> orderItem) {
+        OrderItemList = orderItemList;
+        OrderItem = orderItem;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         Button itemButton;
         public ViewHolder(@NonNull View OwnerOrderView) {
@@ -52,9 +58,9 @@ public class OwnerIndvOrderAdapter extends RecyclerView.Adapter<OwnerIndvOrderAd
             holder.itemButton.setText(buttonText);
         }
         else{
-            //String buttonText = OrderItem.get(position).getItemName();
-            holder.itemButton.setText("ItemID: "+itemID);
-            //holder.itemButton.setText(buttonText);
+            String buttonText = OrderItem.get(position).getItemName();
+            //holder.itemButton.setText("ItemID: "+itemID);
+            holder.itemButton.setText(buttonText);
             holder.itemButton.setClickable(false);
 
             /*
