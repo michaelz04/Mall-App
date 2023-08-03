@@ -2,6 +2,7 @@ package com.example.b07_final_project;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +30,7 @@ public class StoreListActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
        // Log.d("storelist_customer", "RecyclerView initialized");
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         storeList = new ArrayList<>();
 
         adapter = new StoreAdapter(storeList);

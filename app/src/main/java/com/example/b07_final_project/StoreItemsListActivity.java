@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,14 +43,14 @@ public class StoreItemsListActivity extends AppCompatActivity {
 
         // Initialize the RecyclerView and ItemAdapter
         RecyclerView recyclerView = findViewById(R.id.recyclerViewItems);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         itemList = new ArrayList<>();
         adapter = new ItemAdapter(itemList);
         recyclerView.setAdapter(adapter);
 
         if (savedInstanceState == null) {
             String type = CurrentUserData.getInstance().getAccountType();
-            if (type.equals("Owners")) {
+            if (type != null && type.equals("Owners")) {
                 getSupportFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
                         .add(R.id.fragmentContainerView, IndividualStoreActivityOwnerFragment.class, null)

@@ -17,6 +17,10 @@
             android:name=".OwnerIndividualOrderActivity"
             android:exported="false" />
         <activity
+            android:name=".ShopperUI"
+            android:exported="false"
+            android:label="@string/title_activity_shopper_ui" />
+        <activity
             android:name=".CustomerSpecificOrderActivity"
             android:exported="false" />
         <activity

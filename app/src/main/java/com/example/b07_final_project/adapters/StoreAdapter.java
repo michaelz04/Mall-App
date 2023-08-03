@@ -1,10 +1,14 @@
 package com.example.b07_final_project.adapters;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +17,11 @@ import com.example.b07_final_project.R;
 import com.example.b07_final_project.StoreItemsListActivity;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.Store;
+import com.google.android.material.card.MaterialCardView;
+import com.squareup.picasso.Picasso;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 
@@ -27,11 +35,18 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        Button storeButton;
+        MaterialCardView storeButton;
+        TextView storeName;
+        TextView description;
+
+        ImageView image;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            storeButton = itemView.findViewById(R.id.storeButton);
+            storeButton = itemView.findViewById(R.id.storeCard);
+            storeName = itemView.findViewById(R.id.storeName);
+            description = itemView.findViewById(R.id.description);
+            image = itemView.findViewById(R.id.imageView);
         }
     }
 
@@ -49,14 +64,21 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         Store store = storeList.get(position);
         String storename = store.getStoreName();
         String errormsg = "No Stores currently";
+        String image = "https://www.kurin.com/wp-content/uploads/placeholder-square.jpg";
 
         if (!storename.equals(errormsg)) {
-            String buttonText = store.getStoreName() + " - " + store.getDescription() +
-                    " - " + store.getStoreOwner(); //+ " - " + temp.size();
-            holder.storeButton.setText(buttonText);
+            holder.storeName.setText(store.getStoreName());
+            holder.description.setText(store.getDescription());
+            try {
+                // if the image is a valid URL, show the image
+                new URL(image);
+                Picasso.get().load(image).into(holder.image);
+            } catch (MalformedURLException e) {
+                // otherwise show the placeholder
+                Picasso.get().load(R.drawable.placeholder).into(holder.image);
+            }
 
             // Set click listener
-
             holder.storeButton.setOnClickListener(v -> {
 
 
@@ -69,9 +91,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
             });
         }
         else{
-            holder.storeButton.setText(errormsg);
-            holder.storeButton.setOnClickListener(null);
-            holder.storeButton.setClickable(false);
+            holder.storeButton.setVisibility(GONE);
         }
     }
 
