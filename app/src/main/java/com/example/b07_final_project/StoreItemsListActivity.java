@@ -1,9 +1,12 @@
 package com.example.b07_final_project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +32,7 @@ public class StoreItemsListActivity extends AppCompatActivity {
     private ItemAdapter adapter;
     private List <String> itemIDs;
     private String storeId; // Store ID received from the previous activity
+    private Toolbar toolbar;
 
 
 
@@ -36,7 +40,8 @@ public class StoreItemsListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_items_view);
+        setContentView(R.layout.fragment_items);
+        toolbar = findViewById(R.id.toolbar);
 
         storeId = CurrentStoreData.getInstance().getId();
         //storeId = getIntent().getStringExtra("store_id");
@@ -58,6 +63,8 @@ public class StoreItemsListActivity extends AppCompatActivity {
             }
             // TODO: add other fragment for shopper, shows cart. Implement in sprint 2
         }
+
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
     }
 
     @Override
@@ -119,6 +126,9 @@ https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324
         });
     }
 
+    public void onClickCart(View view) {
+        startActivity(new Intent(StoreItemsListActivity.this, CartActivity.class));
+    }
     // Helper method to check if the store contains the given item ID
 
 }
