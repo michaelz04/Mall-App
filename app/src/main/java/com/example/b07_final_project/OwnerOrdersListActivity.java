@@ -5,14 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+
 
 import com.example.b07_final_project.adapters.OwnerOrderAdapter;
-import com.example.b07_final_project.adapters.StoreAdapter;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
-import com.example.b07_final_project.classes.Store;
 import com.google.firebase.database.*;
 
 import java.util.ArrayList;
@@ -46,24 +47,22 @@ public class OwnerOrdersListActivity extends AppCompatActivity {
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot order : snapshot.child("Owners").child(username).
-                        child("orders").getChildren()){
-                    String orderId = order.getKey();
+                if (snapshot.child("Owners").child(username).
+                        child("orders").exists()){
+                    for(DataSnapshot order : snapshot.child("Owners").child(username).
+                            child("orders").getChildren()){
 
+                        String orderId = order.getKey();
+                        if (orderId != null){
+                            boolean orderStatus = (Boolean) snapshot.child("Orders").child(orderId).
+                                    child("stores").child(storeId).child("status").getValue();
+                            orderList.add(orderId);
+                            statusList.add(orderStatus);
+                        }
 
-
-                    if (orderId != null){
-
-                        boolean orderStatus = (Boolean) snapshot.child("Orders").child(orderId).
-                                child("stores").child(storeId).child("status").getValue();
-
-                        //Log.d("test", orderId);
-
-                        orderList.add(orderId);
-                        statusList.add(orderStatus);
                     }
-
                 }
+
                 if (orderList.isEmpty()){
                     orderList.add("empty");
                 }
@@ -81,4 +80,10 @@ public class OwnerOrdersListActivity extends AppCompatActivity {
 
 
     }
+    public void onClickMenu(View view){
+        startActivity(new Intent(OwnerOrdersListActivity.this, OwnerMenuActivity.class));
+    }
+
+    @Override
+    public void onBackPressed(){}
 }

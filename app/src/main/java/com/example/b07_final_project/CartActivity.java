@@ -2,7 +2,6 @@ package com.example.b07_final_project;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -11,15 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07_final_project.adapters.CartAdapter;
 import com.example.b07_final_project.classes.CurrentUserData;
 import com.example.b07_final_project.classes.Item;
 import com.example.b07_final_project.classes.OrderStores;
 import com.example.b07_final_project.classes.Orders;
-import com.example.b07_final_project.classes.Store;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.DatabaseRegistrar;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -192,9 +190,7 @@ public class CartActivity extends AppCompatActivity {
                     // Handle error
                 }
             });
-            /*
-             You can start adding the orders into owners here.
-             */
+            Toast.makeText(this, "Checkout successful", Toast.LENGTH_SHORT).show();
         });
     }
 
