@@ -35,7 +35,7 @@ public class Item {
 
     public void setItemID(String itemID) {
         this.itemID = itemID;
-    }
+    } // are we making itemIDs randomly ourselves to ensure uniqueness?
 
     public String getDescription() {
         return description;

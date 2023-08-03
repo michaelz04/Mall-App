@@ -25,6 +25,7 @@
     <string name="create_store_exists_error">Store already exists</string>
     <string name="create_store_empty_error">Store name cannot be empty</string>
     <string name="create_store_data_error">Error fetching data</string>
+    <string name="placeholder_image">https://www.kurin.com/wp-content/uploads/placeholder-square.jpg</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
@@ -80,4 +81,13 @@
     <string name="userlabel">Username:</string>
     <string name="registerbutton">Register</string>
     <string name="passlbl">Password:</string>
+    <string name="status">status</string>
+    <string name="title_activity_change_item_amount">ChangeItemAmount</string>
+    <string name="title_activity_shopper_ui">ShopperUI</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

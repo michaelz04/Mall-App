@@ -1,17 +1,17 @@
 package com.example.b07_final_project.classes;
 
-import java.util.List;
+import java.util.Map;
 
 public class Customer {
     private String username;
     private String password;
-    private List<String> cart;
-    private List<String> orders;
+    private Map<String, Integer> cart; // item id: Amount
+    private Map<String, String> orders; // This is a string of the order ids
 
     public Customer() {
     }
 
-    public Customer(String username, String password, List<String> cart, List<String> orders) {
+    public Customer(String username, String password, Map<String, Integer> cart, Map<String, String> orders) {
         this.username = username;
         this.password = password;
         this.cart = cart;
@@ -34,19 +34,19 @@ public class Customer {
         this.password = password;
     }
 
-    public List<String> getCart() {
+    public Map<String, Integer> getCart() {
         return cart;
     }
 
-    public void setCart(List<String> cart) {
+    public void setCart(Map<String, Integer> cart) {
         this.cart = cart;
     }
 
-    public List<String> getOrders() {
+    public Map<String, String> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<String> orders) {
+    public void setOrders(Map<String, String> orders) {
         this.orders = orders;
     }
 }

@@ -5,48 +5,71 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.*;
 
 public class LoginActivity extends AppCompatActivity {
     DatabaseReference db;
+    TextInputEditText usernameText;
+    TextInputEditText passwordText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
-
+        usernameText = (TextInputEditText) findViewById(R.id.UsernameInput);
+        passwordText = (TextInputEditText) findViewById(R.id.PasswordInput);
+        // when the user presses 'done' on their keyboard, try logging in
+        passwordText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_DONE) onClickLoginLogin(findViewById(R.id.LoginLoginButton));
+                return false;
+            }
+        });
     }
 
-    public void onClickLogin(View view){
+    public void onClickLoginLogin(View view){
         //check for user id
 
+        // if empty, show error
+        if (usernameText.getText() == null || passwordText.getText() == null) {
+            Snackbar.make(view, "Fields cannot be empty", 1000).show();
+            return;
+        }
         //grab username and password from input
-        EditText usernameText = (EditText) findViewById(R.id.UsernameInput);
         String username = usernameText.getText().toString();
-        EditText passwordText = (EditText) findViewById(R.id.PasswordInput);
         String password = passwordText.getText().toString();
+        // if empty, show error
+        if (username.isEmpty() || password.isEmpty()) {
+            Snackbar.make(view, "Fields cannot be empty", 1000).show();
+            return;
+        }
 
         //query owners
         DatabaseReference queryOwners = db.child("Owners").child(username);
-        queryOwners.addValueEventListener(new ValueEventListener() {
+        queryOwners.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()){
                     //if username not in owners, check shoppers
                     DatabaseReference queryShoppers = db.child("Shoppers").child(username);
-                    queryShoppers.addValueEventListener(new ValueEventListener() {
+                    queryShoppers.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (!snapshot.exists()){
                                 //username does not exist in either owners or shoppers
-                                ((TextView)findViewById(R.id.LoginFail)).setText("Username does not exist");
+                                Snackbar.make(view, "Username does not exist", 1000).show();
                             } else {
                                 //username exists in shoppers so check password
                                 //get password from database
@@ -61,9 +84,9 @@ public class LoginActivity extends AppCompatActivity {
                                                     CurrentUserData currentUserData = CurrentUserData.getInstance();
                                                     currentUserData.setId(username);
                                                     currentUserData.setAccountType("Shoppers");
-                                                    startActivity(new Intent(LoginActivity.this, storelist_customer.class));
+                                                    startActivity(new Intent(LoginActivity.this, CustomerMenuActivity.class));
                                                 } else {
-                                                    ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
+                                                    Snackbar.make(view, "Incorrect password", 1000).show();
                                                 }
                                             }
                                         });
@@ -92,9 +115,10 @@ public class LoginActivity extends AppCompatActivity {
                             return;
                         }
                         CurrentStoreData.getInstance().setId(ownerStoreID);
-                        startActivity(new Intent(LoginActivity.this, StoreItemsActivityView.class));
+
+                        startActivity(new Intent(LoginActivity.this, OwnerMenuActivity.class));
                     } else {
-                        ((TextView)findViewById(R.id.LoginFail)).setText("Password incorrect");
+                        Snackbar.make(view, "Incorrect password", 1000).show();
                     }
 
                 }
@@ -107,7 +131,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void onClickSignup(View view){
+    public void onClickLoginSignup(View view){
         startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
     }
+
+    @Override
+    public void onBackPressed(){}
 }

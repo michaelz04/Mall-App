@@ -14,27 +14,53 @@
         android:theme="@style/Theme.B07finalproject"
         tools:targetApi="31">
         <activity
+            android:name=".OwnerIndividualOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ShopperUI"
+            android:exported="false"
+            android:label="@string/title_activity_shopper_ui" />
+        <activity
+            android:name=".CustomerSpecificOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerOrdersListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditItemAmount"
+            android:exported="false" />
+        <activity
+            android:name=".OwnerOrdersListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomerMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OwnerMenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity> <!-- Add other activities here -->
-        <activity android:name=".StoreItemsActivityView" />
+            android:exported="true" /> <!-- Add other activities here -->
+        <activity android:name=".StoreItemsListActivity" />
         <activity android:name=".CreateStoreActivity" />
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_signup" />
         <activity android:name=".ItemActivity" />
-        <activity android:name=".storelist_customer" />
+        <activity android:name=".StoreListActivity" />
         <activity android:name=".AccountTypeActivity" />
+        <activity
+            android:name=".CartActivity"
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:label="@string/title_activity_login_view" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:label="@string/title_activity_login_view">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".NewItemActivity" />
     </application>
