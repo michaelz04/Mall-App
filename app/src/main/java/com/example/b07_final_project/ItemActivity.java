@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -65,11 +66,20 @@ public class ItemActivity extends AppCompatActivity {
                 String itemName = snapshot.child("itemName").getValue(String.class);
                 Float itemPrice = snapshot.child("price").getValue(Float.class);
                 String itemImage = snapshot.child("picture").getValue(String.class);
+                ImageView image = findViewById(R.id.Item_Image);
 
                 //displaying values to the user
                 ((TextView)findViewById(R.id.Item_Description)).setText(itemDes);
                 ((TextView)findViewById(R.id.Item_Name)).setText(itemName);
                 ((TextView)findViewById(R.id.Item_Price)).setText(String.valueOf(itemPrice));
+                try {
+                    // if the image is a valid URL, show the image
+                    new URL(itemImage);
+                    Picasso.get().load(itemImage).into(image);
+                } catch (MalformedURLException e) {
+                    // otherwise show the placeholder
+                    Picasso.get().load(R.drawable.placeholder).into(image);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
