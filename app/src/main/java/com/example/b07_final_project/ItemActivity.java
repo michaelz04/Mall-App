@@ -111,6 +111,7 @@ public class ItemActivity extends AppCompatActivity {
                 else {
                     currentCartItems.put(itemId, 1);
                     cartRef.setValue(currentCartItems);
+                    startActivity(new Intent(ItemActivity.this, CartActivity.class));
                 }
             }
 
