@@ -30,13 +30,13 @@ public class SignUpActivity extends AppCompatActivity {
 
         DatabaseReference queryOwners = db.child("Owners").child(username);
 
-        queryOwners.addValueEventListener(new ValueEventListener() {
+        queryOwners.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.exists()){
                     //if username not in owners, check shoppers
                     DatabaseReference queryShoppers = db.child("Shoppers").child(username);
-                    queryShoppers.addValueEventListener(new ValueEventListener() {
+                    queryShoppers.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (!snapshot.exists()){
