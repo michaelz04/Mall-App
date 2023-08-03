@@ -50,7 +50,7 @@ public class StoreItemsListActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             String type = CurrentUserData.getInstance().getAccountType();
-            if (type.equals("Owners")) {
+            if (type != null && type.equals("Owners")) {
                 getSupportFragmentManager().beginTransaction()
                         .setReorderingAllowed(true)
                         .add(R.id.fragmentContainerView, IndividualStoreActivityOwnerFragment.class, null)
