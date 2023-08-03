@@ -1,7 +1,11 @@
 package com.example.b07_final_project;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
+import com.example.b07_final_project.databinding.StoresForCustomersBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
