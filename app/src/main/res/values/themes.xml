@@ -33,7 +33,7 @@
         <item name="snackbarStyle">@style/Widget.Material3.Snackbar</item>
         <item name="materialCardViewStyle">@style/Widget.Material3.CardView.Outlined</item>
         <item name="android:fitsSystemWindows">true</item>
-        <item name="appBarLayoutStyle">@style/Widget.Material3.AppBarLayout</item>
+        <item name="toolbarStyle">@style/Widget.Material3.Toolbar</item>
     </style>
 
     <style name="Theme.B07finalproject" parent="AppTheme" />

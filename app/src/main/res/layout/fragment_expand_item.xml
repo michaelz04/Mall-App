@@ -6,9 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ExpandItem">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/itemsToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:menu="@menu/top_app_bar"
+        app:navigationContentDescription="Back"
+        app:navigationIcon="@drawable/outline_arrow_back_24"></androidx.appcompat.widget.Toolbar>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -71,6 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:layout_weight="1"
+            android:onClick="onClickBack"
             android:text="Cancel" />
 
         <Button
@@ -78,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onClickAdd"
             android:text="Add to cart" />
     </LinearLayout>
 

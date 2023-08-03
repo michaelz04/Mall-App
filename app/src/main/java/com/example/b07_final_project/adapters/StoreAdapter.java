@@ -20,6 +20,8 @@ import com.example.b07_final_project.classes.Store;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 
@@ -67,7 +69,14 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         if (!storename.equals(errormsg)) {
             holder.storeName.setText(store.getStoreName());
             holder.description.setText(store.getDescription());
-            Picasso.get().load(image).into(holder.image);
+            try {
+                // if the image is a valid URL, show the image
+                new URL(image);
+                Picasso.get().load(image).into(holder.image);
+            } catch (MalformedURLException e) {
+                // otherwise show the placeholder
+                Picasso.get().load(R.drawable.placeholder).into(holder.image);
+            }
 
             // Set click listener
             holder.storeButton.setOnClickListener(v -> {

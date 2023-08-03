@@ -25,6 +25,7 @@
     <string name="create_store_exists_error">Store already exists</string>
     <string name="create_store_empty_error">Store name cannot be empty</string>
     <string name="create_store_data_error">Error fetching data</string>
+    <string name="placeholder_image">https://www.kurin.com/wp-content/uploads/placeholder-square.jpg</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
