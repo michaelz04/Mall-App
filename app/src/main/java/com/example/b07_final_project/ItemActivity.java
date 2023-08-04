@@ -50,6 +50,11 @@ public class ItemActivity extends AppCompatActivity {
 
         });
 
+        if (CurrentUserData.getInstance().getAccountType().equals("Owners")) {
+            findViewById(R.id.addToCartButton).setVisibility(View.GONE);
+            findViewById(R.id.quantityInbox).setVisibility(View.GONE);
+        }
+
 //        Button goCart = findViewById(R.id.goToCart);
 //        goCart.setOnClickListener(v -> {
 //            Intent intent = new Intent(v.getContext(), CartActivity.class);
