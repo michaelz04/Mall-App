@@ -1,14 +1,8 @@
 package com.example.b07_final_project;
 
-import android.content.Intent;
 
 import androidx.annotation.NonNull;
 
-import com.example.b07_final_project.classes.CurrentStoreData;
-import com.example.b07_final_project.classes.CurrentUserData;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +17,6 @@ public class LoginModel {
 
 
     public void queryOwners(LoginPresenter presenter, String username, String password){
-        //query owners
         DatabaseReference queryOwners = db.child("Owners").child(username);
         queryOwners.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

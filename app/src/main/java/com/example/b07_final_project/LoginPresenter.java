@@ -1,11 +1,7 @@
 package com.example.b07_final_project;
 
-import android.content.Intent;
-import android.view.View;
-
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
-import com.google.android.material.snackbar.Snackbar;
 
 public class LoginPresenter {
     LoginActivityView loginView;
@@ -20,6 +16,7 @@ public class LoginPresenter {
         if (username.isEmpty() || password.isEmpty()) {
             loginView.showSnackbar("Fields cannot be empty");
         } else {
+            //check if username is in owners
             model.queryOwners(this, username, password);
         }
     }
@@ -28,12 +25,13 @@ public class LoginPresenter {
         if (ownerExist){
             model.getOwnerPassword(this, username, password);
         } else {
+            //username not in owners, check shoppers
             model.queryShoppers(this, username, password);
         }
     }
     public void checkOwnerPassword(String username, String password, String databasePassword){
         if (databasePassword.equals(password)){
-            //set current user id
+            //set current user data
             CurrentUserData currentUserData = CurrentUserData.getInstance();
             currentUserData.setId(username);
             currentUserData.setAccountType("Owners");
@@ -62,7 +60,7 @@ public class LoginPresenter {
     }
     public void checkShopperPassword(String username, String password, String databasePassword){
         if (databasePassword.equals(password)){
-            //set current user id
+            //set current user data
             CurrentUserData currentUserData = CurrentUserData.getInstance();
             currentUserData.setId(username);
             currentUserData.setAccountType("Shoppers");
