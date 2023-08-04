@@ -53,7 +53,7 @@
             android:name=".CartActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".LoginActivityView"
             android:exported="true"
             android:label="@string/title_activity_login_view">
             <intent-filter>

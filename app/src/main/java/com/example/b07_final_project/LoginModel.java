@@ -17,78 +17,76 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginModel {
     DatabaseReference db;
-
     public LoginModel(){
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
     }
-    /*
-    public void queryDB(LoginPresenter presenter, String username){
+
+
+    public void queryOwners(LoginPresenter presenter, String username, String password){
         //query owners
         DatabaseReference queryOwners = db.child("Owners").child(username);
         queryOwners.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.exists()){
-                    //if username not in owners, check shoppers
-                    DatabaseReference queryShoppers = db.child("Shoppers").child(username);
-                    queryShoppers.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (!snapshot.exists()){
-                                //username does not exist in either owners or shoppers
-                                Snackbar.make(  view, "Username does not exist", 1000).show();
-                            } else {
-                                //username exists in shoppers so check password
-                                //get password from database
-                                db.child("Shoppers").child(username).child("password").get().
-                                        addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                                String databasePassword = String.valueOf(task.getResult().getValue());
-                                                //check if password and password from database is correct
-                                                if (databasePassword.equals(password)){
-                                                    //set current user id
-                                                    CurrentUserData currentUserData = CurrentUserData.getInstance();
-                                                    currentUserData.setId(username);
-                                                    currentUserData.setAccountType("Shoppers");
-                                                    startActivity(new Intent(LoginActivity.this, CustomerMenuActivity.class));
-                                                } else {
-                                                    Snackbar.make(view, "Incorrect password", 1000).show();
-                                                }
-                                            }
-                                        });
-                            }
-                        }
+                presenter.checkOwners(snapshot.exists(), username, password);
+            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
-                } else {
-                    //username exists in owners so check password
-                    //get password from database
-                    String databasePassword = snapshot.child("password").getValue(String.class);
-                    if (databasePassword.equals(password)){
-                        //set current user id
-                        CurrentUserData currentUserData = CurrentUserData.getInstance();
-                        currentUserData.setId(username);
-                        currentUserData.setAccountType("Owners");
-                        //set current store instance
-                        String ownerStoreID = snapshot.child("storeKey").getValue(String.class);
-                        // If the store doesn't exist, send the owner to create the store
-                        if (ownerStoreID == null || ownerStoreID.isEmpty()) {
-                            startActivity(new Intent(LoginActivity.this, CreateStoreActivity.class));
-                            return;
-                        }
-                        CurrentStoreData.getInstance().setId(ownerStoreID);
+            }
+        });
+    }
+    public void getOwnerPassword(LoginPresenter presenter, String username, String password){
+        DatabaseReference queryOwners = db.child("Owners").child(username);
+        queryOwners.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String databasePassword = snapshot.child("password").getValue(String.class);
+                presenter.checkOwnerPassword(username, password, databasePassword);
+            }
 
-                        startActivity(new Intent(LoginActivity.this, OwnerMenuActivity.class));
-                    } else {
-                        Snackbar.make(view, "Incorrect password", 1000).show();
-                    }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                }
+            }
+        });
+    }
+    public void getOwnerStore(LoginPresenter presenter, String username){
+        DatabaseReference queryOwners = db.child("Owners").child(username);
+        queryOwners.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String ownerStoreID = snapshot.child("storeKey").getValue(String.class);
+                presenter.checkOwnerStore(ownerStoreID);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void queryShoppers(LoginPresenter presenter, String username, String password){
+        DatabaseReference queryShoppers = db.child("Shoppers").child(username);
+        queryShoppers.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                presenter.checkShoppers(snapshot.exists(), username, password);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void getShopperPassword(LoginPresenter presenter, String username, String password){
+        DatabaseReference queryOwners = db.child("Shoppers").child(username);
+        queryOwners.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String databasePassword = snapshot.child("password").getValue(String.class);
+                presenter.checkShopperPassword(username, password, databasePassword);
             }
 
             @Override
@@ -98,7 +96,5 @@ public class LoginModel {
         });
     }
 
-
-     */
 
 }
