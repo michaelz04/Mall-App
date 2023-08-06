@@ -23,52 +23,64 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class ExampleUnitTest {
     @Mock
-    private LoginActivityView mockLoginView;
+    private LoginActivityView view;
 
     @Mock
-    private LoginModel mockModel;
+    private LoginModel model;
 
-
-    /*@Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
-    }*/
-
+    @Test
+    public void checkEmptyUsername(){
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkFields("", "password");
+        verify(view).showSnackbar("Fields cannot be empty");
+    }
+    @Test
+    public void checkEmptyPassword(){
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkFields("username", "");
+        verify(view).showSnackbar("Fields cannot be empty");
+    }
+    @Test
+    public void checkFilledFields(){
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkFields("username", "password");
+        verify(model).queryOwners(presenter, "username", "password");
+    }
     @Test
     public void testCheckOwners_OwnerExist_PasswordMatch() {
         // Mock the model to return a valid database password
-        LoginPresenter presenter = new LoginPresenter(mockLoginView, mockModel);
+        LoginPresenter presenter = new LoginPresenter(view, model);
         presenter.checkOwners(true, "valid_username", "correct_password");
-        verify(mockModel).getOwnerPassword(any(), eq("valid_username"), eq("correct_password"));
+        verify(model).getOwnerPassword(any(), eq("valid_username"), eq("correct_password"));
     }
     @Test
     public void testCheckOwners_IsNotAnOwner() {
         // Mock the model so owner doesn't exist but could be shopper or someone that doesn't exist
         // at all.
-        LoginPresenter presenter = new LoginPresenter(mockLoginView, mockModel);
+        LoginPresenter presenter = new LoginPresenter(view, model);
         presenter.checkOwners(false, "potential_valid_username",
                 "any_password");
         //This is to make sure the code under if doesn't get called, can remove if wanted.
-        verify(mockModel, never()).getOwnerPassword(any(), eq("potential_valid_username"),
+        verify(model, never()).getOwnerPassword(any(), eq("potential_valid_username"),
                 eq("any_password"));
-        verify(mockModel).queryShoppers(any(), eq("potential_valid_username"),
+        verify(model).queryShoppers(any(), eq("potential_valid_username"),
                 eq("any_password"));
     }
 
     @Test
     public void testCheckOwnerPassword_PasswordMatch() {
         // Call the method with correct password
-        LoginPresenter presenter = new LoginPresenter(mockLoginView, mockModel);
+        LoginPresenter presenter = new LoginPresenter(view, model);
         presenter.checkOwnerPassword("valid_username", "correct_password", "correct_password");
-        verify(mockModel).getOwnerStore(any(), eq("valid_username"));
+        verify(model).getOwnerStore(any(), eq("valid_username"));
     }
 
     @Test
     public void testCheckOwnerPassword_PasswordMismatch() {
         // Call the method with incorrect password
-        LoginPresenter presenter = new LoginPresenter(mockLoginView, mockModel);
+        LoginPresenter presenter = new LoginPresenter(view, model);
         presenter.checkOwnerPassword("valid_username", "incorrect_password", "correct_password");
-        verify(mockLoginView).showSnackbar("Incorrect password");
+        verify(view).showSnackbar("Incorrect password");
     }
 
 }
