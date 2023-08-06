@@ -43,7 +43,8 @@ public class ExampleUnitTest {
     }
     @Test
     public void testCheckOwners_IsNotAnOwner() {
-        // Mock the model to return an incorrect database password
+        // Mock the model so owner doesn't exist but could be shopper or someone that doesn't exist
+        // at all.
         LoginPresenter presenter = new LoginPresenter(mockLoginView, mockModel);
         presenter.checkOwners(false, "potential_valid_username",
                 "any_password");
