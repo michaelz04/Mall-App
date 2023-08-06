@@ -1,7 +1,6 @@
 package com.example.b07_final_project;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -165,6 +164,7 @@ public class CartActivity extends AppCompatActivity {
                                                         ownersRef.child(orderowner).child("orders").child(orderId).setValue(orderId);
                                                         //Log.d("CartActivity", "3rd test " + orderowner);
                                                     }
+                                                    Toast.makeText(CartActivity.this, "Checkout successful", Toast.LENGTH_SHORT).show();
                                                 }
 
                                                 @Override
@@ -181,7 +181,8 @@ public class CartActivity extends AppCompatActivity {
                     }
                     else {
                         // Cart is empty, do smth.
-                        Log.d("CartActivity", "Empty cart");
+                        //Log.d("CartActivity", "Empty cart");
+                        Toast.makeText(CartActivity.this, "Empty Cart", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -190,7 +191,6 @@ public class CartActivity extends AppCompatActivity {
                     // Handle error
                 }
             });
-            Toast.makeText(this, "Checkout successful", Toast.LENGTH_SHORT).show();
         });
     }
 
