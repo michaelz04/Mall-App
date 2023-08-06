@@ -83,4 +83,18 @@ public class ExampleUnitTest {
         verify(view).showSnackbar("Incorrect password");
     }
 
+    @Test
+    public void testCheckOwnerStore_HasStore() {
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkOwnerStore("valid_store");
+        verify(view).startNewActivity(OwnerMenuActivity.class);
+    }
+
+    @Test
+    public void testCheckOwnerStore_HasNoStore() {
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkOwnerStore(null);
+        verify(view).startNewActivity(CreateStoreActivity.class);
+
+    }
 }
