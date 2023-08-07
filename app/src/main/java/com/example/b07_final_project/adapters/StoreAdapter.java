@@ -64,7 +64,8 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         Store store = storeList.get(position);
         String storename = store.getStoreName();
         String errormsg = "No Stores currently";
-        String image = "https://www.kurin.com/wp-content/uploads/placeholder-square.jpg";
+        String image = store.getPicture();
+//        String image = "https://www.kurin.com/wp-content/uploads/placeholder-square.jpg";
 
         if (!storename.equals(errormsg)) {
             holder.storeName.setText(store.getStoreName());
