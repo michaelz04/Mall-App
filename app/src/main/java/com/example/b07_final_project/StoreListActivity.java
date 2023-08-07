@@ -48,13 +48,14 @@ public class StoreListActivity extends AppCompatActivity {
                         String storename = store.child("storeName").getValue(String.class);
                         String storeinfo = store.child("description").getValue(String.class);
                         String storeowner = store.child("storeOwner").getValue(String.class);
+                        String picture = store.child("picture").getValue(String.class);
                         List<String> storeitems = new ArrayList<>();
                         for (DataSnapshot item : store.child("items").getChildren()) {
                             storeitems.add(item.getValue(String.class));
                         }
 
                         Store createStore = new Store(storename, storeinfo, storeowner,
-                                storeitems);
+                                storeitems, picture);
 
                         storeList.add(createStore);
 
@@ -65,7 +66,7 @@ public class StoreListActivity extends AppCompatActivity {
                 }
                 else{
                     String errormsg= "No Stores currently";
-                    Store empty = new Store(errormsg, "", "", new ArrayList<>());
+                    Store empty = new Store(errormsg, "", "", new ArrayList<>(), "");
                     storeList.add(empty);
 
                 }

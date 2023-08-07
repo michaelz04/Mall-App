@@ -47,6 +47,9 @@ public class CreateStoreActivity extends AppCompatActivity {
         String storeDescription = ((EditText) findViewById(R.id.editTextStoreDescription))
                 .getText()
                 .toString();
+        String storePicture = ((EditText) findViewById(R.id.editTextStoreImage))
+                .getText()
+                .toString();
 
         // Check if store name is empty
         if (storeName.equals("")) {
@@ -60,6 +63,8 @@ public class CreateStoreActivity extends AppCompatActivity {
             showError("Store description cannot be empty");
             return;
         }
+
+        // Image is optional
 
         // DB references for owner and stores
         ownerRef = db.child("Owners").child(username);
@@ -90,6 +95,8 @@ public class CreateStoreActivity extends AppCompatActivity {
                         newStoreRef.child("storeName").setValue(storeName);
                         //set store owner
                         newStoreRef.child("storeOwner").setValue(username);
+                        //set picture
+                        newStoreRef.child("picture").setValue(storePicture);
                         // Add store key to owner
                         ownerRef.child("storeKey").setValue(storeName);
 
@@ -101,7 +108,6 @@ public class CreateStoreActivity extends AppCompatActivity {
                         return;
                     }
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
