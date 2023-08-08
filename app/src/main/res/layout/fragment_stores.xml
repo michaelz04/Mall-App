@@ -19,18 +19,17 @@
             android:layout_width="match_parent"
 
             android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
-            app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:title="Stores"
-            app:toolbarId="@+id/toolbar">
+            app:toolbarId="@+id/itemsToolbar">
 
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/itemsToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/top_app_bar"
-                app:title="Stores"></androidx.appcompat.widget.Toolbar>
+                app:title="Stores" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

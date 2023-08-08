@@ -34,7 +34,7 @@ public class StoreListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         storeList = new ArrayList<>();
 
-        adapter = new StoreAdapter(storeList, (UserUI) this);
+        adapter = new StoreAdapter(storeList);
         recyclerView.setAdapter(adapter);
 
 

@@ -17,24 +17,24 @@
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
             style="?attr/collapsingToolbarLayoutMediumStyle"
-            android:layout_width="match_parent"
 
+            android:layout_width="match_parent"
             android:layout_height="?attr/collapsingToolbarLayoutMediumSize"
-            app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:title="Store Name"
-            app:toolbarId="@+id/toolbar">
+            app:toolbarId="@+id/itemsToolbar">
 
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/itemsToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/top_app_bar"
                 app:navigationContentDescription="Back"
                 app:navigationIcon="@drawable/outline_arrow_back_24"
-                app:title="Stores"></androidx.appcompat.widget.Toolbar>
+                app:title="Stores" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <androidx.recyclerview.widget.RecyclerView

@@ -15,17 +15,17 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class ShopperUI extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, UserUI {
-    private int currentFragmentId;
+    private int currentFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopper_ui);
 
-        currentFragmentId = R.id.navigation_shop;
+        currentFragment = R.id.shopper_fragment;
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnItemSelectedListener(this);
-        navView.setSelectedItemId(currentFragmentId);
+        navView.setSelectedItemId(R.id.navigation_shop);
 //        // Passing each menu ID as a set of Ids because each
 //        // menu should be considered as top level destinations.
 //        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -40,9 +40,10 @@ public class ShopperUI extends AppCompatActivity implements NavigationBarView.On
     public void setFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.shopper_fragment, fragment)
+                .replace(currentFragment, fragment)
+                .addToBackStack(null)
                 .commit();
-        currentFragmentId = fragment.getId();
+        currentFragment = fragment.getId();
     }
 
     @Override
@@ -61,6 +62,10 @@ public class ShopperUI extends AppCompatActivity implements NavigationBarView.On
 
     @Override
     public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
 
+        if (count > 1) {
+            getSupportFragmentManager().popBackStack();
+        }
     }
 }

@@ -7,7 +7,7 @@
     tools:context=".ExpandItem">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/itemsToolbar"
+        android:id="@+id/expandItemToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:menu="@menu/top_app_bar"

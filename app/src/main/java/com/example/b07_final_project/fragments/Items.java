@@ -2,9 +2,9 @@ package com.example.b07_final_project.fragments;
 
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,12 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.b07_final_project.R;
-import com.example.b07_final_project.ShopperUI;
 import com.example.b07_final_project.adapters.ItemAdapter;
-import com.example.b07_final_project.adapters.StoreAdapter;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.Item;
 import com.example.b07_final_project.classes.Store;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,16 +50,11 @@ public class Items extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        requireActivity().getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                Log.e("test", "test");
-                ((ShopperUI) view.getContext()).setFragment(new Stores());
-            }
-        });
+        Toolbar toolbar = view.findViewById(R.id.itemsToolbar);
+        toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
 
         storeId = CurrentStoreData.getInstance().getId();
-        //storeId = getIntent().getStringExtra("store_id");
+        ((CollapsingToolbarLayout) requireActivity().findViewById(R.id.collapsingToolbar)).setTitle(storeId);
 
         // Initialize the RecyclerView and ItemAdapter
         RecyclerView recyclerView = requireView().findViewById(R.id.recyclerView);

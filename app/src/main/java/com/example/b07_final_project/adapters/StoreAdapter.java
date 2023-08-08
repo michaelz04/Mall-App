@@ -29,12 +29,9 @@ import java.util.List;
 public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> {
 
     private List<Store> storeList;
-    private UserUI activityReference;
 
-
-    public StoreAdapter(List<Store> storeList, UserUI activityReference) {
+    public StoreAdapter(List<Store> storeList) {
         this.storeList = storeList;
-        this.activityReference = activityReference;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

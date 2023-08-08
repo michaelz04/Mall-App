@@ -50,7 +50,7 @@ public class Stores extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         storeList = new ArrayList<>();
 
-        adapter = new StoreAdapter(storeList, (UserUI) getActivity());
+        adapter = new StoreAdapter(storeList);
         recyclerView.setAdapter(adapter);
 
         //DatabaseReference dbRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/");

@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.b07_final_project.classes.CurrentItemData;
 import com.example.b07_final_project.classes.CurrentUserData;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,13 +19,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class ItemActivity extends AppCompatActivity {
     //String userId = CurrentUserData.getInstance().getId();
@@ -40,7 +36,7 @@ public class ItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_expand_item);
         itemId = getIntent().getStringExtra("item_id");
-        toolbar = findViewById(R.id.itemsToolbar);
+        toolbar = findViewById(R.id.expandItemToolbar);
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
 
         // Make Add to Cart work.
@@ -76,7 +72,7 @@ public class ItemActivity extends AppCompatActivity {
                 //displaying values to the user
                 ((TextView)findViewById(R.id.Item_Description)).setText(itemDes);
                 ((TextView)findViewById(R.id.Item_Name)).setText(itemName);
-                ((TextView)findViewById(R.id.Item_Price)).setText(String.valueOf(itemPrice));
+                ((TextView)findViewById(R.id.Item_Price)).setText("$" + itemPrice);
                 try {
                     // if the image is a valid URL, show the image
                     new URL(itemImage);
