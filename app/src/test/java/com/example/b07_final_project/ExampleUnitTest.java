@@ -5,7 +5,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -97,4 +96,40 @@ public class ExampleUnitTest {
         verify(view).startNewActivity(CreateStoreActivity.class);
 
     }
+    @Test
+    public void testCheckShopper_ShopperExist_PasswordMatch() {
+        // Mock the model to return a valid database password
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkShoppers(true, "valid_username", "correct_password");
+        verify(model).getShopperPassword(any(), eq("valid_username"), eq("correct_password"));
+    }
+    public void testCheckShopper_IsNotAShopper() {
+        // Mock the model so owner doesn't exist but could be shopper or someone that doesn't exist
+        // at all.
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkShoppers(false, "potential_valid_username",
+                "any_password");
+        //This is to make sure the code under if doesn't get called, can remove if wanted.
+        verify(model, never()).getShopperPassword(any(), eq("potential_valid_username"),
+                eq("any_password"));
+        verify(model).queryOwners(any(), eq("potential_valid_username"),
+                eq("any_password"));
+    }
+
+    public void testCheckShopperPassword_PasswordMismatch() {
+        // Call the method with incorrect password
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkShopperPassword("valid_username", "incorrect_password", "correct_password");
+        verify(view).showSnackbar("Incorrect password");
+    }
+    @Test
+    public void testCheckShopperPassword_PasswordMatch() {
+        // Call the method with correct password
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkShopperPassword("valid_username", "correct_password", "correct_password");
+        verify(view).startNewActivity(CustomerMenuActivity.class);
+
+
+    }
+
 }

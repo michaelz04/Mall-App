@@ -50,5 +50,6 @@
         android:layout_height="wrap_content"
         android:text="Select next activity: "
         tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="156dp" />
+        tools:layout_editor_absoluteY="156dp"
+        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
