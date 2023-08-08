@@ -103,25 +103,33 @@ public class ExampleUnitTest {
         presenter.checkShoppers(true, "valid_username", "correct_password");
         verify(model).getShopperPassword(any(), eq("valid_username"), eq("correct_password"));
     }
-    public void testCheckShopper_IsNotAShopper() {
-        // Mock the model so owner doesn't exist but could be shopper or someone that doesn't exist
-        // at all.
+    @Test
+    public void testCheckShopper_ShopperExists_PasswordMismatch(){
         LoginPresenter presenter = new LoginPresenter(view, model);
-        presenter.checkShoppers(false, "potential_valid_username",
-                "any_password");
-        //This is to make sure the code under if doesn't get called, can remove if wanted.
-        verify(model, never()).getShopperPassword(any(), eq("potential_valid_username"),
-                eq("any_password"));
-        verify(model).queryOwners(any(), eq("potential_valid_username"),
-                eq("any_password"));
+        presenter.checkShoppers(true, "valid_username", "incorrect_password");
+        presenter.checkShopperPassword("valid_username", "incorrect Password", "correct_password");
+        verify(view).showSnackbar("Incorrect password");
     }
 
+    @Test
+    public void testCheckShopper_IsNotAShopper() {
+        // test if shopper doesn't exist so it queries the owners
+
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkShoppers(false, "valid_username",
+                "any_password");
+        verify(view).showSnackbar("Username does not exist");
+
+    }
+
+   @Test
     public void testCheckShopperPassword_PasswordMismatch() {
         // Call the method with incorrect password
         LoginPresenter presenter = new LoginPresenter(view, model);
         presenter.checkShopperPassword("valid_username", "incorrect_password", "correct_password");
         verify(view).showSnackbar("Incorrect password");
     }
+
     @Test
     public void testCheckShopperPassword_PasswordMatch() {
         // Call the method with correct password
