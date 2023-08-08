@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.b07_final_project.classes.CurrentUserData;
+import com.example.b07_final_project.classes.ToolbarNavigation;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,14 +30,15 @@ public class ItemActivity extends AppCompatActivity {
     String itemId;
     DatabaseReference db;
     ImageView rImage;
-    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_expand_item);
+
+        ToolbarNavigation.set(ItemActivity.this, findViewById(R.id.expandItemToolbar));
+
         itemId = getIntent().getStringExtra("item_id");
-        toolbar = findViewById(R.id.expandItemToolbar);
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
 
         // Make Add to Cart work.
@@ -87,8 +89,6 @@ public class ItemActivity extends AppCompatActivity {
 
             }
         });
-
-        toolbar.setNavigationOnClickListener(view -> onBackPressed());
     }
 
     private void onClickAdd(View view) {

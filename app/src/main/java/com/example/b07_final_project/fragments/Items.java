@@ -1,5 +1,6 @@
 package com.example.b07_final_project.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,16 +10,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.b07_final_project.LoginActivityView;
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.adapters.ItemAdapter;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.Item;
 import com.example.b07_final_project.classes.Store;
+import com.example.b07_final_project.classes.ToolbarNavigation;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,8 +52,7 @@ public class Items extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toolbar toolbar = view.findViewById(R.id.itemsToolbar);
-        toolbar.setNavigationOnClickListener(v -> requireActivity().onBackPressed());
+        ToolbarNavigation.set(getActivity(), view.findViewById(R.id.toolbar));
 
         storeId = CurrentStoreData.getInstance().getId();
         ((CollapsingToolbarLayout) requireActivity().findViewById(R.id.collapsingToolbar)).setTitle(storeId);

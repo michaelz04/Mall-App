@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/logout"
         android:contentDescription="Log out"
         android:icon="@drawable/outline_logout_24"
         android:title="Log out"
