@@ -5,7 +5,6 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -97,4 +96,48 @@ public class ExampleUnitTest {
         verify(view).startNewActivity(CreateStoreActivity.class);
 
     }
+    @Test
+    public void testCheckShopper_ShopperExist_PasswordMatch() {
+        // Mock the model to return a valid database password
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkShoppers(true, "valid_username", "correct_password");
+        verify(model).getShopperPassword(any(), eq("valid_username"), eq("correct_password"));
+    }
+    @Test
+    public void testCheckShopper_ShopperExists_PasswordMismatch(){
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkShoppers(true, "valid_username", "incorrect_password");
+        presenter.checkShopperPassword("valid_username", "incorrect Password", "correct_password");
+        verify(view).showSnackbar("Incorrect password");
+    }
+
+    @Test
+    public void testCheckShopper_IsNotAShopper() {
+        // test if shopper doesn't exist so it queries the owners
+
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkShoppers(false, "valid_username",
+                "any_password");
+        verify(view).showSnackbar("Username does not exist");
+
+    }
+
+   @Test
+    public void testCheckShopperPassword_PasswordMismatch() {
+        // Call the method with incorrect password
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkShopperPassword("valid_username", "incorrect_password", "correct_password");
+        verify(view).showSnackbar("Incorrect password");
+    }
+
+    @Test
+    public void testCheckShopperPassword_PasswordMatch() {
+        // Call the method with correct password
+        LoginPresenter presenter = new LoginPresenter(view, model);
+        presenter.checkShopperPassword("valid_username", "correct_password", "correct_password");
+        verify(view).startNewActivity(CustomerMenuActivity.class);
+
+
+    }
+
 }
