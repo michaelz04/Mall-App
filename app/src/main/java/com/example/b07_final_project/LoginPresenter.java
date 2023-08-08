@@ -64,7 +64,7 @@ public class LoginPresenter {
             CurrentUserData currentUserData = CurrentUserData.getInstance();
             currentUserData.setId(username);
             currentUserData.setAccountType("Shoppers");
-            loginView.startNewActivity(CustomerMenuActivity.class);
+            loginView.startNewActivity(ShopperUI.class);
         } else {
             loginView.showSnackbar("Incorrect password");
         }

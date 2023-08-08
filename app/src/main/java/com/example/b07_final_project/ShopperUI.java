@@ -1,41 +1,66 @@
 package com.example.b07_final_project;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 
-import com.example.b07_final_project.databinding.StoresForCustomersBinding;
+import com.example.b07_final_project.classes.UserUI;
+import com.example.b07_final_project.fragments.Stores;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.Fragment;
 
-import com.example.b07_final_project.databinding.ActivityShopperUiBinding;
+import com.google.android.material.navigation.NavigationBarView;
 
-public class ShopperUI extends AppCompatActivity {
-
-    private ActivityShopperUiBinding binding;
-
+public class ShopperUI extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, UserUI {
+    private int currentFragmentId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_shopper_ui);
 
-        binding = ActivityShopperUiBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        currentFragmentId = R.id.navigation_shop;
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_shop, R.id.navigation_cart, R.id.navigation_orders)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_shopper_ui);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        navView.setOnItemSelectedListener(this);
+        navView.setSelectedItemId(currentFragmentId);
+//        // Passing each menu ID as a set of Ids because each
+//        // menu should be considered as top level destinations.
+//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+//                R.id.navigation_shop, R.id.navigation_cart, R.id.navigation_orders)
+//                .build();
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_shopper_ui);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+//        NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    @Override
+    public void setFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.shopper_fragment, fragment)
+                .commit();
+        currentFragmentId = fragment.getId();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.navigation_shop) {
+            setFragment(new Stores());
+            return true;
+        }
+        if (itemId == R.id.navigation_cart) {
+            setFragment(new Stores());
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
