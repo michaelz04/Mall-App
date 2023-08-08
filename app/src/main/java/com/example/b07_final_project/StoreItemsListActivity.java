@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07_final_project.adapters.ItemAdapter;
@@ -41,7 +40,6 @@ public class StoreItemsListActivity extends AppCompatActivity {
         storeId = CurrentStoreData.getInstance().getId();
         //storeId = getIntent().getStringExtra("store_id");
 
-        // Initialize the RecyclerView and ItemAdapter
         RecyclerView recyclerView = findViewById(R.id.recyclerViewItems);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         itemList = new ArrayList<>();
@@ -68,7 +66,7 @@ public class StoreItemsListActivity extends AppCompatActivity {
         final boolean[] addonce = {false};
 
         DatabaseReference storeRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference("Stores").child(storeId);
-//        DatabaseReference storeRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").child(storeId);
+
         storeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -83,7 +81,7 @@ public class StoreItemsListActivity extends AppCompatActivity {
         });
 
 
-        // DatabaseReference itemsRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/");
+
         DatabaseReference itemsRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference("Items");
         itemsRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -107,8 +105,6 @@ public class StoreItemsListActivity extends AppCompatActivity {
                     addonce[0] = true;
                 }
 
-                // Log.d("Size", String.valueOf(itemList.size()));
-https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324px-Banana-Single.jpg
                 adapter.notifyDataSetChanged();
             }
 
@@ -119,6 +115,6 @@ https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324
         });
     }
 
-    // Helper method to check if the store contains the given item ID
+
 
 }

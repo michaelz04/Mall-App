@@ -1,12 +1,11 @@
 package com.example.b07_final_project;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
 
 import com.example.b07_final_project.adapters.StoreAdapter;
 import com.example.b07_final_project.classes.Store;
@@ -29,15 +28,12 @@ public class StoreListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_storelist_customer);
 
         recyclerView = findViewById(R.id.recyclerView);
-       // Log.d("storelist_customer", "RecyclerView initialized");
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         storeList = new ArrayList<>();
 
         adapter = new StoreAdapter(storeList);
         recyclerView.setAdapter(adapter);
 
-
-        //DatabaseReference dbRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/");
         DatabaseReference dbRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference("Stores");
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override

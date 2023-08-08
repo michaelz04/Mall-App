@@ -1,7 +1,6 @@
 package com.example.b07_final_project.adapters;
 
 import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -50,7 +49,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         }
     }
 
-    // Create a new ViewHolder and inflate the stores_for_customers layout
+    // Create a new ViewHolder and inflate the  layout
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -65,7 +64,6 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         String storename = store.getStoreName();
         String errormsg = "No Stores currently";
         String image = store.getPicture();
-//        String image = "https://www.kurin.com/wp-content/uploads/placeholder-square.jpg";
 
         if (!storename.equals(errormsg)) {
             holder.storeName.setText(store.getStoreName());
@@ -84,7 +82,6 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
 
 
                 Intent intent = new Intent(v.getContext(), StoreItemsListActivity.class);
-                //intent.putExtra("store_id", store.getStoreName());
                 CurrentStoreData.getInstance().setId(store.getStoreName());
                 v.getContext().startActivity(intent);
 
