@@ -135,7 +135,7 @@ public class ExampleUnitTest {
         // Call the method with correct password
         LoginPresenter presenter = new LoginPresenter(view, model);
         presenter.checkShopperPassword("valid_username", "correct_password", "correct_password");
-        verify(view).startNewActivity(CustomerMenuActivity.class);
+        verify(view).startNewActivity(ShopperUI.class);
 
 
     }

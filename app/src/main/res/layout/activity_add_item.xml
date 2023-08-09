@@ -6,14 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".NewItemActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/addItemToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginBottom="76dp"
+        app:layout_constraintBottom_toTopOf="@+id/newItemTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/top_app_bar"
+        app:navigationContentDescription="Back"
+        app:navigationIcon="@drawable/outline_arrow_back_24" />
+
     <TextView
         android:id="@+id/newItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="140dp"
+        android:layout_marginEnd="177dp"
+        android:layout_marginBottom="3dp"
         android:text="Set desired item details:"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/LinearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,15 +45,18 @@
         android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LinearLayout" />
 
     <LinearLayout
         android:id="@+id/LinearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="170dp"
+        android:layout_marginBottom="139dp"
         android:orientation="vertical"
         android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/addNewItemSubmit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -71,6 +91,7 @@
                 android:layout_weight="1"
                 android:hint="Price"
                 android:imeOptions="actionNext"
+                android:inputType="number|numberDecimal"
                 android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -100,7 +121,8 @@
                 android:id="@+id/itemDescriptionInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Description" />
+                android:hint="Description"
+                android:imeOptions="actionDone" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>

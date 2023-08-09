@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="onClickCart"
-    tools:context=".ItemActivity">
+    tools:context=".fragments.ExpandItem">
 
     <Button
         android:id="@+id/goToCart"

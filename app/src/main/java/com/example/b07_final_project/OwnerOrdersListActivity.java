@@ -14,6 +14,7 @@ import android.view.View;
 import com.example.b07_final_project.adapters.OwnerOrderAdapter;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
+import com.example.b07_final_project.classes.ToolbarNavigation;
 import com.google.firebase.database.*;
 
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class OwnerOrdersListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_orders_list);
+
+        ToolbarNavigation.set(this, findViewById(R.id.ordersListToolbar));
 
         RecyclerView recyclerView = findViewById(R.id.OwnerOrdersRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -77,13 +80,5 @@ public class OwnerOrdersListActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
-    public void onClickMenu(View view){
-        startActivity(new Intent(OwnerOrdersListActivity.this, OwnerMenuActivity.class));
-    }
-
-    @Override
-    public void onBackPressed(){}
 }

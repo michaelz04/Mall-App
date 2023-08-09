@@ -11,6 +11,7 @@ import android.os.Bundle;
 import com.example.b07_final_project.adapters.CustomerSpecificOrderAdapter;
 import com.example.b07_final_project.classes.CurrentOrderData;
 import com.example.b07_final_project.classes.OrderStores;
+import com.example.b07_final_project.classes.ToolbarNavigation;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +35,8 @@ public class CustomerSpecificOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_order_recycle_view);
+
+        ToolbarNavigation.set(this, findViewById(R.id.customerOrdersToolbar));
 
         orderStores = new ArrayList<>();
         storeNames = new ArrayList<>();

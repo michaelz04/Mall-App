@@ -1,5 +1,11 @@
 package com.example.b07_final_project;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +22,7 @@ import com.example.b07_final_project.classes.CurrentOrderData;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
 import com.example.b07_final_project.classes.Item;
+import com.example.b07_final_project.classes.ToolbarNavigation;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,7 +44,6 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
     DatabaseReference db;
 
     Button finish;
-    TextView order;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +52,9 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.ownerIndvOrderRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        order = findViewById(R.id.orderheader);
+        Toolbar toolbar = findViewById(R.id.individualOrderToolbar);
+        ToolbarNavigation.set(this, toolbar);
+
         OrderItemList = new ArrayList<String>();
         ItemList = new ArrayList<>();
         OrderQuantity = new ArrayList<Integer>();
@@ -87,7 +95,7 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
                 String status = "Done";
                 if(!orderStatus)status = "Not Done";
 
-                order.setText("Order ID #: "+orderID);
+                toolbar.setTitle("Order ID #" + orderID);
                 if(OrderItemList.isEmpty()){
                     OrderItemList.add("empty");
                     OrderQuantity.add(0);

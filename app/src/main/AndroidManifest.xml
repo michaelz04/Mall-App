@@ -33,10 +33,7 @@
             android:name=".OwnerOrdersListActivity"
             android:exported="false" />
         <activity
-            android:name=".CustomerMenuActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OwnerMenuActivity"
+            android:name=".OwnerUI"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -46,7 +43,6 @@
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_signup" />
-        <activity android:name=".ItemActivity" />
         <activity android:name=".StoreListActivity" />
         <activity android:name=".AccountTypeActivity" />
         <activity

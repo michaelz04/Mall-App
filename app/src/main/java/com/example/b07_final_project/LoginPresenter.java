@@ -48,7 +48,7 @@ public class LoginPresenter {
             loginView.startNewActivity(CreateStoreActivity.class);
         } else {
             CurrentStoreData.getInstance().setId(ownerStoreID);
-            loginView.startNewActivity(OwnerMenuActivity.class);
+            loginView.startNewActivity(OwnerUI.class);
         }
     }
     public void checkShoppers(boolean shopperExist, String username, String password){
@@ -64,7 +64,7 @@ public class LoginPresenter {
             CurrentUserData currentUserData = CurrentUserData.getInstance();
             currentUserData.setId(username);
             currentUserData.setAccountType("Shoppers");
-            loginView.startNewActivity(CustomerMenuActivity.class);
+            loginView.startNewActivity(ShopperUI.class);
         } else {
             loginView.showSnackbar("Incorrect password");
         }
