@@ -1,5 +1,6 @@
 package com.example.b07_final_project.adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

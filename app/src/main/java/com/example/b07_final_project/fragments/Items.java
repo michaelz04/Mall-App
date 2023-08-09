@@ -26,6 +26,7 @@ import com.example.b07_final_project.classes.CurrentUserData;
 import com.example.b07_final_project.classes.Item;
 import com.example.b07_final_project.classes.Store;
 import com.example.b07_final_project.classes.ToolbarNavigation;
+import com.example.b07_final_project.classes.UserUI;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -75,7 +76,7 @@ public class Items extends Fragment {
         if (CurrentUserData.getInstance().getAccountType().equals("Owners")) {
             addItemButton.setVisibility(View.VISIBLE);
             addItemButton.setOnClickListener(l -> {
-                startActivity(new Intent(requireContext(), NewItemActivity.class));
+                ((UserUI) requireContext()).setFragment(new NewItem());
             });
             toolbar.setNavigationIcon(null);
         }
@@ -84,6 +85,7 @@ public class Items extends Fragment {
             toolbar.setNavigationIcon(R.drawable.outline_arrow_back_24);
         }
 
+        view.findViewById(R.id.message4).setVisibility(View.GONE);
 
         ToolbarNavigation.set(getActivity(), toolbar);
 
@@ -127,6 +129,7 @@ public class Items extends Fragment {
                     Item empty = new Item(errormsg, "", 0.0f, "", "", "");
                     itemList.add(empty);
                     addonce[0] = true;
+                    view.findViewById(R.id.message4).setVisibility(View.VISIBLE);
                 }
 
                 // Log.d("Size", String.valueOf(itemList.size()));

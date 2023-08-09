@@ -28,4 +28,6 @@
     <color name="md_theme_dark_inversePrimary">#954A05</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="green">#00FF00</color>
+    <color name="red">#FF0000</color>
 </resources>

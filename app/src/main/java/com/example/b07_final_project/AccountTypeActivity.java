@@ -28,7 +28,7 @@ public class AccountTypeActivity extends AppCompatActivity {
         userRef.child("password").setValue(password);
         userRef.child("username").setValue(username);
         CurrentUserData.getInstance().setAccountType("Shoppers");
-        startActivity(new Intent(AccountTypeActivity.this, StoreListActivity.class));
+        startActivity(new Intent(AccountTypeActivity.this, ShopperUI.class));
     }
 
     public void onClickOwner(View view){
@@ -36,7 +36,7 @@ public class AccountTypeActivity extends AppCompatActivity {
         db.child("Owners").child(username).child("password").setValue(password);
         db.child("Owners").child(username).child("username").setValue(username);
         CurrentUserData.getInstance().setAccountType("Owners");
-        startActivity(new Intent(AccountTypeActivity.this, CreateStoreActivity.class));
+        startActivity(new Intent(AccountTypeActivity.this, OwnerUI.class));
 
     }
 }

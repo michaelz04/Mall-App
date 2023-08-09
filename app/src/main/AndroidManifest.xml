@@ -38,12 +38,10 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" /> <!-- Add other activities here -->
-        <activity android:name=".StoreItemsListActivity" />
         <activity android:name=".CreateStoreActivity" />
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_signup" />
-        <activity android:name=".StoreListActivity" />
         <activity android:name=".AccountTypeActivity" />
         <activity
             android:name=".CartActivity"
