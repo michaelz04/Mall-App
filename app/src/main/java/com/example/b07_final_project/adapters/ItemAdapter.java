@@ -2,23 +2,21 @@ package com.example.b07_final_project.adapters;
 
 import static android.view.View.GONE;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.b07_final_project.ItemActivity;
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.ShopperUI;
+import com.example.b07_final_project.classes.CurrentUserData;
 import com.example.b07_final_project.classes.Item;
+import com.example.b07_final_project.classes.UserUI;
 import com.example.b07_final_project.fragments.ExpandItem;
-import com.example.b07_final_project.fragments.Items;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
@@ -78,7 +76,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
                 // Set click listener
                 holder.itemCard.setOnClickListener(v -> {
-                    ((ShopperUI) v.getContext()).setFragment(new ExpandItem(item.getItemID()));
+                    if (CurrentUserData.getInstance().getAccountType().equals("Shoppers")) {
+                        ((UserUI) v.getContext()).setFragment(new ExpandItem(item.getItemID()));
+                    }
                 });
             }
 

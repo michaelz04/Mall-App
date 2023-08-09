@@ -1,14 +1,10 @@
 package com.example.b07_final_project.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,18 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.b07_final_project.CartActivity;
-import com.example.b07_final_project.ItemActivity;
-import com.example.b07_final_project.LoginActivityView;
 import com.example.b07_final_project.R;
-import com.example.b07_final_project.ShopperUI;
-import com.example.b07_final_project.adapters.ItemAdapter;
-import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
-import com.example.b07_final_project.classes.Item;
-import com.example.b07_final_project.classes.Store;
 import com.example.b07_final_project.classes.ToolbarNavigation;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,9 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class ExpandItem extends Fragment {
     String itemId;

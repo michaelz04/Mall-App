@@ -48,7 +48,7 @@ public class LoginPresenter {
             loginView.startNewActivity(CreateStoreActivity.class);
         } else {
             CurrentStoreData.getInstance().setId(ownerStoreID);
-            loginView.startNewActivity(OwnerMenuActivity.class);
+            loginView.startNewActivity(OwnerUI.class);
         }
     }
     public void checkShoppers(boolean shopperExist, String username, String password){

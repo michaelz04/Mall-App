@@ -4,30 +4,30 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.b07_final_project.classes.UserUI;
-import com.example.b07_final_project.fragments.Cart;
-import com.example.b07_final_project.fragments.Stores;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.b07_final_project.classes.UserUI;
+import com.example.b07_final_project.fragments.Cart;
+import com.example.b07_final_project.fragments.Items;
+import com.example.b07_final_project.fragments.Stores;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class ShopperUI extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, UserUI {
+public class OwnerUI extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, UserUI {
     private int currentFragmentLayout;
     private BottomNavigationView navView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shopper_ui);
+        setContentView(R.layout.activity_owner_ui);
 
-        currentFragmentLayout = R.id.shopper_fragment;
+        currentFragmentLayout = R.id.owner_fragment;
 
         navView = findViewById(R.id.nav_view);
         navView.setOnItemSelectedListener(this);
-        navView.setSelectedItemId(R.id.navigation_shop);
+        navView.setSelectedItemId(R.id.navigation_store);
 //        // Passing each menu ID as a set of Ids because each
 //        // menu should be considered as top level destinations.
 //        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -42,8 +42,8 @@ public class ShopperUI extends AppCompatActivity implements NavigationBarView.On
     protected void onStart() {
         super.onStart();
         if (navView.getSelectedItemId() == R.id.navigation_orders) {
-            setFragment(new Stores());
-            navView.setSelectedItemId(R.id.navigation_shop);
+            setFragment(new Items());
+            navView.setSelectedItemId(R.id.navigation_store);
         }
     }
 
@@ -62,16 +62,12 @@ public class ShopperUI extends AppCompatActivity implements NavigationBarView.On
         for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); ++i)
             getSupportFragmentManager().popBackStack();
         int itemId = item.getItemId();
-        if (itemId == R.id.navigation_shop) {
-            setFragment(new Stores());
-            return true;
-        }
-        if (itemId == R.id.navigation_cart) {
-            setFragment(new Cart());
+        if (itemId == R.id.navigation_store) {
+            setFragment(new Items());
             return true;
         }
         if (itemId == R.id.navigation_orders) {
-            startActivity(new Intent(ShopperUI.this, CustomerOrdersListActivity.class));
+            startActivity(new Intent(OwnerUI.this, OwnerOrdersListActivity.class));
             return true;
         }
         return false;

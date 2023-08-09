@@ -9,6 +9,16 @@
     android:layout_height="match_parent"
     tools:context=".fragments.Items">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addItemButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:contentDescription="Add store"
+        android:src="@android:drawable/ic_input_add" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
 

@@ -1,5 +1,7 @@
 package com.example.b07_final_project.fragments;
 
+import static android.view.View.GONE;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,15 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.b07_final_project.LoginActivityView;
+import com.example.b07_final_project.NewItemActivity;
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.adapters.ItemAdapter;
 import com.example.b07_final_project.classes.CurrentStoreData;
+import com.example.b07_final_project.classes.CurrentUserData;
 import com.example.b07_final_project.classes.Item;
 import com.example.b07_final_project.classes.Store;
 import com.example.b07_final_project.classes.ToolbarNavigation;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,8 +58,6 @@ public class Items extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ToolbarNavigation.set(getActivity(), view.findViewById(R.id.toolbar));
-
         storeId = CurrentStoreData.getInstance().getId();
         ((CollapsingToolbarLayout) requireActivity().findViewById(R.id.collapsingToolbar)).setTitle(storeId);
 
@@ -63,6 +67,25 @@ public class Items extends Fragment {
         itemList = new ArrayList<>();
         adapter = new ItemAdapter(itemList);
         recyclerView.setAdapter(adapter);
+
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+
+        FloatingActionButton addItemButton = view.findViewById(R.id.addItemButton);
+
+        if (CurrentUserData.getInstance().getAccountType().equals("Owners")) {
+            addItemButton.setVisibility(View.VISIBLE);
+            addItemButton.setOnClickListener(l -> {
+                startActivity(new Intent(requireContext(), NewItemActivity.class));
+            });
+            toolbar.setNavigationIcon(null);
+        }
+        else {
+            addItemButton.setVisibility(View.GONE);
+            toolbar.setNavigationIcon(R.drawable.outline_arrow_back_24);
+        }
+
+
+        ToolbarNavigation.set(getActivity(), toolbar);
 
         final boolean[] addonce = {false};
 

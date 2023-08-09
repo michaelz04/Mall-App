@@ -3,13 +3,16 @@ package com.example.b07_final_project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
 import com.example.b07_final_project.classes.Item;
+import com.example.b07_final_project.classes.Owner;
 import com.example.b07_final_project.classes.Store;
+import com.example.b07_final_project.classes.ToolbarNavigation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.example.b07_final_project.classes.CurrentStoreData;
@@ -29,6 +32,7 @@ public class NewItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+        ToolbarNavigation.set(this, findViewById(R.id.addItemToolbar));
     }
 
     public void onClickAddNewItemSubmit(View view) {
@@ -101,19 +105,18 @@ public class NewItemActivity extends AppCompatActivity {
 //                storeRef.child("items").child(itemKey).setValue(nameInput.getText().toString());
 
             // Set text for snack bar
-            successPrompt = Snackbar.make(view, "Successfully added item", 3000);
+//            successPrompt = Snackbar.make(view, "Successfully added item", 3000);
 
             // Would want to reset fields after successful creation
             nameInput.setText("");
             priceInput.setText("");
             descInput.setText("");
             imageInput.setText("");
+
+            startActivity(new Intent(this, OwnerUI.class));
         } catch (Exception e) {
             successPrompt = Snackbar.make(view, "Failed to add item", 3000);
+            successPrompt.show();
         }
-
-        successPrompt.show();
     }
-
-
 }
