@@ -77,7 +77,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                         if (task.isSuccessful() && !itemName.equals(errormsg)) {
-                            int quantity = task.getResult().getValue(Integer.class);
+                            Integer quantity = task.getResult().getValue(Integer.class);
+                            if (quantity == null) {
+                                quantity = 1;
+                            }
 
                             holder.itemCard.setVisibility(View.VISIBLE);
                             holder.itemName.setText(itemName + " (" + Integer.toString(quantity) + ")");
