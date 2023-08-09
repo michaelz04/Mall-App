@@ -61,6 +61,7 @@ public class Stores extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 storeList.clear();
                 if (snapshot.exists()) {
+                    view.findViewById(R.id.message2).setVisibility(View.GONE);
                     for (DataSnapshot store : snapshot.getChildren()) {
                         String storename = store.child("storeName").getValue(String.class);
                         String storeinfo = store.child("description").getValue(String.class);
@@ -85,7 +86,7 @@ public class Stores extends Fragment {
                     String errormsg= "No Stores currently";
                     Store empty = new Store(errormsg, "", "", new ArrayList<>(), "");
                     storeList.add(empty);
-
+                    view.findViewById(R.id.message2).setVisibility(View.VISIBLE);
                 }
                 adapter.notifyDataSetChanged();
             }

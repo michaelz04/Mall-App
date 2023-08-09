@@ -1,15 +1,17 @@
 package com.example.b07_final_project.adapters;
 
 import android.content.Intent;
+import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.*;
 
 import com.example.b07_final_project.OwnerIndividualOrderActivity;
-import com.example.b07_final_project.StoreItemsListActivity;
 import com.example.b07_final_project.classes.CurrentOrderData;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.database.*;
 import android.widget.*;
 
@@ -35,14 +37,14 @@ public class OwnerOrderAdapter extends RecyclerView.Adapter<OwnerOrderAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        Button orderButton;
-        TextView statusText;
+        MaterialCardView card;
+        TextView orderId;
         TextView doneText;
 
         public ViewHolder(@NonNull View OwnerOrdersView) {
             super(OwnerOrdersView);
-            orderButton = OwnerOrdersView.findViewById(R.id.OwnerOrderButton);
-            statusText = OwnerOrdersView.findViewById(R.id.OrderStatusText);
+            card = OwnerOrdersView.findViewById(R.id.OwnerOrderCard);
+            orderId = OwnerOrdersView.findViewById(R.id.OrderIDText);
             doneText = OwnerOrdersView.findViewById(R.id.OrderStatusDone);
         }
     }
@@ -62,26 +64,27 @@ public class OwnerOrderAdapter extends RecyclerView.Adapter<OwnerOrderAdapter.Vi
         Log.d("test", text);
 
         if (orderId.equals("empty")){
-            String buttonText = "No orders";
-            holder.orderButton.setText(buttonText);
-            holder.orderButton.setClickable(false);
-            holder.statusText.setText("");
-            holder.doneText.setText("");
+//            String buttonText = "No orders";
+//            holder.orderButton.setText(buttonText);
+//            holder.orderButton.setClickable(false);
+//            holder.statusText.setText("");
+//            holder.doneText.setText("");
         } else {
             boolean orderStatus = statusList.get(position);
 
             if (orderStatus){
                 holder.doneText.setText("Done");
+                holder.doneText.setTextColor(Color.GREEN);
             } else {
                 holder.doneText.setText("Not Done");
+                holder.doneText.setTextColor(Color.RED);
             }
 
             String orderIdTrim = orderId.substring(0, 15);
-            String buttonText = "Order ID: #" + orderIdTrim;
-            holder.orderButton.setText(buttonText);
+            holder.orderId.setText("Order ID #" + orderIdTrim);
 
             // Set click listener
-            holder.orderButton.setOnClickListener(v -> {
+            holder.card.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), OwnerIndividualOrderActivity.class);
                 CurrentOrderData.getInstance().setId(orderId);
                 v.getContext().startActivity(intent);

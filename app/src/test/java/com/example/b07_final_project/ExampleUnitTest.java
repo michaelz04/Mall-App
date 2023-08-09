@@ -86,7 +86,7 @@ public class ExampleUnitTest {
     public void testCheckOwnerStore_HasStore() {
         LoginPresenter presenter = new LoginPresenter(view, model);
         presenter.checkOwnerStore("valid_store");
-        verify(view).startNewActivity(OwnerMenuActivity.class);
+        verify(view).startNewActivity(OwnerUI.class);
     }
 
     @Test
