@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/navigation_cart"
         android:label="Cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/cart_item_layout" />
 
     <fragment
         android:id="@+id/navigation_orders"

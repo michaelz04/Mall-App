@@ -2,10 +2,8 @@ package com.example.b07_final_project;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.b07_final_project.classes.UserUI;
 import com.example.b07_final_project.fragments.Cart;
 import com.example.b07_final_project.fragments.Stores;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,16 +14,17 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationBarView;
 
-public class ShopperUI extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener, UserUI {
-    private int currentFragment;
+public class ShopperUI extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
+    private int currentFragmentLayout;
+    private BottomNavigationView navView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopper_ui);
 
-        currentFragment = R.id.shopper_fragment;
+        currentFragmentLayout = R.id.shopper_fragment;
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView = findViewById(R.id.nav_view);
         navView.setOnItemSelectedListener(this);
         navView.setSelectedItemId(R.id.navigation_shop);
 //        // Passing each menu ID as a set of Ids because each
@@ -39,14 +38,22 @@ public class ShopperUI extends AppCompatActivity implements NavigationBarView.On
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        if (navView.getSelectedItemId() == R.id.navigation_orders) {
+            setFragment(new Stores());
+            navView.setSelectedItemId(R.id.navigation_shop);
+        }
+    }
+
     public void setFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
-                .replace(currentFragment, fragment)
+                .replace(currentFragmentLayout, fragment)
                 .addToBackStack(null)
                 .commit();
-        currentFragment = fragment.getId();
+        currentFragmentLayout = fragment.getId();
     }
 
     @Override
@@ -62,13 +69,16 @@ public class ShopperUI extends AppCompatActivity implements NavigationBarView.On
             setFragment(new Cart());
             return true;
         }
+        if (itemId == R.id.navigation_orders) {
+            startActivity(new Intent(ShopperUI.this, CustomerOrdersListActivity.class));
+            return true;
+        }
         return false;
     }
 
     @Override
     public void onBackPressed() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
-
         if (count > 1) {
             getSupportFragmentManager().popBackStack();
         }

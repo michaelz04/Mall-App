@@ -62,7 +62,9 @@ public class Cart extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        ToolbarNavigation.set(getActivity(), view.findViewById(R.id.toolbar));
+        ToolbarNavigation.set(getActivity(), view.findViewById(R.id.toolbar));
+
+        Button checkoutButton = view.findViewById(R.id.checkoutButton);
 
         recyclerView = view.findViewById(R.id.recyclerViewCart);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -86,6 +88,7 @@ public class Cart extends Fragment {
                 cartItemListKey.clear();
                 cartItemList.clear();
                 if (snapshot.exists()) {
+                    checkoutButton.setVisibility(View.VISIBLE);
                     for (DataSnapshot itemkey : snapshot.getChildren()) {
                         String itemId = itemkey.getKey();
                         cartItemListKey.add(itemId);
@@ -117,6 +120,7 @@ public class Cart extends Fragment {
                     String errormsg = "No Items in cart currently";
                     Item empty = new Item(errormsg, "", 0.0f, "", "", "");
                     view.findViewById(R.id.message).setVisibility(View.VISIBLE);
+                    checkoutButton.setVisibility(View.GONE);
                     cartItemList.add(empty);
                     cartAdapter.notifyDataSetChanged();
                 }
@@ -128,7 +132,6 @@ public class Cart extends Fragment {
             }
         });
 
-        Button checkoutButton = view.findViewById(R.id.checkoutButton);
         checkoutButton.setOnClickListener(v -> {
             DatabaseReference ordersRef = db.child("Orders").push();
             String orderId = ordersRef.getKey();

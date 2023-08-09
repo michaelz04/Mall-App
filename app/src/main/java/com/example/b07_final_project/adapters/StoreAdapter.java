@@ -9,10 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.b07_final_project.classes.UserUI;
 import com.example.b07_final_project.fragments.Items;
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.ShopperUI;
