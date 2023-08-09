@@ -42,9 +42,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/customers_order_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
