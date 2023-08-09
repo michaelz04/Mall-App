@@ -1,15 +1,15 @@
 package com.example.b07_final_project;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07_final_project.adapters.OwnerIndvOrderAdapter;
 import com.example.b07_final_project.classes.CurrentOrderData;
@@ -28,6 +28,7 @@ import java.util.List;
 public class OwnerIndividualOrderActivity extends AppCompatActivity {
     private List<String> OrderItemList;
     private List<Item> ItemList;
+    private List<Integer>OrderQuantity;
     private boolean orderStatus;
     String username = CurrentUserData.getInstance().getId();
     String storeId = CurrentStoreData.getInstance().getId();
@@ -48,9 +49,10 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
         order = findViewById(R.id.orderheader);
         OrderItemList = new ArrayList<String>();
         ItemList = new ArrayList<>();
+        OrderQuantity = new ArrayList<Integer>();
         finish = findViewById(R.id.finish);
 
-        adapter = new OwnerIndvOrderAdapter(OrderItemList,ItemList);
+        adapter = new OwnerIndvOrderAdapter(OrderItemList,ItemList,OrderQuantity);
         recyclerView.setAdapter(adapter);
 
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").
@@ -67,6 +69,9 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
                     String itemID = item.getKey();
                     if (itemID != null) {
                         OrderItemList.add(itemID);
+                        Integer itemQuantity = (Integer) item.getValue(Integer.class);
+                        OrderQuantity.add(itemQuantity);
+
                     }
                 }
 
@@ -85,6 +90,7 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
                 order.setText("Order ID #: "+orderID);
                 if(OrderItemList.isEmpty()){
                     OrderItemList.add("empty");
+                    OrderQuantity.add(0);
                 }
                 adapter.notifyDataSetChanged();
 
