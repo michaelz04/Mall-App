@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,7 @@ public class ExpandItem extends Fragment {
         ToolbarNavigation.set(getActivity(), view.findViewById(R.id.expandItemToolbar));
 
         db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
+
 
         // Make Add to Cart work.
         Button cartAdd = view.findViewById(R.id.addToCartButton);
@@ -101,6 +103,7 @@ public class ExpandItem extends Fragment {
     }
 
     private void onClickAdd(View view) {
+        String quantity = ((EditText)getView().findViewById(R.id.quantityEditText)).getText().toString();
         // TODO: Implement code for the button
         String userId = CurrentUserData.getInstance().getId();
         DatabaseReference cartRef = db.child("Shoppers").child(userId).child("cart");
@@ -120,7 +123,7 @@ public class ExpandItem extends Fragment {
                     requireActivity().onBackPressed();
                 }
                 else {
-                    currentCartItems.put(itemId, 1);
+                    currentCartItems.put(itemId, Integer.parseInt(quantity));
                     cartRef.setValue(currentCartItems);
                     Toast.makeText(getContext(), "The item is successfully added to your cart.", Toast.LENGTH_SHORT).show();
                     requireActivity().onBackPressed();
