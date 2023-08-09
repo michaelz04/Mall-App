@@ -36,7 +36,7 @@ public class AccountTypeActivity extends AppCompatActivity {
         db.child("Owners").child(username).child("password").setValue(password);
         db.child("Owners").child(username).child("username").setValue(username);
         CurrentUserData.getInstance().setAccountType("Owners");
-        startActivity(new Intent(AccountTypeActivity.this, OwnerUI.class));
+        startActivity(new Intent(AccountTypeActivity.this, CreateStoreActivity.class));
 
     }
 }
