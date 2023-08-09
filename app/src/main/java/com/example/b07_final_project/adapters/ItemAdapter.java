@@ -15,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07_final_project.ItemActivity;
 import com.example.b07_final_project.R;
+import com.example.b07_final_project.ShopperUI;
 import com.example.b07_final_project.classes.Item;
+import com.example.b07_final_project.fragments.ExpandItem;
+import com.example.b07_final_project.fragments.Items;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
@@ -36,7 +39,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         MaterialCardView itemCard;
         TextView itemName;
         TextView price;
-
         ImageView image;
 
         public ViewHolder(@NonNull View itemView) {
@@ -76,9 +78,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
                 // Set click listener
                 holder.itemCard.setOnClickListener(v -> {
-                    Intent intent = new Intent(v.getContext(), ItemActivity.class);
-                    intent.putExtra("item_id", item.getItemID());
-                    v.getContext().startActivity(intent);
+                    ((ShopperUI) v.getContext()).setFragment(new ExpandItem(item.getItemID()));
                 });
             }
 

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.b07_final_project.classes.UserUI;
+import com.example.b07_final_project.fragments.Cart;
 import com.example.b07_final_project.fragments.Stores;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -41,6 +42,7 @@ public class ShopperUI extends AppCompatActivity implements NavigationBarView.On
     public void setFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                 .replace(currentFragment, fragment)
                 .addToBackStack(null)
                 .commit();
@@ -49,13 +51,15 @@ public class ShopperUI extends AppCompatActivity implements NavigationBarView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        for (int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); ++i)
+            getSupportFragmentManager().popBackStack();
         int itemId = item.getItemId();
         if (itemId == R.id.navigation_shop) {
             setFragment(new Stores());
             return true;
         }
         if (itemId == R.id.navigation_cart) {
-            setFragment(new Stores());
+            setFragment(new Cart());
             return true;
         }
         return false;

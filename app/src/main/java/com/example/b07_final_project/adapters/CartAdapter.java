@@ -5,17 +5,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.b07_final_project.EditItemAmount;
 import com.example.b07_final_project.R;
 import com.example.b07_final_project.classes.Item;
+import com.google.android.material.card.MaterialCardView;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
-
     private List<Item> cartItemList;
     //private OnItemClickListener itemClickListener;
 
@@ -31,11 +36,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }*/
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        Button cartButtonView;
-
+        MaterialCardView itemCard;
+        TextView itemName;
+        TextView price;
+        ImageView image;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            cartButtonView = itemView.findViewById(R.id.itemorder);
+            itemCard = itemView.findViewById(R.id.itemCard);
+            itemName = itemView.findViewById(R.id.itemName);
+            price = itemView.findViewById(R.id.price);
+            image = itemView.findViewById(R.id.imageView);
         }
     }
 
@@ -52,10 +62,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         String itemName = item.getItemName();
         String errormsg = "No Items in cart currently";
         if(!itemName.equals(errormsg)) {
-            String buttonText = item.getItemName() + " - " + item.getDescription() + " - $" + item.getPrice();
-            holder.cartButtonView.setText(buttonText);
+            holder.itemCard.setVisibility(View.VISIBLE);
+            holder.itemName.setText(itemName);
+            Picasso.get().load(item.getPicture()).into(holder.image);
 
-            holder.cartButtonView.setOnClickListener(v ->  {
+            holder.itemCard.setOnClickListener(v ->  {
                 Intent intent = new Intent(v.getContext(), EditItemAmount.class);
 
                 intent.putExtra("item_id", item.getItemID());
@@ -69,9 +80,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
         }
         else {
-            holder.cartButtonView.setText(errormsg);
-            holder.cartButtonView.setOnClickListener(null);
-            holder.cartButtonView.setClickable(false);
+//            holder.itemCard.setText(errormsg);
+//            holder.cartButtonView.setOnClickListener(null);
+//            holder.cartButtonView.setClickable(false);
+            holder.itemCard.setVisibility(View.GONE);
         }
     }
 
