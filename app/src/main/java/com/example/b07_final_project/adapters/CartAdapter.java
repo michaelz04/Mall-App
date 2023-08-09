@@ -17,18 +17,12 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     private List<Item> cartItemList;
-    //private OnItemClickListener itemClickListener;
-
-    // Constructor with the OnItemClickListener parameter
     public CartAdapter(List<Item> cartItemList) {
         this.cartItemList = cartItemList;
-        //this.itemClickListener = itemClickListener;
+
     }
 
 
-    /*public interface OnItemClickListener {
-        void onItemClick(Item item);
-    }*/
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         Button cartButtonView;

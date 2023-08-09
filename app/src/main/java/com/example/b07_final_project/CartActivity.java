@@ -130,23 +130,25 @@ public class CartActivity extends AppCompatActivity {
                                             orderStores = new OrderStores(new HashMap<>(), false);
                                             storesMap.put(storeKey, orderStores);
                                             uniqueStoreKeys.add(storeKey);
-                                            //Log.d("CartActivity", "Added new storeKey: " + storeKey);
+
                                         }
 
                                         orderStores.getItems().put(itemId, quantity);
 
                                         if (uniqueStoreKeys.size() == storesMap.size()) {
+                                            //Set the orders in the database
                                             Orders orders = new Orders(orderId, storesMap);
                                             db.child("Orders").child(orderId).setValue(orders);
-                                            //If you want to remove a user's cart after checkout uncomment code below
+                                            //Remove Cart after purchase.
                                             cartRef.removeValue();
                                             cartAdapter.notifyDataSetChanged();
-                                            //Add to current user orders:
+
+                                            //Add to current user orders in database:
                                             String currentUser = CurrentUserData.getInstance().getId();
                                             DatabaseReference userRef = db.child("Shoppers").child(currentUser);
                                             userRef.child("orders").child(orderId).setValue(orderId);
 
-                                            //Add things to owners
+                                            //Add orders to owners in database
                                             DatabaseReference storeRef = db.child("Stores");
                                             storeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
@@ -155,14 +157,14 @@ public class CartActivity extends AppCompatActivity {
                                                         if(uniqueStoreKeys.contains(stores.getKey())) {
                                                             String ownername = stores.child("storeOwner").getValue(String.class);
                                                             ownersOfOrders.add(ownername);
-                                                            //Log.d("CartActivity", "2nd test " + ownername);
+
                                                         }
                                                     }
-                                                  //  Log.d("CartActivity", "4th test " + ownersOfOrders.size());
+
                                                     DatabaseReference ownersRef = db.child("Owners");
                                                     for (String orderowner : ownersOfOrders) {
                                                         ownersRef.child(orderowner).child("orders").child(orderId).setValue(orderId);
-                                                        //Log.d("CartActivity", "3rd test " + orderowner);
+
                                                     }
                                                     Toast.makeText(CartActivity.this, "Checkout successful", Toast.LENGTH_SHORT).show();
                                                 }
@@ -180,8 +182,7 @@ public class CartActivity extends AppCompatActivity {
                         }
                     }
                     else {
-                        // Cart is empty, do smth.
-                        //Log.d("CartActivity", "Empty cart");
+                        // Cart is empty
                         Toast.makeText(CartActivity.this, "Empty Cart", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -215,7 +216,7 @@ public class CartActivity extends AppCompatActivity {
                         }
                     }
                 }
-                // Item with given itemId not found
+
                 callback.onStoreKeyReceived(null);
             }
 
