@@ -88,6 +88,19 @@
                 android:hint="Description" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextStoreImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Image (Optional)"
+                android:singleLine="true" />
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

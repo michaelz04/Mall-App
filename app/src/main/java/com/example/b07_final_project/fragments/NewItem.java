@@ -1,47 +1,77 @@
-package com.example.b07_final_project;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.b07_final_project.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.example.b07_final_project.OwnerUI;
+import com.example.b07_final_project.R;
+import com.example.b07_final_project.classes.CurrentStoreData;
+import com.example.b07_final_project.classes.CurrentUserData;
 import com.example.b07_final_project.classes.Item;
-import com.example.b07_final_project.classes.Owner;
 import com.example.b07_final_project.classes.Store;
 import com.example.b07_final_project.classes.ToolbarNavigation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.example.b07_final_project.classes.CurrentStoreData;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class NewItemActivity extends AppCompatActivity {
+public class NewItem extends Fragment {
     String storeId = CurrentStoreData.getInstance().getId();
     FirebaseDatabase db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/");
+    EditText nameInput;
+    EditText priceInput;
+    EditText imageInput;
+    EditText descInput;
+
+    public NewItem() {
+        super(R.layout.activity_add_item);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_item);
-        ToolbarNavigation.set(this, findViewById(R.id.addItemToolbar));
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.activity_add_item, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ToolbarNavigation.set(getActivity(), view.findViewById(R.id.addItemToolbar));
+        nameInput = view.findViewById(R.id.itemNameInput);
+        priceInput = view.findViewById(R.id.itemPriceInput);
+        imageInput = view.findViewById(R.id.itemImageInput);
+        descInput = view.findViewById(R.id.itemDescriptionInput);
+
+        view.findViewById(R.id.addNewItemSubmit).setOnClickListener(l -> onClickAddNewItemSubmit(view));
     }
 
     public void onClickAddNewItemSubmit(View view) {
-        // Get all the needed input fields
-        EditText nameInput = findViewById(R.id.itemNameInput);
-        EditText priceInput = findViewById(R.id.itemPriceInput);
-        EditText imageInput = findViewById(R.id.itemImageInput);
-        EditText descInput = findViewById(R.id.itemDescriptionInput);
-
         // This is for showing the success/error message in a Toast, so that it can disappear after
         // a few seconds.
         // See: https://developer.android.com/reference/com/google/android/material/snackbar/Snackbar
@@ -113,7 +143,7 @@ public class NewItemActivity extends AppCompatActivity {
             descInput.setText("");
             imageInput.setText("");
 
-            startActivity(new Intent(this, OwnerUI.class));
+            startActivity(new Intent(requireContext(), OwnerUI.class));
         } catch (Exception e) {
             successPrompt = Snackbar.make(view, "Failed to add item", 3000);
             successPrompt.show();

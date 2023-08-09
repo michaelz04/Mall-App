@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/shopper_fragment"
+        android:id="@+id/owner_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shopper_fragment"
-        app:menu="@menu/shopper_nav_menu" />
+        app:layout_constraintTop_toBottomOf="@+id/owner_fragment"
+        app:menu="@menu/owner_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.b07_final_project.adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import java.util.List;
 public class OwnerIndvOrderAdapter extends RecyclerView.Adapter<OwnerIndvOrderAdapter.ViewHolder> {
 
     private List<String> OrderItemList;
+    private List<Integer> OrderQuantity;
    private List<Item> OrderItem;
     String username = CurrentUserData.getInstance().getId();
     String storeId = CurrentStoreData.getInstance().getId();
@@ -27,9 +29,10 @@ public class OwnerIndvOrderAdapter extends RecyclerView.Adapter<OwnerIndvOrderAd
         //this.OrderItem = OrderItem;
     }
 
-    public OwnerIndvOrderAdapter(List<String> orderItemList, List<Item> orderItem) {
+    public OwnerIndvOrderAdapter(List<String> orderItemList, List<Item> orderItem, List<Integer> OrderQuantity) {
         OrderItemList = orderItemList;
         OrderItem = orderItem;
+        this.OrderQuantity = OrderQuantity;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -52,12 +55,12 @@ public class OwnerIndvOrderAdapter extends RecyclerView.Adapter<OwnerIndvOrderAd
         String itemID = OrderItemList.get(position);
         String text = Integer.toString(position);
 
-        if(itemID.equals("empty")){
+        if(itemID.equals("empty")&&OrderQuantity.get(position) == 0){
             String buttonText = "No Items";
             holder.itemButton.setText(buttonText);
         }
         else{
-            String buttonText = OrderItem.get(position).getItemName();
+            String buttonText = OrderItem.get(position).getItemName() +"   Quantity: " +OrderQuantity.get(position);
             //holder.itemButton.setText("ItemID: "+itemID);
             holder.itemButton.setText(buttonText);
             holder.itemButton.setClickable(false);

@@ -1,15 +1,15 @@
 package com.example.b07_final_project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.b07_final_project.classes.CurrentUserData;
+import com.example.b07_final_project.classes.ToolbarNavigation;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -21,6 +21,9 @@ public class EditItemAmount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item_amount);
+
+        ToolbarNavigation.set(this, findViewById(R.id.editItemToolbar));
+
         String itemId = getIntent().getStringExtra("item_id");
         String itemName = getIntent().getStringExtra("item_name");
         String store = getIntent().getStringExtra("store");
@@ -30,13 +33,14 @@ public class EditItemAmount extends AppCompatActivity {
         TextView descriptionTextView = findViewById(R.id.itemDetailsTextView);
         descriptionTextView.setText(descriptionMessage);
 
+        //Set up the buttons (remove and confirm) both interacting with database.
         Button removeButton = findViewById(R.id.removeButton);
         removeButton.setOnClickListener(v -> {
             String userId = CurrentUserData.getInstance().getId();
             DatabaseReference cartRef = db.child("Shoppers").child(userId).child("cart");
             cartRef.child(itemId).removeValue();
             Toast.makeText(this, "Item removed", Toast.LENGTH_SHORT).show();
-
+            onBackPressed();
         });
 
         Button confirmButton = findViewById(R.id.confirmButton);
@@ -51,6 +55,7 @@ public class EditItemAmount extends AppCompatActivity {
                     DatabaseReference cartRef = db.child("Shoppers").child(userId).child("cart");
                     cartRef.child(itemId).setValue(quantityInt);
                     Toast.makeText(this, "Quantity updated to " + quantityInt, Toast.LENGTH_SHORT).show();
+                    onBackPressed();
                 } else {
                     Toast.makeText(this, "Please enter a valid quantity (greater than 0)", Toast.LENGTH_SHORT).show();
                 }

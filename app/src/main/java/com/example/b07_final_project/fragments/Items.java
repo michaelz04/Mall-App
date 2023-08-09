@@ -1,19 +1,34 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.fragments;
 
+import static android.view.View.GONE;
+
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.example.b07_final_project.LoginActivityView;
+import com.example.b07_final_project.NewItemActivity;
+import com.example.b07_final_project.R;
 import com.example.b07_final_project.adapters.ItemAdapter;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.CurrentUserData;
 import com.example.b07_final_project.classes.Item;
 import com.example.b07_final_project.classes.Store;
-import com.example.b07_final_project.fragments.IndividualStoreActivityOwnerFragment;
+import com.example.b07_final_project.classes.ToolbarNavigation;
+import com.example.b07_final_project.classes.UserUI;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,48 +38,57 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StoreItemsListActivity extends AppCompatActivity {
+public class Items extends Fragment {
 
     private List<Item> itemList;
     private ItemAdapter adapter;
     private List <String> itemIDs;
     private String storeId; // Store ID received from the previous activity
-
-
-
+    public Items() {
+        super(R.layout.fragment_items);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store_items_view);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_items, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         storeId = CurrentStoreData.getInstance().getId();
-        //storeId = getIntent().getStringExtra("store_id");
+        ((CollapsingToolbarLayout) requireActivity().findViewById(R.id.collapsingToolbar)).setTitle(storeId);
 
         // Initialize the RecyclerView and ItemAdapter
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewItems);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        RecyclerView recyclerView = requireView().findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         itemList = new ArrayList<>();
         adapter = new ItemAdapter(itemList);
         recyclerView.setAdapter(adapter);
 
-        if (savedInstanceState == null) {
-            String type = CurrentUserData.getInstance().getAccountType();
-            if (type != null && type.equals("Owners")) {
-                getSupportFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true)
-                        .add(R.id.fragmentContainerView, IndividualStoreActivityOwnerFragment.class, null)
-                        .commit();
-            }
-            // TODO: add other fragment for shopper, shows cart. Implement in sprint 2
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+
+        FloatingActionButton addItemButton = view.findViewById(R.id.addItemButton);
+
+        if (CurrentUserData.getInstance().getAccountType().equals("Owners")) {
+            addItemButton.setVisibility(View.VISIBLE);
+            addItemButton.setOnClickListener(l -> {
+                ((UserUI) requireContext()).setFragment(new NewItem());
+            });
+            toolbar.setNavigationIcon(null);
         }
-    }
+        else {
+            addItemButton.setVisibility(View.GONE);
+            toolbar.setNavigationIcon(R.drawable.outline_arrow_back_24);
+        }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+        view.findViewById(R.id.message4).setVisibility(View.GONE);
 
-        // This boolean will help in checking if there are no items in a Store.
+        ToolbarNavigation.set(getActivity(), toolbar);
+
         final boolean[] addonce = {false};
 
         DatabaseReference storeRef = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference("Stores").child(storeId);
@@ -105,10 +129,11 @@ public class StoreItemsListActivity extends AppCompatActivity {
                     Item empty = new Item(errormsg, "", 0.0f, "", "", "");
                     itemList.add(empty);
                     addonce[0] = true;
+                    view.findViewById(R.id.message4).setVisibility(View.VISIBLE);
                 }
 
                 // Log.d("Size", String.valueOf(itemList.size()));
-https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324px-Banana-Single.jpg
+                https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324px-Banana-Single.jpg
                 adapter.notifyDataSetChanged();
             }
 
@@ -118,7 +143,4 @@ https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324
             }
         });
     }
-
-    // Helper method to check if the store contains the given item ID
-
 }

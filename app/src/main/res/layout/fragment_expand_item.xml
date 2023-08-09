@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExpandItem">
+    tools:context=".fragments.ExpandItem">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/itemsToolbar"
+        android:id="@+id/expandItemToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:menu="@menu/top_app_bar"
@@ -45,11 +45,13 @@
             android:text="$0.00" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/quantityInbox"
             android:layout_width="96dp"
             android:layout_height="match_parent"
             android:layout_marginTop="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/quantityEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Quantity"
@@ -74,7 +76,7 @@
         android:padding="16dp">
 
         <Button
-            android:id="@+id/Cancel"
+            android:id="@+id/cancel"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

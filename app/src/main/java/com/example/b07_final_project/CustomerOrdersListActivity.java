@@ -11,6 +11,7 @@ import android.os.Bundle;
 import com.example.b07_final_project.adapters.CustomerOrderAdapter;
 import com.example.b07_final_project.classes.CurrentUserData;
 import com.example.b07_final_project.classes.Orders;
+import com.example.b07_final_project.classes.ToolbarNavigation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
@@ -32,6 +33,8 @@ public class CustomerOrdersListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_order_recycle_view);
+
+        ToolbarNavigation.set(this, findViewById(R.id.customerOrdersToolbar));
 
         ordersList = new ArrayList<>();
         adapter = new CustomerOrderAdapter(ordersList);

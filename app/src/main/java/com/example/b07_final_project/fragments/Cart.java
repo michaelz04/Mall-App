@@ -1,19 +1,29 @@
-package com.example.b07_final_project;
+package com.example.b07_final_project.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07_final_project.CartActivity;
+import com.example.b07_final_project.R;
 import com.example.b07_final_project.adapters.CartAdapter;
+import com.example.b07_final_project.adapters.StoreAdapter;
 import com.example.b07_final_project.classes.CurrentUserData;
 import com.example.b07_final_project.classes.Item;
 import com.example.b07_final_project.classes.OrderStores;
 import com.example.b07_final_project.classes.Orders;
+import com.example.b07_final_project.classes.Store;
+import com.example.b07_final_project.classes.ToolbarNavigation;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,43 +37,58 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class CartActivity extends AppCompatActivity {
+public class Cart extends Fragment {
     private RecyclerView recyclerView;
     private CartAdapter cartAdapter;
     private List<Item> cartItemList;
     private List<String> cartItemListKey;
     private DatabaseReference db = FirebaseDatabase.getInstance("https://test-54768-default-rtdb.firebaseio.com/").getReference();
+    public Cart() {
+        super(R.layout.cart_item_layout);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.cart_item_layout, container, false);
+    }
 
     public interface GetStoreKeyCallback {
         void onStoreKeyReceived(String storeKey);
     }
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.cart_item_layout);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = findViewById(R.id.recyclerViewCart);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ToolbarNavigation.set(getActivity(), view.findViewById(R.id.toolbar));
+
+        Button checkoutButton = view.findViewById(R.id.checkoutButton);
+
+        recyclerView = view.findViewById(R.id.recyclerViewCart);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         cartItemListKey = new ArrayList<>();
         cartItemList = new ArrayList<>();
 
         cartAdapter = new CartAdapter(cartItemList);
         recyclerView.setAdapter(cartAdapter);
-        //final boolean[] addonce = {false};
+
+        String userId = CurrentUserData.getInstance().getId();
+        DatabaseReference cartRef = db.child("Shoppers").child(userId).child("cart");
 
         /*
         Populate cartItemList accordingly.
          */
-        String userId = CurrentUserData.getInstance().getId();
-        DatabaseReference cartRef = db.child("Shoppers").child(userId).child("cart");
-
         cartRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                view.findViewById(R.id.message).setVisibility(View.GONE);
                 cartItemListKey.clear();
                 cartItemList.clear();
                 if (snapshot.exists()) {
+                    checkoutButton.setVisibility(View.VISIBLE);
                     for (DataSnapshot itemkey : snapshot.getChildren()) {
                         String itemId = itemkey.getKey();
                         cartItemListKey.add(itemId);
@@ -94,6 +119,8 @@ public class CartActivity extends AppCompatActivity {
 
                     String errormsg = "No Items in cart currently";
                     Item empty = new Item(errormsg, "", 0.0f, "", "", "");
+                    view.findViewById(R.id.message).setVisibility(View.VISIBLE);
+                    checkoutButton.setVisibility(View.GONE);
                     cartItemList.add(empty);
                     cartAdapter.notifyDataSetChanged();
                 }
@@ -105,7 +132,6 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
-        Button checkoutButton = findViewById(R.id.checkoutButton);
         checkoutButton.setOnClickListener(v -> {
             DatabaseReference ordersRef = db.child("Orders").push();
             String orderId = ordersRef.getKey();
@@ -121,7 +147,7 @@ public class CartActivity extends AppCompatActivity {
                         for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
                             String itemId = itemSnapshot.getKey();
                             int quantity = itemSnapshot.getValue(Integer.class);
-                            getStoreKey(itemId, new GetStoreKeyCallback() {
+                            getStoreKey(itemId, new CartActivity.GetStoreKeyCallback() {
                                 @Override
                                 public void onStoreKeyReceived(String storeKey) {
                                     if (storeKey != null) {
@@ -130,25 +156,23 @@ public class CartActivity extends AppCompatActivity {
                                             orderStores = new OrderStores(new HashMap<>(), false);
                                             storesMap.put(storeKey, orderStores);
                                             uniqueStoreKeys.add(storeKey);
-
+                                            //Log.d("CartActivity", "Added new storeKey: " + storeKey);
                                         }
 
                                         orderStores.getItems().put(itemId, quantity);
 
                                         if (uniqueStoreKeys.size() == storesMap.size()) {
-                                            //Set the orders in the database
                                             Orders orders = new Orders(orderId, storesMap);
                                             db.child("Orders").child(orderId).setValue(orders);
-                                            //Remove Cart after purchase.
+                                            //If you want to remove a user's cart after checkout uncomment code below
                                             cartRef.removeValue();
                                             cartAdapter.notifyDataSetChanged();
-
-                                            //Add to current user orders in database:
+                                            //Add to current user orders:
                                             String currentUser = CurrentUserData.getInstance().getId();
                                             DatabaseReference userRef = db.child("Shoppers").child(currentUser);
                                             userRef.child("orders").child(orderId).setValue(orderId);
 
-                                            //Add orders to owners in database
+                                            //Add things to owners
                                             DatabaseReference storeRef = db.child("Stores");
                                             storeRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
@@ -157,16 +181,16 @@ public class CartActivity extends AppCompatActivity {
                                                         if(uniqueStoreKeys.contains(stores.getKey())) {
                                                             String ownername = stores.child("storeOwner").getValue(String.class);
                                                             ownersOfOrders.add(ownername);
-
+                                                            //Log.d("CartActivity", "2nd test " + ownername);
                                                         }
                                                     }
-
+                                                    //  Log.d("CartActivity", "4th test " + ownersOfOrders.size());
                                                     DatabaseReference ownersRef = db.child("Owners");
                                                     for (String orderowner : ownersOfOrders) {
                                                         ownersRef.child(orderowner).child("orders").child(orderId).setValue(orderId);
-
+                                                        //Log.d("CartActivity", "3rd test " + orderowner);
                                                     }
-                                                    Toast.makeText(CartActivity.this, "Checkout successful", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getActivity(), "Checkout successful", Toast.LENGTH_SHORT).show();
                                                 }
 
                                                 @Override
@@ -182,8 +206,9 @@ public class CartActivity extends AppCompatActivity {
                         }
                     }
                     else {
-                        // Cart is empty
-                        Toast.makeText(CartActivity.this, "Empty Cart", Toast.LENGTH_SHORT).show();
+                        // Cart is empty, do smth.
+                        //Log.d("CartActivity", "Empty cart");
+                        Toast.makeText(getActivity(), "Empty Cart", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -195,7 +220,7 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
-    private void getStoreKey(String itemId, GetStoreKeyCallback callback) {
+    private void getStoreKey(String itemId, CartActivity.GetStoreKeyCallback callback) {
         DatabaseReference storedb = db.child("Items");
 
         storedb.addValueEventListener(new ValueEventListener() {
@@ -216,7 +241,7 @@ public class CartActivity extends AppCompatActivity {
                         }
                     }
                 }
-
+                // Item with given itemId not found
                 callback.onStoreKeyReceived(null);
             }
 

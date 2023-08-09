@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //AppDataActivity.addStoreToDatabase();
 
-        Intent intent = new Intent(this, StoreListActivity.class);
+        Intent intent = new Intent(this, LoginActivityView.class);
         startActivity(intent);
         finish();
     }

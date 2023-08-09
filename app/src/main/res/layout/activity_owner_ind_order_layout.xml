@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
     tools:context=".OwnerIndividualOrderActivity">
 
-    <TextView
-        android:id="@+id/orderheader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Order" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/individualOrderToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:menu="@menu/top_app_bar"
+        app:navigationContentDescription="Back"
+        app:navigationIcon="@drawable/outline_arrow_back_24"
+        app:title="Current order" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ownerIndvOrderRecycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/orderheader"
-        android:layout_marginTop="31dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/individualOrderToolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +29,12 @@
         android:id="@+id/finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_below="@id/ownerIndvOrderRecycler"
+        android:layout_alignParentRight="false"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:onClick="onClickFinish"
         android:text="Finish" />
 

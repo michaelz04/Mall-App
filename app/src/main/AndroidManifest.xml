@@ -7,9 +7,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/shoppingcart"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/shoppingcart"
         android:supportsRtl="true"
         android:theme="@style/Theme.B07finalproject"
         tools:targetApi="31">
@@ -33,29 +33,23 @@
             android:name=".OwnerOrdersListActivity"
             android:exported="false" />
         <activity
-            android:name=".CustomerMenuActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OwnerMenuActivity"
+            android:name=".OwnerUI"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true" /> <!-- Add other activities here -->
-        <activity android:name=".StoreItemsListActivity" />
         <activity android:name=".CreateStoreActivity" />
         <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_signup" />
-        <activity android:name=".ItemActivity" />
-        <activity android:name=".StoreListActivity" />
         <activity android:name=".AccountTypeActivity" />
         <activity
             android:name=".CartActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".LoginActivityView"
             android:exported="true"
-            android:label="@string/title_activity_login_view">
+            android:label="Javan's Mall">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

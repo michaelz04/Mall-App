@@ -7,14 +7,16 @@ public class Store {
     private String description;
     private String storeOwner;
     private List<String> items;
+    private String picture;
 
     public Store() {}
 
-    public Store(String storeName, String description, String storeOwner, List<String> items) {
+    public Store(String storeName, String description, String storeOwner, List<String> items, String picture) {
         this.storeName = storeName;
         this.description = description;
         this.storeOwner = storeOwner;
         this.items = items;
+        this.picture = picture;
     }
 
     public String getStoreName() {
@@ -47,5 +49,13 @@ public class Store {
 
     public void setItems(List<String> items) {
         this.items = items;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

@@ -1,9 +1,7 @@
 package com.example.b07_final_project.adapters;
 
 import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.b07_final_project.fragments.Items;
 import com.example.b07_final_project.R;
-import com.example.b07_final_project.StoreItemsListActivity;
+import com.example.b07_final_project.ShopperUI;
 import com.example.b07_final_project.classes.CurrentStoreData;
 import com.example.b07_final_project.classes.Store;
 import com.google.android.material.card.MaterialCardView;
@@ -28,7 +27,6 @@ import java.util.List;
 public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> {
 
     private List<Store> storeList;
-
 
     public StoreAdapter(List<Store> storeList) {
         this.storeList = storeList;
@@ -50,7 +48,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         }
     }
 
-    // Create a new ViewHolder and inflate the stores_for_customers layout
+    // Create a new ViewHolder and inflate the  layout
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -64,7 +62,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         Store store = storeList.get(position);
         String storename = store.getStoreName();
         String errormsg = "No Stores currently";
-        String image = "https://www.kurin.com/wp-content/uploads/placeholder-square.jpg";
+        String image = store.getPicture();
 
         if (!storename.equals(errormsg)) {
             holder.storeName.setText(store.getStoreName());
@@ -80,14 +78,8 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
 
             // Set click listener
             holder.storeButton.setOnClickListener(v -> {
-
-
-                Intent intent = new Intent(v.getContext(), StoreItemsListActivity.class);
-                //intent.putExtra("store_id", store.getStoreName());
                 CurrentStoreData.getInstance().setId(store.getStoreName());
-                v.getContext().startActivity(intent);
-
-
+                ((ShopperUI) v.getContext()).setFragment(new Items());
             });
         }
         else{
