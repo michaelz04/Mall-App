@@ -1,13 +1,12 @@
 package com.example.b07_final_project;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.b07_final_project.classes.CurrentUserData;
 import com.example.b07_final_project.classes.ToolbarNavigation;
@@ -34,6 +33,7 @@ public class EditItemAmount extends AppCompatActivity {
         TextView descriptionTextView = findViewById(R.id.itemDetailsTextView);
         descriptionTextView.setText(descriptionMessage);
 
+        //Set up the buttons (remove and confirm) both interacting with database.
         Button removeButton = findViewById(R.id.removeButton);
         removeButton.setOnClickListener(v -> {
             String userId = CurrentUserData.getInstance().getId();

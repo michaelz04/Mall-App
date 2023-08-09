@@ -86,7 +86,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                 holder.itemCard.setVisibility(GONE);
             }
 
-           // Log.d("test", String.valueOf(position));
+
 
     }
 
