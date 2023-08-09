@@ -50,6 +50,8 @@ public class OwnerOrdersListActivity extends AppCompatActivity {
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                orderList.clear();
+                statusList.clear();
                 if (snapshot.child("Owners").child(username).
                         child("orders").exists()){
                     for(DataSnapshot order : snapshot.child("Owners").child(username).

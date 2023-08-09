@@ -69,6 +69,9 @@ public class OwnerIndividualOrderActivity extends AppCompatActivity {
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ItemList.clear();
+                OrderItemList.clear();
+                OrderQuantity.clear();
 
                 for (DataSnapshot item : snapshot.child("Orders").child(orderID).
                         child("stores").child(storeId).child("items").getChildren()) {
